@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — FinanceApp</title>
+  <style id="pesto-tokens">
+/*
+ * Pesto Design System — Core Variables
+ * ─────────────────────────────────────
+ * All generated pages MUST use these tokens.
+ * Do not hardcode values — reference the custom properties below.
+ */
+
+:root {
+  /* ── Color: Brand ─────────────────────────────────────── */
+  --pesto-brand-50:  #f0fdf4;
+  --pesto-brand-100: #dcfce7;
+  --pesto-brand-200: #bbf7d0;
+  --pesto-brand-300: #86efac;
+  --pesto-brand-400: #4ade80;
+  --pesto-brand-500: #22c55e;
+  --pesto-brand-600: #16a34a;
+  --pesto-brand-700: #15803d;
+  --pesto-brand-800: #166534;
+  --pesto-brand-900: #14532d;
+
+  /* ── Color: Neutral ───────────────────────────────────── */
+  --pesto-neutral-0:   #ffffff;
+  --pesto-neutral-50:  #fafaf9;
+  --pesto-neutral-100: #f5f5f4;
+  --pesto-neutral-200: #e7e5e4;
+  --pesto-neutral-300: #d6d3d1;
+  --pesto-neutral-400: #a8a29e;
+  --pesto-neutral-500: #78716c;
+  --pesto-neutral-600: #57534e;
+  --pesto-neutral-700: #44403c;
+  --pesto-neutral-800: #292524;
+  --pesto-neutral-900: #1c1917;
+
+  /* ── Color: Accent ────────────────────────────────────── */
+  --pesto-accent-50:  #fefce8;
+  --pesto-accent-100: #fef9c3;
+  --pesto-accent-200: #fef08a;
+  --pesto-accent-400: #facc15;
+  --pesto-accent-600: #ca8a04;
+
+  /* ── Color: Semantic ──────────────────────────────────── */
+  --pesto-error-50:  #fef2f2;
+  --pesto-error-500: #ef4444;
+  --pesto-error-700: #b91c1c;
+
+  --pesto-warning-50:  #fffbeb;
+  --pesto-warning-500: #f59e0b;
+  --pesto-warning-700: #b45309;
+
+  --pesto-success-50:  #f0fdf4;
+  --pesto-success-500: #22c55e;
+  --pesto-success-700: #15803d;
+
+  --pesto-info-50:  #eff6ff;
+  --pesto-info-500: #3b82f6;
+  --pesto-info-700: #1d4ed8;
+
+  /* ── Color: Surfaces ──────────────────────────────────── */
+  --pesto-surface-page:    var(--pesto-neutral-0);
+  --pesto-surface-raised:  var(--pesto-neutral-0);
+  --pesto-surface-sunken:  var(--pesto-neutral-50);
+  --pesto-surface-overlay: rgba(0, 0, 0, 0.45);
+
+  /* ── Color: Text ──────────────────────────────────────── */
+  --pesto-text-primary:   var(--pesto-neutral-900);
+  --pesto-text-secondary: var(--pesto-neutral-600);
+  --pesto-text-tertiary:  var(--pesto-neutral-400);
+  --pesto-text-inverse:   var(--pesto-neutral-0);
+  --pesto-text-link:      var(--pesto-brand-600);
+  --pesto-text-link-hover: var(--pesto-brand-700);
+
+  /* ── Color: Borders ───────────────────────────────────── */
+  --pesto-border-default: var(--pesto-neutral-200);
+  --pesto-border-strong:  var(--pesto-neutral-300);
+  --pesto-border-focus:   var(--pesto-brand-500);
+
+  /* ── Typography ───────────────────────────────────────── */
+  --pesto-font-sans:  "Inter", system-ui, -apple-system, sans-serif;
+  --pesto-font-mono:  "JetBrains Mono", ui-monospace, monospace;
+
+  --pesto-text-xs:   0.75rem;    /* 12px */
+  --pesto-text-sm:   0.875rem;   /* 14px */
+  --pesto-text-base: 1rem;       /* 16px */
+  --pesto-text-lg:   1.125rem;   /* 18px */
+  --pesto-text-xl:   1.25rem;    /* 20px */
+  --pesto-text-2xl:  1.5rem;     /* 24px */
+  --pesto-text-3xl:  1.875rem;   /* 30px */
+  --pesto-text-4xl:  2.25rem;    /* 36px */
+  --pesto-text-5xl:  3rem;       /* 48px */
+
+  --pesto-leading-tight:  1.25;
+  --pesto-leading-normal: 1.5;
+  --pesto-leading-loose:  1.75;
+
+  --pesto-weight-normal:   400;
+  --pesto-weight-medium:   500;
+  --pesto-weight-semibold: 600;
+  --pesto-weight-bold:     700;
+
+  /* ── Spacing ──────────────────────────────────────────── */
+  --pesto-space-0:   0;
+  --pesto-space-1:   0.25rem;   /*  4px */
+  --pesto-space-2:   0.5rem;    /*  8px */
+  --pesto-space-3:   0.75rem;   /* 12px */
+  --pesto-space-4:   1rem;      /* 16px */
+  --pesto-space-5:   1.25rem;   /* 20px */
+  --pesto-space-6:   1.5rem;    /* 24px */
+  --pesto-space-8:   2rem;      /* 32px */
+  --pesto-space-10:  2.5rem;    /* 40px */
+  --pesto-space-12:  3rem;      /* 48px */
+  --pesto-space-16:  4rem;      /* 64px */
+  --pesto-space-20:  5rem;      /* 80px */
+  --pesto-space-24:  6rem;      /* 96px */
+
+  /* ── Layout ───────────────────────────────────────────── */
+  --pesto-container-sm:  640px;
+  --pesto-container-md:  768px;
+  --pesto-container-lg:  1024px;
+  --pesto-container-xl:  1280px;
+  --pesto-container-2xl: 1536px;
+
+  --pesto-content-width: min(100% - var(--pesto-space-8), var(--pesto-container-xl));
+
+  /* ── Surfaces ─────────────────────────────────────────── */
+  --pesto-radius-sm:   4px;
+  --pesto-radius-md:   8px;
+  --pesto-radius-lg:   12px;
+  --pesto-radius-xl:   16px;
+  --pesto-radius-full: 9999px;
+
+  --pesto-shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.05);
+  --pesto-shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --pesto-shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --pesto-shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+
+  /* ── Transitions ──────────────────────────────────────── */
+  --pesto-duration-fast:   100ms;
+  --pesto-duration-normal: 200ms;
+  --pesto-duration-slow:   300ms;
+  --pesto-ease-default:    cubic-bezier(0.4, 0, 0.2, 1);
+  --pesto-ease-in:         cubic-bezier(0.4, 0, 1, 1);
+  --pesto-ease-out:        cubic-bezier(0, 0, 0.2, 1);
+
+  /* ── Z-index ──────────────────────────────────────────── */
+  --pesto-z-dropdown: 10;
+  --pesto-z-sticky:   20;
+  --pesto-z-overlay:  30;
+  --pesto-z-modal:    40;
+  --pesto-z-toast:    50;
+}
+
+/* ── Base Styles ─────────────────────────────────────────── */
+/* These resets and defaults ensure every generated page starts
+   from a consistent, polished baseline. */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--pesto-font-sans);
+  font-size: var(--pesto-text-base);
+  line-height: var(--pesto-leading-normal);
+  color: var(--pesto-text-primary);
+  background: var(--pesto-surface-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, picture, video, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Dark mode overrides ──────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pesto-surface-page:   var(--pesto-neutral-900);
+    --pesto-surface-raised: var(--pesto-neutral-800);
+    --pesto-surface-sunken: var(--pesto-neutral-900);
+
+    --pesto-text-primary:   var(--pesto-neutral-50);
+    --pesto-text-secondary: var(--pesto-neutral-400);
+    --pesto-text-tertiary:  var(--pesto-neutral-500);
+    --pesto-text-inverse:   var(--pesto-neutral-900);
+    --pesto-text-link:      var(--pesto-brand-400);
+    --pesto-text-link-hover: var(--pesto-brand-300);
+
+    --pesto-border-default: var(--pesto-neutral-700);
+    --pesto-border-strong:  var(--pesto-neutral-600);
+  }
+}
+
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--pesto-font-sans);
+      font-size: var(--pesto-text-base);
+      line-height: var(--pesto-leading-normal);
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-page);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img, picture, video, svg { display: block; max-width: 100%; }
+    input, button, textarea, select { font: inherit; }
+    ul, ol { list-style: none; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Container ───────────────────────────────────────── */
+    .container {
+      width: var(--pesto-content-width);
+      margin-inline: auto;
+    }
+
+    /* ── Navigation ──────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: var(--pesto-z-sticky);
+      background: var(--pesto-surface-page);
+      border-bottom: 1px solid var(--pesto-border-default);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--pesto-space-4) 0;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-10);
+    }
+
+    .nav-logo {
+      font-size: var(--pesto-text-xl);
+      font-weight: var(--pesto-weight-bold);
+      color: var(--pesto-brand-600);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--pesto-space-8);
+    }
+
+    .nav-links a {
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-secondary);
+      transition: color var(--pesto-duration-normal) var(--pesto-ease-default);
+      padding: var(--pesto-space-1) 0;
+    }
+
+    .nav-links a:hover { color: var(--pesto-text-primary); }
+
+    .nav-links a[aria-current="page"] {
+      color: var(--pesto-text-primary);
+      font-weight: var(--pesto-weight-semibold);
+      border-bottom: 2px solid var(--pesto-brand-600);
+    }
+
+    .nav-links a:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+      border-radius: var(--pesto-radius-sm);
+    }
+
+    .nav-profile {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-3);
+      cursor: pointer;
+    }
+
+    .nav-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--pesto-radius-full);
+      background: var(--pesto-brand-100);
+      color: var(--pesto-brand-700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-semibold);
+    }
+
+    .nav-profile-name {
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-primary);
+    }
+
+    .nav-profile-chevron {
+      color: var(--pesto-text-tertiary);
+      font-size: var(--pesto-text-xs);
+    }
+
+    /* Hamburger */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--pesto-space-2);
+      color: var(--pesto-text-primary);
+      min-width: 44px;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--pesto-radius-md);
+      transition: background var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .nav-hamburger:hover { background: var(--pesto-surface-sunken); }
+    .nav-hamburger:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .hamburger-icon {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      width: 22px;
+    }
+
+    .hamburger-icon span {
+      display: block;
+      height: 2px;
+      background: var(--pesto-text-primary);
+      border-radius: 2px;
+      transition: all var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    /* Mobile nav overlay */
+    .nav-mobile-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--pesto-surface-page);
+      z-index: var(--pesto-z-overlay);
+      flex-direction: column;
+      padding: var(--pesto-space-6);
+    }
+
+    .nav-mobile-overlay.is-open {
+      display: flex;
+    }
+
+    .nav-mobile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--pesto-space-8);
+    }
+
+    .nav-mobile-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: var(--pesto-text-xl);
+      color: var(--pesto-text-primary);
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--pesto-radius-md);
+    }
+
+    .nav-mobile-close:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .nav-mobile-links {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-2);
+    }
+
+    .nav-mobile-links a {
+      display: block;
+      font-size: var(--pesto-text-lg);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-secondary);
+      padding: var(--pesto-space-4);
+      border-radius: var(--pesto-radius-md);
+      transition: all var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .nav-mobile-links a:hover,
+    .nav-mobile-links a[aria-current="page"] {
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-sunken);
+    }
+
+    .nav-mobile-links a[aria-current="page"] {
+      color: var(--pesto-brand-600);
+      font-weight: var(--pesto-weight-semibold);
+    }
+
+    /* ── Main ────────────────────────────────────────────── */
+    main {
+      padding-bottom: var(--pesto-space-20);
+    }
+
+    /* ── Section spacing ─────────────────────────────────── */
+    .section {
+      padding-top: var(--pesto-space-16);
+    }
+
+    .section-header {
+      margin-bottom: var(--pesto-space-8);
+    }
+
+    .section-header h1 {
+      font-size: var(--pesto-text-4xl);
+      font-weight: var(--pesto-weight-bold);
+      line-height: var(--pesto-leading-tight);
+      margin-bottom: var(--pesto-space-2);
+    }
+
+    .section-header h2 {
+      font-size: var(--pesto-text-2xl);
+      font-weight: var(--pesto-weight-semibold);
+      line-height: var(--pesto-leading-normal);
+    }
+
+    .section-header p {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-secondary);
+      margin-top: var(--pesto-space-1);
+    }
+
+    /* ── Cards ───────────────────────────────────────────── */
+    .card {
+      background: var(--pesto-surface-raised);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      padding: var(--pesto-space-6);
+      box-shadow: var(--pesto-shadow-sm);
+    }
+
+    .card-interactive {
+      transition: box-shadow var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .card-interactive:hover { box-shadow: var(--pesto-shadow-md); }
+
+    /* ── Account Overview Grid ───────────────────────────── */
+    .accounts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--pesto-space-6);
+    }
+
+    .account-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-4);
+    }
+
+    .account-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .account-type-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--pesto-space-1) var(--pesto-space-3);
+      background: var(--pesto-brand-100);
+      color: var(--pesto-brand-800);
+      font-size: var(--pesto-text-xs);
+      font-weight: var(--pesto-weight-medium);
+      border-radius: var(--pesto-radius-full);
+    }
+
+    .account-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--pesto-radius-md);
+      background: var(--pesto-brand-100);
+      color: var(--pesto-brand-700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--pesto-text-lg);
+      flex-shrink: 0;
+    }
+
+    .account-name {
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-secondary);
+      margin-bottom: var(--pesto-space-1);
+    }
+
+    .account-balance {
+      font-size: var(--pesto-text-3xl);
+      font-weight: var(--pesto-weight-bold);
+      line-height: var(--pesto-leading-tight);
+      color: var(--pesto-text-primary);
+    }
+
+    .account-balance-label {
+      font-size: var(--pesto-text-xs);
+      color: var(--pesto-text-tertiary);
+      margin-top: var(--pesto-space-1);
+    }
+
+    .account-card-credit .account-balance {
+      color: var(--pesto-brand-600);
+    }
+
+    /* ── Buttons ─────────────────────────────────────────── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--pesto-space-2);
+      padding: var(--pesto-space-3) var(--pesto-space-6);
+      background: var(--pesto-brand-600);
+      color: var(--pesto-text-inverse);
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      border: none;
+      border-radius: var(--pesto-radius-md);
+      cursor: pointer;
+      transition: all var(--pesto-duration-normal) var(--pesto-ease-default);
+      min-height: 44px;
+    }
+
+    .btn-primary:hover { background: var(--pesto-brand-700); }
+    .btn-primary:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--pesto-space-2);
+      padding: var(--pesto-space-3) var(--pesto-space-6);
+      background: transparent;
+      color: var(--pesto-text-primary);
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-md);
+      cursor: pointer;
+      transition: all var(--pesto-duration-normal) var(--pesto-ease-default);
+      min-height: 44px;
+    }
+
+    .btn-secondary:hover { background: var(--pesto-surface-sunken); }
+    .btn-secondary:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--pesto-space-2);
+      padding: var(--pesto-space-2) var(--pesto-space-3);
+      background: transparent;
+      color: var(--pesto-text-link);
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      border: none;
+      border-radius: var(--pesto-radius-md);
+      cursor: pointer;
+      transition: all var(--pesto-duration-normal) var(--pesto-ease-default);
+      min-height: 44px;
+    }
+
+    .btn-ghost:hover {
+      color: var(--pesto-text-link-hover);
+      text-decoration: underline;
+    }
+
+    .btn-ghost:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    /* ── Spending Overview ───────────────────────────────── */
+    .spending-layout {
+      display: grid;
+      grid-template-columns: 60fr 40fr;
+      gap: var(--pesto-space-6);
+      align-items: start;
+    }
+
+    .spending-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--pesto-space-6);
+    }
+
+    .spending-header h3 {
+      font-size: var(--pesto-text-xl);
+      font-weight: var(--pesto-weight-semibold);
+    }
+
+    .date-selector {
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-md);
+      padding: var(--pesto-space-2) var(--pesto-space-4);
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-raised);
+      cursor: pointer;
+      min-height: 44px;
+      transition: border-color var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .date-selector:focus-visible {
+      outline: 2px solid var(--pesto-brand-200);
+      outline-offset: 1px;
+      border-color: var(--pesto-border-focus);
+    }
+
+    /* Bar chart */
+    .chart-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-4);
+    }
+
+    .chart-item {
+      display: grid;
+      grid-template-columns: 9rem 1fr 4rem;
+      align-items: center;
+      gap: var(--pesto-space-3);
+    }
+
+    .chart-label {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chart-bar-track {
+      background: var(--pesto-neutral-100);
+      border-radius: var(--pesto-radius-full);
+      height: 10px;
+      overflow: hidden;
+    }
+
+    .chart-bar-fill {
+      height: 100%;
+      border-radius: var(--pesto-radius-full);
+      background: var(--pesto-brand-500);
+      transition: width var(--pesto-duration-slow) var(--pesto-ease-out);
+    }
+
+    .chart-bar-fill--secondary { background: var(--pesto-brand-300); }
+    .chart-bar-fill--tertiary { background: var(--pesto-brand-200); }
+
+    .chart-amount {
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-primary);
+      text-align: right;
+    }
+
+    /* Spending summary card */
+    .spending-summary {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-6);
+    }
+
+    .spending-total-label {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-secondary);
+      margin-bottom: var(--pesto-space-1);
+    }
+
+    .spending-total-amount {
+      font-size: var(--pesto-text-4xl);
+      font-weight: var(--pesto-weight-bold);
+      line-height: var(--pesto-leading-tight);
+      color: var(--pesto-text-primary);
+    }
+
+    .spending-remaining {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .spending-remaining-label {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-secondary);
+    }
+
+    .spending-remaining-amount {
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-semibold);
+      color: var(--pesto-success-700);
+    }
+
+    .progress-track {
+      background: var(--pesto-neutral-100);
+      border-radius: var(--pesto-radius-full);
+      height: 12px;
+      overflow: hidden;
+      margin-top: var(--pesto-space-2);
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: var(--pesto-radius-full);
+      background: var(--pesto-warning-500);
+      width: 72.5%;
+    }
+
+    .progress-label {
+      font-size: var(--pesto-text-xs);
+      color: var(--pesto-text-tertiary);
+      margin-top: var(--pesto-space-2);
+    }
+
+    /* ── Transactions Table ───────────────────────────────── */
+    .transactions-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--pesto-space-6);
+    }
+
+    .transactions-section-header h2 {
+      font-size: var(--pesto-text-2xl);
+      font-weight: var(--pesto-weight-semibold);
+    }
+
+    .transactions-table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      box-shadow: var(--pesto-shadow-sm);
+    }
+
+    .transactions-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--pesto-surface-raised);
+    }
+
+    .transactions-table thead {
+      background: var(--pesto-surface-sunken);
+    }
+
+    .transactions-table th {
+      padding: var(--pesto-space-4);
+      text-align: left;
+      font-size: var(--pesto-text-xs);
+      font-weight: var(--pesto-weight-semibold);
+      color: var(--pesto-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--pesto-border-default);
+      white-space: nowrap;
+    }
+
+    .transactions-table tbody tr {
+      border-bottom: 1px solid var(--pesto-border-default);
+      transition: background var(--pesto-duration-fast) var(--pesto-ease-default);
+    }
+
+    .transactions-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .transactions-table tbody tr:nth-child(even) {
+      background: var(--pesto-neutral-50);
+    }
+
+    .transactions-table tbody tr:hover {
+      background: var(--pesto-brand-50);
+    }
+
+    .transactions-table td {
+      padding: var(--pesto-space-4);
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-primary);
+      vertical-align: middle;
+    }
+
+    .td-date {
+      color: var(--pesto-text-secondary);
+      white-space: nowrap;
+    }
+
+    .td-description {
+      font-weight: var(--pesto-weight-medium);
+    }
+
+    .category-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--pesto-space-1) var(--pesto-space-3);
+      border-radius: var(--pesto-radius-full);
+      font-size: var(--pesto-text-xs);
+      font-weight: var(--pesto-weight-medium);
+      white-space: nowrap;
+    }
+
+    .badge-groceries {
+      background: var(--pesto-brand-100);
+      color: var(--pesto-brand-800);
+    }
+
+    .badge-income {
+      background: var(--pesto-success-50);
+      color: var(--pesto-success-700);
+    }
+
+    .badge-utilities {
+      background: var(--pesto-info-50);
+      color: var(--pesto-info-700);
+    }
+
+    .badge-transportation {
+      background: var(--pesto-accent-100);
+      color: var(--pesto-accent-600);
+    }
+
+    .badge-subscriptions {
+      background: var(--pesto-neutral-100);
+      color: var(--pesto-neutral-700);
+    }
+
+    .td-amount {
+      font-weight: var(--pesto-weight-semibold);
+      text-align: right;
+      white-space: nowrap;
+      font-family: var(--pesto-font-mono);
+    }
+
+    .amount-expense { color: var(--pesto-error-500); }
+    .amount-income { color: var(--pesto-success-500); }
+
+    /* Mobile transaction cards */
+    .transactions-cards {
+      display: none;
+      flex-direction: column;
+      gap: var(--pesto-space-3);
+    }
+
+    .txn-card {
+      background: var(--pesto-surface-raised);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      padding: var(--pesto-space-4);
+      box-shadow: var(--pesto-shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--pesto-space-3);
+    }
+
+    .txn-card-left {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-1);
+      min-width: 0;
+    }
+
+    .txn-card-desc {
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .txn-card-meta {
+      font-size: var(--pesto-text-xs);
+      color: var(--pesto-text-secondary);
+    }
+
+    .txn-card-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: var(--pesto-space-1);
+      flex-shrink: 0;
+    }
+
+    .txn-card-amount {
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-semibold);
+      font-family: var(--pesto-font-mono);
+    }
+
+    .transactions-footer {
+      display: flex;
+      justify-content: center;
+      margin-top: var(--pesto-space-6);
+    }
+
+    /* ── Footer ──────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--pesto-border-default);
+      padding: var(--pesto-space-12) 0;
+      background: var(--pesto-surface-page);
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1fr repeat(3, auto);
+      gap: var(--pesto-space-8);
+      align-items: start;
+    }
+
+    .footer-brand {
+      font-size: var(--pesto-text-lg);
+      font-weight: var(--pesto-weight-bold);
+      color: var(--pesto-brand-600);
+      margin-bottom: var(--pesto-space-2);
+    }
+
+    .footer-copy {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-tertiary);
+    }
+
+    .footer-col-heading {
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-semibold);
+      color: var(--pesto-text-primary);
+      margin-bottom: var(--pesto-space-4);
+    }
+
+    .footer-col-links {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-3);
+    }
+
+    .footer-col-links a {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-secondary);
+      transition: color var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .footer-col-links a:hover { color: var(--pesto-text-primary); }
+
+    .footer-col-links a:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+      border-radius: var(--pesto-radius-sm);
+    }
+
+    /* ── Responsive ──────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .accounts-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-profile-name { display: none; }
+
+      .accounts-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .spending-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .chart-item {
+        grid-template-columns: 7rem 1fr 3.5rem;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-col-links {
+        align-items: center;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section-header h1 {
+        font-size: var(--pesto-text-3xl);
+      }
+
+      .transactions-table-wrapper {
+        display: none;
+      }
+
+      .transactions-cards {
+        display: flex;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+      }
+
+      .chart-item {
+        grid-template-columns: 6rem 1fr 3rem;
+      }
+
+      .spending-total-amount {
+        font-size: var(--pesto-text-3xl);
+      }
+
+      .account-balance {
+        font-size: var(--pesto-text-2xl);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <div class="container">
+        <div class="nav-inner">
+          <div class="nav-left">
+            <a href="dashboard.html" class="nav-logo">FinanceApp</a>
+            <ul class="nav-links">
+              <li><a href="dashboard.html" aria-current="page">Dashboard</a></li>
+              <li><a href="transactions.html">Transactions</a></li>
+              <li><a href="settings.html">Settings</a></li>
+            </ul>
+          </div>
+          <div class="nav-profile" role="button" aria-label="User profile menu" tabindex="0">
+            <div class="nav-avatar" aria-hidden="true">JD</div>
+            <span class="nav-profile-name">Jane Doe</span>
+            <span class="nav-profile-chevron" aria-hidden="true">▾</span>
+          </div>
+          <button class="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" id="hamburger-btn">
+            <div class="hamburger-icon" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="nav-mobile-overlay" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <div class="nav-mobile-header">
+      <span class="nav-logo">FinanceApp</span>
+      <button class="nav-mobile-close" aria-label="Close navigation menu" id="mobile-nav-close">✕</button>
+    </div>
+    <ul class="nav-mobile-links">
+      <li><a href="dashboard.html" aria-current="page">Dashboard</a></li>
+      <li><a href="transactions.html">Transactions</a></li>
+      <li><a href="settings.html">Settings</a></li>
+    </ul>
+  </div>
+
+  <main>
+    <!-- ── Account Overview ──────────────────────────────── -->
+    <section class="section" aria-labelledby="account-overview-heading">
+      <div class="container">
+        <div class="section-header">
+          <h1 id="account-overview-heading">Account Overview</h1>
+          <p>Your financial snapshot as of August 28, 2024</p>
+        </div>
+
+        <div class="accounts-grid">
+          <!-- Checking -->
+          <article class="card card-interactive account-card" aria-label="Checking Account">
+            <div class="account-card-top">
+              <div class="account-icon" aria-hidden="true">🏦</div>
+              <span class="account-type-badge">Checking</span>
+            </div>
+            <div>
+              <p class="account-name">Checking Account</p>
+              <p class="account-balance">$4,287.50</p>
+              <p class="account-balance-label">Current balance</p>
+            </div>
+            <button class="btn-ghost">View Details →</button>
+          </article>
+
+          <!-- Savings -->
+          <article class="card card-interactive account-card" aria-label="Savings Account">
+            <div class="account-card-top">
+              <div class="account-icon" aria-hidden="true">💰</div>
+              <span class="account-type-badge">Savings</span>
+            </div>
+            <div>
+              <p class="account-name">Savings Account</p>
+              <p class="account-balance">$18,920.00</p>
+              <p class="account-balance-label">Current balance</p>
+            </div>
+            <button class="btn-ghost">View Details →</button>
+          </article>
+
+          <!-- Credit Card -->
+          <article class="card card-interactive account-card account-card-credit" aria-label="Credit Card">
+            <div class="account-card-top">
+              <div class="account-icon" aria-hidden="true">💳</div>
+              <span class="account-type-badge">Credit Card</span>
+            </div>
+            <div>
+              <p class="account-name">Credit Card</p>
+              <p class="account-balance">$3,200.00</p>
+              <p class="account-balance-label">Available credit</p>
+            </div>
+            <button class="btn-ghost">View Details →</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Spending Overview ──────────────────────────────── -->
+    <section class="section" aria-labelledby="spending-heading">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="spending-heading">Spending This Month</h2>
+        </div>
+
+        <div class="spending-layout">
+          <!-- Chart -->
+          <div class="card">
+            <div class="spending-header">
+              <h3>By Category</h3>
+              <label for="date-range" class="sr-only">Select date range</label>
+              <select class="date-selector" id="date-range" aria-label="Date range">
+                <option selected>August 2024</option>
+                <option>July 2024</option>
+                <option>June 2024</option>
+              </select>
+            </div>
+            <div class="chart-list" role="list" aria-label="Spending by category">
+              <div class="chart-item" role="listitem">
+                <span class="chart-label">Groceries</span>
+                <div class="chart-bar-track" role="progressbar" aria-valuenow="420" aria-valuemin="0" aria-valuemax="420" aria-label="Groceries $420">
+                  <div class="chart-bar-fill" style="width: 100%"></div>
+                </div>
+                <span class="chart-amount">$420</span>
+              </div>
+              <div class="chart-item" role="listitem">
+                <span class="chart-label">Transportation</span>
+                <div class="chart-bar-track" role="progressbar" aria-valuenow="320" aria-valuemin="0" aria-valuemax="420" aria-label="Transportation $320">
+                  <div class="chart-bar-fill" style="width: 76%"></div>
+                </div>
+                <span class="chart-amount">$320</span>
+              </div>
+              <div class="chart-item" role="listitem">
+                <span class="chart-label">Dining & Ent.</span>
+                <div class="chart-bar-track" role="progressbar" aria-valuenow="280" aria-valuemin="0" aria-valuemax="420" aria-label="Dining and Entertainment $280">
+                  <div class="chart-bar-fill chart-bar-fill--secondary" style="width: 67%"></div>
+                </div>
+                <span class="chart-amount">$280</span>
+              </div>
+              <div class="chart-item" role="listitem">
+                <span class="chart-label">Shopping</span>
+                <div class="chart-bar-track" role="progressbar" aria-valuenow="185" aria-valuemin="0" aria-valuemax="420" aria-label="Shopping $185">
+                  <div class="chart-bar-fill chart-bar-fill--secondary" style="width: 44%"></div>
+                </div>
+                <span class="chart-amount">$185</span>
+              </div>
+              <div class="chart-item" role="listitem">
+                <span class="chart-label">Utilities</span>
+                <div class="chart-bar-track" role="progressbar" aria-valuenow="150" aria-valuemin="0" aria-valuemax="420" aria-label="Utilities $150">
+                  <div class="chart-bar-fill chart-bar-fill--tertiary" style="width: 36%"></div>
+                </div>
+                <span class="chart-amount">$150</span>
+              </div>
+              <div class="chart-item" role="listitem">
+                <span class="chart-label">Other</span>
+                <div class="chart-bar-track" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="420" aria-label="Other $95">
+                  <div class="chart-bar-fill chart-bar-fill--tertiary" style="width: 23%"></div>
+                </div>
+                <span class="chart-amount">$95</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary -->
+          <div class="card spending-summary">
+            <div>
+              <p class="spending-total-label">Total Spent</p>
+              <p class="spending-total-amount">$1,450</p>
+            </div>
+            <div>
+              <div class="spending-remaining">
+                <span class="spending-remaining-label">Budget Remaining</span>
+                <span class="spending-remaining-amount">$550</span>
+              </div>
+              <div class="progress-track" role="progressbar" aria-valuenow="72.5" aria-valuemin="0" aria-valuemax="100" aria-label="72.5% of budget used">
+                <div class="progress-fill"></div>
+              </div>
+              <p class="progress-label">72.5% of monthly budget used</p>
+            </div>
+            <button class="btn-secondary">Set Budget</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Recent Transactions ────────────────────────────── -->
+    <section class="section" aria-labelledby="recent-transactions-heading">
+      <div class="container">
+        <div class="transactions-section-header">
+          <h2 id="recent-transactions-heading">Recent Transactions</h2>
+        </div>
+
+        <!-- Desktop table -->
+        <div class="transactions-table-wrapper">
+          <table class="transactions-table" aria-label="Recent transactions">
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Description</th>
+                <th scope="col">Category</th>
+                <th scope="col" style="text-align: right;">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="td-date">Aug 28, 2024</td>
+                <td class="td-description">Whole Foods Market</td>
+                <td><span class="category-badge badge-groceries">Groceries</span></td>
+                <td class="td-amount amount-expense">–$87.42</td>
+              </tr>
+              <tr>
+                <td class="td-date">Aug 27, 2024</td>
+                <td class="td-description">Salary Deposit</td>
+                <td><span class="category-badge badge-income">Income</span></td>
+                <td class="td-amount amount-income">+$3,500.00</td>
+              </tr>
+              <tr>
+                <td class="td-date">Aug 26, 2024</td>
+                <td class="td-description">Electric Company</td>
+                <td><span class="category-badge badge-utilities">Utilities</span></td>
+                <td class="td-amount amount-expense">–$142.30</td>
+              </tr>
+              <tr>
+                <td class="td-date">Aug 25, 2024</td>
+                <td class="td-description">Uber</td>
+                <td><span class="category-badge badge-transportation">Transportation</span></td>
+                <td class="td-amount amount-expense">–$24.50</td>
+              </tr>
+              <tr>
+                <td class="td-date">Aug 24, 2024</td>
+                <td class="td-description">Netflix</td>
+                <td><span class="category-badge badge-subscriptions">Subscriptions</span></td>
+                <td class="td-amount amount-expense">–$15.99</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Mobile cards -->
+        <div class="transactions-cards" aria-label="Recent transactions">
+          <div class="txn-card">
+            <div class="txn-card-left">
+              <span class="txn-card-desc">Whole Foods Market</span>
+              <span class="txn-card-meta">Aug 28, 2024 · <span class="category-badge badge-groceries">Groceries</span></span>
+            </div>
+            <div class="txn-card-right">
+              <span class="txn-card-amount amount-expense">–$87.42</span>
+            </div>
+          </div>
+          <div class="txn-card">
+            <div class="txn-card-left">
+              <span class="txn-card-desc">Salary Deposit</span>
+              <span class="txn-card-meta">Aug 27, 2024 · <span class="category-badge badge-income">Income</span></span>
+            </div>
+            <div class="txn-card-right">
+              <span class="txn-card-amount amount-income">+$3,500.00</span>
+            </div>
+          </div>
+          <div class="txn-card">
+            <div class="txn-card-left">
+              <span class="txn-card-desc">Electric Company</span>
+              <span class="txn-card-meta">Aug 26, 2024 · <span class="category-badge badge-utilities">Utilities</span></span>
+            </div>
+            <div class="txn-card-right">
+              <span class="txn-card-amount amount-expense">–$142.30</span>
+            </div>
+          </div>
+          <div class="txn-card">
+            <div class="txn-card-left">
+              <span class="txn-card-desc">Uber</span>
+              <span class="txn-card-meta">Aug 25, 2024 · <span class="category-badge badge-transportation">Transportation</span></span>
+            </div>
+            <div class="txn-card-right">
+              <span class="txn-card-amount amount-expense">–$24.50</span>
+            </div>
+          </div>
+          <div class="txn-card">
+            <div class="txn-card-left">
+              <span class="txn-card-desc">Netflix</span>
+              <span class="txn-card-meta">Aug 24, 2024 · <span class="category-badge badge-subscriptions">Subscriptions</span></span>
+            </div>
+            <div class="txn-card-right">
+              <span class="txn-card-amount amount-expense">–$15.99</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="transactions-footer">
+          <a href="transactions.html" class="btn-ghost">View All Transactions →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <p class="footer-brand">FinanceApp</p>
+          <p class="footer-copy">© 2024 FinanceApp. All rights reserved.</p>
+        </div>
+        <div>
+          <p class="footer-col-heading">Legal</p>
+          <ul class="footer-col-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-heading">Support</p>
+          <ul class="footer-col-links">
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-heading">Company</p>
+          <ul class="footer-col-links">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    const mobileNavClose = document.getElementById('mobile-nav-close');
+
+    function openMobileNav() {
+      mobileNav.classList.add('is-open');
+      hamburgerBtn.setAttribute('aria-expanded', 'true');
+      mobileNavClose.focus();
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileNav() {
+      mobileNav.classList.remove('is-open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+      hamburgerBtn.focus();
+      document.body.style.overflow = '';
+    }
+
+    hamburgerBtn.addEventListener('click', openMobileNav);
+    mobileNavClose.addEventListener('click', closeMobileNav);
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && mobileNav.classList.contains('is-open')) {
+        closeMobileNav();
+      }
+    });
+  </script>
+
+</body>
+</html>

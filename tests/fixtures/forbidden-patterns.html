@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forbidden Patterns Test</title>
+  <style>
+    :root {
+      --pesto-font-sans: "Inter", system-ui, sans-serif;
+      --pesto-text-primary: #1c1917;
+      --pesto-surface-page: #ffffff;
+      --pesto-brand-600: #16a34a;
+      --pesto-space-4: 1rem;
+      --pesto-space-8: 2rem;
+      --pesto-radius-md: 8px;
+    }
+    body {
+      font-family: var(--pesto-font-sans);
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-page);
+    }
+    /* VIOLATION: !important */
+    .hero-title {
+      font-size: var(--pesto-text-5xl) !important;
+      color: var(--pesto-text-primary) !important;
+    }
+    /* VIOLATION: Tailwind-style utility class names suggest framework use */
+    .mt-4 { margin-top: 1rem; }
+    .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+    /* VIOLATION: raw media query not matching Pesto breakpoints */
+    @media (max-width: 500px) {
+      .hero-title { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- VIOLATION: div soup instead of semantic elements -->
+  <div class="hero">
+    <!-- VIOLATION: inline style -->
+    <div style="text-align: center; padding: 80px 24px;">
+      <div class="hero-title">Welcome to FreshMart</div>
+      <!-- VIOLATION: br tags for spacing -->
+      <br><br>
+      <div>Your one-stop shop for organic groceries</div>
+      <br><br><br>
+      <!-- VIOLATION: inline styles on button -->
+      <button style="background: #16a34a; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer;">
+        Shop Now
+      </button>
+    </div>
+  </div>
+
+  <div class="mt-4 px-6">
+    <div>
+      <div style="font-weight: bold; font-size: 20px;">Featured Products</div>
+      <!-- VIOLATION: img without figure wrapper, poor alt text -->
+      <img src="https://placehold.co/400x300" alt="image1">
+      <img src="https://placehold.co/400x300" alt="photo">
+      <!-- VIOLATION: input without label -->
+      <input type="email" placeholder="Enter your email">
+      <button style="background: green; color: white; padding: 8px;">Subscribe</button>
+    </div>
+  </div>
+</body>
+</html>

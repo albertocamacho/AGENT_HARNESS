@@ -1,0 +1,35 @@
+{
+  "name": "agent-harness",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "An orchestrator harness for LLM agents that design HTML interfaces",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/entrypoints/api.ts",
+    "cli": "tsx src/entrypoints/cli.ts",
+    "api": "tsx src/entrypoints/api.ts",
+    "web": "tsx src/entrypoints/web.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:unit": "vitest run tests/design-system.test.ts",
+    "test:validator": "vitest run tests/validator/",
+    "test:e2e": "vitest run tests/e2e/",
+    "test:fixture": "vitest run tests/validator/compliance.test.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "commander": "^12.1.0",
+    "dotenv": "^17.4.1",
+    "express": "^4.21.0",
+    "nanoid": "^5.0.9",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.0.0",
+    "@types/ws": "^8.5.13",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^4.1.2"
+  }
+}

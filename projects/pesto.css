@@ -1,0 +1,208 @@
+/*
+ * Pesto Design System — Core Variables
+ * ─────────────────────────────────────
+ * All generated pages MUST use these tokens.
+ * Do not hardcode values — reference the custom properties below.
+ */
+
+:root {
+  /* ── Color: Brand ─────────────────────────────────────── */
+  --pesto-brand-50:  #f0fdf4;
+  --pesto-brand-100: #dcfce7;
+  --pesto-brand-200: #bbf7d0;
+  --pesto-brand-300: #86efac;
+  --pesto-brand-400: #4ade80;
+  --pesto-brand-500: #22c55e;
+  --pesto-brand-600: #16a34a;
+  --pesto-brand-700: #15803d;
+  --pesto-brand-800: #166534;
+  --pesto-brand-900: #14532d;
+
+  /* ── Color: Neutral ───────────────────────────────────── */
+  --pesto-neutral-0:   #ffffff;
+  --pesto-neutral-50:  #fafaf9;
+  --pesto-neutral-100: #f5f5f4;
+  --pesto-neutral-200: #e7e5e4;
+  --pesto-neutral-300: #d6d3d1;
+  --pesto-neutral-400: #a8a29e;
+  --pesto-neutral-500: #78716c;
+  --pesto-neutral-600: #57534e;
+  --pesto-neutral-700: #44403c;
+  --pesto-neutral-800: #292524;
+  --pesto-neutral-900: #1c1917;
+
+  /* ── Color: Accent ────────────────────────────────────── */
+  --pesto-accent-50:  #fefce8;
+  --pesto-accent-100: #fef9c3;
+  --pesto-accent-200: #fef08a;
+  --pesto-accent-400: #facc15;
+  --pesto-accent-600: #ca8a04;
+
+  /* ── Color: Semantic ──────────────────────────────────── */
+  --pesto-error-50:  #fef2f2;
+  --pesto-error-500: #ef4444;
+  --pesto-error-700: #b91c1c;
+
+  --pesto-warning-50:  #fffbeb;
+  --pesto-warning-500: #f59e0b;
+  --pesto-warning-700: #b45309;
+
+  --pesto-success-50:  #f0fdf4;
+  --pesto-success-500: #22c55e;
+  --pesto-success-700: #15803d;
+
+  --pesto-info-50:  #eff6ff;
+  --pesto-info-500: #3b82f6;
+  --pesto-info-700: #1d4ed8;
+
+  /* ── Color: Surfaces ──────────────────────────────────── */
+  --pesto-surface-page:    var(--pesto-neutral-0);
+  --pesto-surface-raised:  var(--pesto-neutral-0);
+  --pesto-surface-sunken:  var(--pesto-neutral-50);
+  --pesto-surface-overlay: rgba(0, 0, 0, 0.45);
+
+  /* ── Color: Text ──────────────────────────────────────── */
+  --pesto-text-primary:   var(--pesto-neutral-900);
+  --pesto-text-secondary: var(--pesto-neutral-600);
+  --pesto-text-tertiary:  var(--pesto-neutral-400);
+  --pesto-text-inverse:   var(--pesto-neutral-0);
+  --pesto-text-link:      var(--pesto-brand-600);
+  --pesto-text-link-hover: var(--pesto-brand-700);
+
+  /* ── Color: Borders ───────────────────────────────────── */
+  --pesto-border-default: var(--pesto-neutral-200);
+  --pesto-border-strong:  var(--pesto-neutral-300);
+  --pesto-border-focus:   var(--pesto-brand-500);
+
+  /* ── Typography ───────────────────────────────────────── */
+  --pesto-font-sans:  "Inter", system-ui, -apple-system, sans-serif;
+  --pesto-font-mono:  "JetBrains Mono", ui-monospace, monospace;
+
+  --pesto-text-xs:   0.75rem;    /* 12px */
+  --pesto-text-sm:   0.875rem;   /* 14px */
+  --pesto-text-base: 1rem;       /* 16px */
+  --pesto-text-lg:   1.125rem;   /* 18px */
+  --pesto-text-xl:   1.25rem;    /* 20px */
+  --pesto-text-2xl:  1.5rem;     /* 24px */
+  --pesto-text-3xl:  1.875rem;   /* 30px */
+  --pesto-text-4xl:  2.25rem;    /* 36px */
+  --pesto-text-5xl:  3rem;       /* 48px */
+
+  --pesto-leading-tight:  1.25;
+  --pesto-leading-normal: 1.5;
+  --pesto-leading-loose:  1.75;
+
+  --pesto-weight-normal:   400;
+  --pesto-weight-medium:   500;
+  --pesto-weight-semibold: 600;
+  --pesto-weight-bold:     700;
+
+  /* ── Spacing ──────────────────────────────────────────── */
+  --pesto-space-0:   0;
+  --pesto-space-1:   0.25rem;   /*  4px */
+  --pesto-space-2:   0.5rem;    /*  8px */
+  --pesto-space-3:   0.75rem;   /* 12px */
+  --pesto-space-4:   1rem;      /* 16px */
+  --pesto-space-5:   1.25rem;   /* 20px */
+  --pesto-space-6:   1.5rem;    /* 24px */
+  --pesto-space-8:   2rem;      /* 32px */
+  --pesto-space-10:  2.5rem;    /* 40px */
+  --pesto-space-12:  3rem;      /* 48px */
+  --pesto-space-16:  4rem;      /* 64px */
+  --pesto-space-20:  5rem;      /* 80px */
+  --pesto-space-24:  6rem;      /* 96px */
+
+  /* ── Layout ───────────────────────────────────────────── */
+  --pesto-container-sm:  640px;
+  --pesto-container-md:  768px;
+  --pesto-container-lg:  1024px;
+  --pesto-container-xl:  1280px;
+  --pesto-container-2xl: 1536px;
+
+  --pesto-content-width: min(100% - var(--pesto-space-8), var(--pesto-container-xl));
+
+  /* ── Surfaces ─────────────────────────────────────────── */
+  --pesto-radius-sm:   4px;
+  --pesto-radius-md:   8px;
+  --pesto-radius-lg:   12px;
+  --pesto-radius-xl:   16px;
+  --pesto-radius-full: 9999px;
+
+  --pesto-shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.05);
+  --pesto-shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --pesto-shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --pesto-shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+
+  /* ── Transitions ──────────────────────────────────────── */
+  --pesto-duration-fast:   100ms;
+  --pesto-duration-normal: 200ms;
+  --pesto-duration-slow:   300ms;
+  --pesto-ease-default:    cubic-bezier(0.4, 0, 0.2, 1);
+  --pesto-ease-in:         cubic-bezier(0.4, 0, 1, 1);
+  --pesto-ease-out:        cubic-bezier(0, 0, 0.2, 1);
+  --pesto-ease-interact:   cubic-bezier(1, 0, 0, 1);
+
+  /* ── Z-index ──────────────────────────────────────────── */
+  --pesto-z-dropdown: 10;
+  --pesto-z-sticky:   20;
+  --pesto-z-overlay:  30;
+  --pesto-z-modal:    40;
+  --pesto-z-toast:    50;
+}
+
+/* ── Base Styles ─────────────────────────────────────────── */
+/* These resets and defaults ensure every generated page starts
+   from a consistent, polished baseline. */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--pesto-font-sans);
+  font-size: var(--pesto-text-base);
+  line-height: var(--pesto-leading-normal);
+  color: var(--pesto-text-primary);
+  background: var(--pesto-surface-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, picture, video, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Dark mode overrides ──────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pesto-surface-page:   var(--pesto-neutral-900);
+    --pesto-surface-raised: var(--pesto-neutral-800);
+    --pesto-surface-sunken: var(--pesto-neutral-900);
+
+    --pesto-text-primary:   var(--pesto-neutral-50);
+    --pesto-text-secondary: var(--pesto-neutral-400);
+    --pesto-text-tertiary:  var(--pesto-neutral-500);
+    --pesto-text-inverse:   var(--pesto-neutral-900);
+    --pesto-text-link:      var(--pesto-brand-400);
+    --pesto-text-link-hover: var(--pesto-brand-300);
+
+    --pesto-border-default: var(--pesto-neutral-700);
+    --pesto-border-strong:  var(--pesto-neutral-600);
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//usr/local/bin/**)",
+      "Read(//usr/local/**)",
+      "Read(//opt/**)",
+      "Read(//Users/albertocamacho/Desktop/AGENT_HARNESS/**)",
+      "Bash(export PATH=\"/opt/homebrew/bin:$PATH\")",
+      "Bash(npx vitest:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npx tsc:*)",
+      "Bash(ls -la /Users/albertocamacho/Desktop/AGENT_HARNESS/*.md)",
+      "Bash(npx tsx:*)"
+    ]
+  }
+}

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compliant Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pesto-brand-50: #f0fdf4;
+      --pesto-brand-100: #dcfce7;
+      --pesto-brand-600: #16a34a;
+      --pesto-brand-700: #15803d;
+      --pesto-brand-800: #166534;
+      --pesto-neutral-0: #ffffff;
+      --pesto-neutral-50: #fafaf9;
+      --pesto-neutral-200: #e7e5e4;
+      --pesto-neutral-300: #d6d3d1;
+      --pesto-neutral-400: #a8a29e;
+      --pesto-neutral-600: #57534e;
+      --pesto-neutral-900: #1c1917;
+      --pesto-font-sans: "Inter", system-ui, -apple-system, sans-serif;
+      --pesto-text-sm: 0.875rem;
+      --pesto-text-base: 1rem;
+      --pesto-text-lg: 1.125rem;
+      --pesto-text-2xl: 1.5rem;
+      --pesto-text-4xl: 2.25rem;
+      --pesto-leading-normal: 1.5;
+      --pesto-weight-normal: 400;
+      --pesto-weight-medium: 500;
+      --pesto-weight-semibold: 600;
+      --pesto-weight-bold: 700;
+      --pesto-space-2: 0.5rem;
+      --pesto-space-3: 0.75rem;
+      --pesto-space-4: 1rem;
+      --pesto-space-6: 1.5rem;
+      --pesto-space-8: 2rem;
+      --pesto-space-16: 4rem;
+      --pesto-container-xl: 1280px;
+      --pesto-content-width: min(100% - var(--pesto-space-8), var(--pesto-container-xl));
+      --pesto-surface-page: var(--pesto-neutral-0);
+      --pesto-surface-raised: var(--pesto-neutral-0);
+      --pesto-surface-sunken: var(--pesto-neutral-50);
+      --pesto-text-primary: var(--pesto-neutral-900);
+      --pesto-text-secondary: var(--pesto-neutral-600);
+      --pesto-text-inverse: var(--pesto-neutral-0);
+      --pesto-text-link: var(--pesto-brand-600);
+      --pesto-text-link-hover: var(--pesto-brand-700);
+      --pesto-border-default: var(--pesto-neutral-200);
+      --pesto-border-focus: var(--pesto-brand-600);
+      --pesto-radius-md: 8px;
+      --pesto-radius-lg: 12px;
+      --pesto-radius-full: 9999px;
+      --pesto-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --pesto-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --pesto-duration-normal: 200ms;
+      --pesto-ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--pesto-font-sans);
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-page);
+      line-height: var(--pesto-leading-normal);
+      font-size: var(--pesto-text-base);
+    }
+    .container {
+      width: var(--pesto-content-width);
+      margin-inline: auto;
+    }
+    header {
+      padding: var(--pesto-space-4) 0;
+      border-bottom: 1px solid var(--pesto-border-default);
+    }
+    nav a {
+      color: var(--pesto-text-secondary);
+      text-decoration: none;
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      transition: color var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+    nav a:hover { color: var(--pesto-text-primary); }
+    nav a:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+    section { padding: var(--pesto-space-16) 0; }
+    h1 {
+      font-size: var(--pesto-text-4xl);
+      font-weight: var(--pesto-weight-bold);
+      max-width: 65ch;
+    }
+    h2 {
+      font-size: var(--pesto-text-2xl);
+      font-weight: var(--pesto-weight-semibold);
+    }
+    p {
+      font-size: var(--pesto-text-base);
+      line-height: var(--pesto-leading-normal);
+      color: var(--pesto-text-secondary);
+      max-width: 65ch;
+    }
+    .card {
+      background: var(--pesto-surface-raised);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      padding: var(--pesto-space-6);
+      box-shadow: var(--pesto-shadow-sm);
+      transition: box-shadow var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+    .card:hover { box-shadow: var(--pesto-shadow-md); }
+    .btn-primary {
+      background: var(--pesto-brand-600);
+      color: var(--pesto-text-inverse);
+      border: none;
+      border-radius: var(--pesto-radius-md);
+      padding: var(--pesto-space-3) var(--pesto-space-6);
+      font-weight: var(--pesto-weight-medium);
+      font-size: var(--pesto-text-sm);
+      cursor: pointer;
+      transition: all var(--pesto-duration-normal) var(--pesto-ease-default);
+      min-height: 44px;
+      min-width: 44px;
+    }
+    .btn-primary:hover { background: var(--pesto-brand-700); }
+    .btn-primary:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+    label {
+      display: block;
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-primary);
+      margin-bottom: var(--pesto-space-2);
+    }
+    input[type="email"] {
+      width: 100%;
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-md);
+      padding: var(--pesto-space-3) var(--pesto-space-4);
+      font-family: inherit;
+      font-size: var(--pesto-text-base);
+      transition: border-color var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+    input[type="email"]:focus-visible {
+      border-color: var(--pesto-border-focus);
+      outline: 2px solid var(--pesto-brand-100);
+      outline-offset: 1px;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--pesto-brand-100);
+      color: var(--pesto-brand-800);
+      padding: var(--pesto-space-2) var(--pesto-space-3);
+      border-radius: var(--pesto-radius-full);
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+    }
+    footer {
+      border-top: 1px solid var(--pesto-border-default);
+      padding: var(--pesto-space-8) 0;
+      color: var(--pesto-text-secondary);
+      font-size: var(--pesto-text-sm);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <section class="container">
+      <span class="badge">New</span>
+      <h1>A Compliant Page</h1>
+      <p>This page follows every Pesto design system rule correctly.</p>
+      <button class="btn-primary">Get Started</button>
+    </section>
+    <section class="container">
+      <h2>Features</h2>
+      <article class="card">
+        <h3 style="font-size: var(--pesto-text-lg); font-weight: var(--pesto-weight-medium);">Feature One</h3>
+        <p>A well-structured card with proper tokens.</p>
+      </article>
+    </section>
+    <section class="container">
+      <h2>Stay Updated</h2>
+      <label for="email">Email address</label>
+      <input type="email" id="email" placeholder="you@example.com">
+      <button class="btn-primary">Subscribe</button>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Pesto. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

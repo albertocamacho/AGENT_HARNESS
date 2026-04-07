@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skipped Headings Test</title>
+  <style>
+    :root {
+      --pesto-brand-600: #16a34a;
+      --pesto-neutral-900: #1c1917;
+      --pesto-neutral-0: #ffffff;
+      --pesto-text-primary: var(--pesto-neutral-900);
+      --pesto-surface-page: var(--pesto-neutral-0);
+      --pesto-font-sans: "Inter", system-ui, sans-serif;
+      --pesto-text-5xl: 3rem;
+      --pesto-text-xl: 1.25rem;
+      --pesto-text-base: 1rem;
+      --pesto-weight-bold: 700;
+      --pesto-weight-semibold: 600;
+      --pesto-leading-normal: 1.5;
+    }
+    body {
+      font-family: var(--pesto-font-sans);
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-page);
+      line-height: var(--pesto-leading-normal);
+    }
+    h1 { font-size: var(--pesto-text-5xl); font-weight: var(--pesto-weight-bold); }
+    /* BUG: skips h2 entirely */
+    h3 { font-size: var(--pesto-text-xl); font-weight: var(--pesto-weight-semibold); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Our Services</h1>
+    <p>We offer a range of solutions for your needs.</p>
+    <!-- Violation: jumps from h1 to h3, skipping h2 -->
+    <h3>Web Development</h3>
+    <p>Building modern, responsive websites.</p>
+    <h3>Mobile Apps</h3>
+    <p>Native and cross-platform mobile solutions.</p>
+    <!-- Violation: jumps from h3 to h5 -->
+    <h5>Technologies We Use</h5>
+    <p>React, Node.js, Swift, Kotlin.</p>
+  </main>
+</body>
+</html>

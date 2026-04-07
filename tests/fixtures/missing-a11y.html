@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Missing Accessibility</title>
+  <style>
+    :root {
+      --pesto-font-sans: "Inter", system-ui, sans-serif;
+      --pesto-text-primary: var(--pesto-neutral-900);
+      --pesto-surface-page: var(--pesto-neutral-0);
+      --pesto-neutral-0: #ffffff;
+      --pesto-neutral-200: #e7e5e4;
+      --pesto-neutral-900: #1c1917;
+      --pesto-brand-600: #16a34a;
+      --pesto-brand-700: #15803d;
+      --pesto-text-inverse: var(--pesto-neutral-0);
+      --pesto-text-base: 1rem;
+      --pesto-text-4xl: 2.25rem;
+      --pesto-text-2xl: 1.5rem;
+      --pesto-text-sm: 0.875rem;
+      --pesto-weight-bold: 700;
+      --pesto-weight-semibold: 600;
+      --pesto-weight-medium: 500;
+      --pesto-radius-md: 8px;
+      --pesto-radius-lg: 12px;
+      --pesto-space-3: 0.75rem;
+      --pesto-space-4: 1rem;
+      --pesto-space-6: 1.5rem;
+      --pesto-border-default: var(--pesto-neutral-200);
+      --pesto-surface-raised: var(--pesto-neutral-0);
+      --pesto-shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --pesto-leading-normal: 1.5;
+    }
+    body {
+      font-family: var(--pesto-font-sans);
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-page);
+      font-size: var(--pesto-text-base);
+      line-height: var(--pesto-leading-normal);
+    }
+    h1 { font-size: var(--pesto-text-4xl); font-weight: var(--pesto-weight-bold); }
+    h2 { font-size: var(--pesto-text-2xl); font-weight: var(--pesto-weight-semibold); }
+    /* Violation: no :focus-visible on interactive elements */
+    .btn {
+      background: var(--pesto-brand-600);
+      color: var(--pesto-text-inverse);
+      border: none;
+      border-radius: var(--pesto-radius-md);
+      padding: var(--pesto-space-3) var(--pesto-space-6);
+      font-weight: var(--pesto-weight-medium);
+      font-size: var(--pesto-text-sm);
+      cursor: pointer;
+      /* Violation: no min-height/width for touch target */
+    }
+    .btn:hover { background: var(--pesto-brand-700); }
+    /* Violation: focus explicitly removed */
+    .btn:focus { outline: none; }
+    a:focus { outline: none; }
+    input {
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-md);
+      padding: var(--pesto-space-3) var(--pesto-space-4);
+    }
+    /* Violation: focus removed from input too */
+    input:focus { outline: none; }
+    .card {
+      background: var(--pesto-surface-raised);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      padding: var(--pesto-space-6);
+      box-shadow: var(--pesto-shadow-sm);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Accessibility Test</h1>
+    <h2>Sign Up Form</h2>
+    <div class="card">
+      <!-- Violation: inputs without labels -->
+      <input type="text" placeholder="Full name">
+      <input type="email" placeholder="Email address">
+      <button class="btn">Submit</button>
+    </div>
+    <h2>Gallery</h2>
+    <!-- Violation: images without alt text -->
+    <img src="https://placehold.co/600x400">
+    <img src="https://placehold.co/600x400">
+    <!-- Violation: link with no discernible text -->
+    <a href="/about"></a>
+  </main>
+</body>
+</html>

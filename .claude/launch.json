@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev",
+      "runtimeExecutable": "/opt/homebrew/bin/node",
+      "runtimeArgs": ["node_modules/.bin/tsx", "watch", "src/entrypoints/api.ts"],
+      "port": 3100
+    },
+    {
+      "name": "api",
+      "runtimeExecutable": "/opt/homebrew/bin/node",
+      "runtimeArgs": ["node_modules/.bin/tsx", "src/entrypoints/api.ts"],
+      "port": 3100
+    },
+    {
+      "name": "web",
+      "runtimeExecutable": "/opt/homebrew/bin/node",
+      "runtimeArgs": ["node_modules/.bin/tsx", "src/entrypoints/web.ts"],
+      "port": 3100
+    }
+  ]
+}

@@ -1,0 +1,2228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style id="pesto-tokens">
+/*
+ * Pesto Design System — Core Variables
+ * ─────────────────────────────────────
+ * All generated pages MUST use these tokens.
+ * Do not hardcode values — reference the custom properties below.
+ */
+
+:root {
+  /* ── Color: Brand ─────────────────────────────────────── */
+  --pesto-brand-50:  #f0fdf4;
+  --pesto-brand-100: #dcfce7;
+  --pesto-brand-200: #bbf7d0;
+  --pesto-brand-300: #86efac;
+  --pesto-brand-400: #4ade80;
+  --pesto-brand-500: #22c55e;
+  --pesto-brand-600: #16a34a;
+  --pesto-brand-700: #15803d;
+  --pesto-brand-800: #166534;
+  --pesto-brand-900: #14532d;
+
+  /* ── Color: Neutral ───────────────────────────────────── */
+  --pesto-neutral-0:   #ffffff;
+  --pesto-neutral-50:  #fafaf9;
+  --pesto-neutral-100: #f5f5f4;
+  --pesto-neutral-200: #e7e5e4;
+  --pesto-neutral-300: #d6d3d1;
+  --pesto-neutral-400: #a8a29e;
+  --pesto-neutral-500: #78716c;
+  --pesto-neutral-600: #57534e;
+  --pesto-neutral-700: #44403c;
+  --pesto-neutral-800: #292524;
+  --pesto-neutral-900: #1c1917;
+
+  /* ── Color: Accent ────────────────────────────────────── */
+  --pesto-accent-50:  #fefce8;
+  --pesto-accent-100: #fef9c3;
+  --pesto-accent-200: #fef08a;
+  --pesto-accent-400: #facc15;
+  --pesto-accent-600: #ca8a04;
+
+  /* ── Color: Semantic ──────────────────────────────────── */
+  --pesto-error-50:  #fef2f2;
+  --pesto-error-500: #ef4444;
+  --pesto-error-700: #b91c1c;
+
+  --pesto-warning-50:  #fffbeb;
+  --pesto-warning-500: #f59e0b;
+  --pesto-warning-700: #b45309;
+
+  --pesto-success-50:  #f0fdf4;
+  --pesto-success-500: #22c55e;
+  --pesto-success-700: #15803d;
+
+  --pesto-info-50:  #eff6ff;
+  --pesto-info-500: #3b82f6;
+  --pesto-info-700: #1d4ed8;
+
+  /* ── Color: Surfaces ──────────────────────────────────── */
+  --pesto-surface-page:    var(--pesto-neutral-0);
+  --pesto-surface-raised:  var(--pesto-neutral-0);
+  --pesto-surface-sunken:  var(--pesto-neutral-50);
+  --pesto-surface-overlay: rgba(0, 0, 0, 0.45);
+
+  /* ── Color: Text ──────────────────────────────────────── */
+  --pesto-text-primary:   var(--pesto-neutral-900);
+  --pesto-text-secondary: var(--pesto-neutral-600);
+  --pesto-text-tertiary:  var(--pesto-neutral-400);
+  --pesto-text-inverse:   var(--pesto-neutral-0);
+  --pesto-text-link:      var(--pesto-brand-600);
+  --pesto-text-link-hover: var(--pesto-brand-700);
+
+  /* ── Color: Borders ───────────────────────────────────── */
+  --pesto-border-default: var(--pesto-neutral-200);
+  --pesto-border-strong:  var(--pesto-neutral-300);
+  --pesto-border-focus:   var(--pesto-brand-500);
+
+  /* ── Typography ───────────────────────────────────────── */
+  --pesto-font-sans:  "Inter", system-ui, -apple-system, sans-serif;
+  --pesto-font-mono:  "JetBrains Mono", ui-monospace, monospace;
+
+  --pesto-text-xs:   0.75rem;    /* 12px */
+  --pesto-text-sm:   0.875rem;   /* 14px */
+  --pesto-text-base: 1rem;       /* 16px */
+  --pesto-text-lg:   1.125rem;   /* 18px */
+  --pesto-text-xl:   1.25rem;    /* 20px */
+  --pesto-text-2xl:  1.5rem;     /* 24px */
+  --pesto-text-3xl:  1.875rem;   /* 30px */
+  --pesto-text-4xl:  2.25rem;    /* 36px */
+  --pesto-text-5xl:  3rem;       /* 48px */
+
+  --pesto-leading-tight:  1.25;
+  --pesto-leading-normal: 1.5;
+  --pesto-leading-loose:  1.75;
+
+  --pesto-weight-normal:   400;
+  --pesto-weight-medium:   500;
+  --pesto-weight-semibold: 600;
+  --pesto-weight-bold:     700;
+
+  /* ── Spacing ──────────────────────────────────────────── */
+  --pesto-space-0:   0;
+  --pesto-space-1:   0.25rem;   /*  4px */
+  --pesto-space-2:   0.5rem;    /*  8px */
+  --pesto-space-3:   0.75rem;   /* 12px */
+  --pesto-space-4:   1rem;      /* 16px */
+  --pesto-space-5:   1.25rem;   /* 20px */
+  --pesto-space-6:   1.5rem;    /* 24px */
+  --pesto-space-8:   2rem;      /* 32px */
+  --pesto-space-10:  2.5rem;    /* 40px */
+  --pesto-space-12:  3rem;      /* 48px */
+  --pesto-space-16:  4rem;      /* 64px */
+  --pesto-space-20:  5rem;      /* 80px */
+  --pesto-space-24:  6rem;      /* 96px */
+
+  /* ── Layout ───────────────────────────────────────────── */
+  --pesto-container-sm:  640px;
+  --pesto-container-md:  768px;
+  --pesto-container-lg:  1024px;
+  --pesto-container-xl:  1280px;
+  --pesto-container-2xl: 1536px;
+
+  --pesto-content-width: min(100% - var(--pesto-space-8), var(--pesto-container-xl));
+
+  /* ── Surfaces ─────────────────────────────────────────── */
+  --pesto-radius-sm:   4px;
+  --pesto-radius-md:   8px;
+  --pesto-radius-lg:   12px;
+  --pesto-radius-xl:   16px;
+  --pesto-radius-full: 9999px;
+
+  --pesto-shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.05);
+  --pesto-shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --pesto-shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --pesto-shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+
+  /* ── Transitions ──────────────────────────────────────── */
+  --pesto-duration-fast:   100ms;
+  --pesto-duration-normal: 200ms;
+  --pesto-duration-slow:   300ms;
+  --pesto-ease-default:    cubic-bezier(0.4, 0, 0.2, 1);
+  --pesto-ease-in:         cubic-bezier(0.4, 0, 1, 1);
+  --pesto-ease-out:        cubic-bezier(0, 0, 0.2, 1);
+
+  /* ── Z-index ──────────────────────────────────────────── */
+  --pesto-z-dropdown: 10;
+  --pesto-z-sticky:   20;
+  --pesto-z-overlay:  30;
+  --pesto-z-modal:    40;
+  --pesto-z-toast:    50;
+}
+
+/* ── Base Styles ─────────────────────────────────────────── */
+/* These resets and defaults ensure every generated page starts
+   from a consistent, polished baseline. */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--pesto-font-sans);
+  font-size: var(--pesto-text-base);
+  line-height: var(--pesto-leading-normal);
+  color: var(--pesto-text-primary);
+  background: var(--pesto-surface-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, picture, video, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Dark mode overrides ──────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pesto-surface-page:   var(--pesto-neutral-900);
+    --pesto-surface-raised: var(--pesto-neutral-800);
+    --pesto-surface-sunken: var(--pesto-neutral-900);
+
+    --pesto-text-primary:   var(--pesto-neutral-50);
+    --pesto-text-secondary: var(--pesto-neutral-400);
+    --pesto-text-tertiary:  var(--pesto-neutral-500);
+    --pesto-text-inverse:   var(--pesto-neutral-900);
+    --pesto-text-link:      var(--pesto-brand-400);
+    --pesto-text-link-hover: var(--pesto-brand-300);
+
+    --pesto-border-default: var(--pesto-neutral-700);
+    --pesto-border-strong:  var(--pesto-neutral-600);
+  }
+}
+
+</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow – Kanban Board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ─────────────────────────────────────────────────────────
+       Pesto Design Tokens
+       ───────────────────────────────────────────────────────── */
+    :root {
+      --pesto-brand-50:  #f0fdf4;
+      --pesto-brand-100: #dcfce7;
+      --pesto-brand-200: #bbf7d0;
+      --pesto-brand-300: #86efac;
+      --pesto-brand-400: #4ade80;
+      --pesto-brand-500: #22c55e;
+      --pesto-brand-600: #16a34a;
+      --pesto-brand-700: #15803d;
+      --pesto-brand-800: #166534;
+      --pesto-brand-900: #14532d;
+
+      --pesto-neutral-0:   #ffffff;
+      --pesto-neutral-50:  #fafaf9;
+      --pesto-neutral-100: #f5f5f4;
+      --pesto-neutral-200: #e7e5e4;
+      --pesto-neutral-300: #d6d3d1;
+      --pesto-neutral-400: #a8a29e;
+      --pesto-neutral-500: #78716c;
+      --pesto-neutral-600: #57534e;
+      --pesto-neutral-700: #44403c;
+      --pesto-neutral-800: #292524;
+      --pesto-neutral-900: #1c1917;
+
+      --pesto-accent-50:  #fefce8;
+      --pesto-accent-100: #fef9c3;
+      --pesto-accent-200: #fef08a;
+      --pesto-accent-400: #facc15;
+      --pesto-accent-600: #ca8a04;
+
+      --pesto-error-50:  #fef2f2;
+      --pesto-error-500: #ef4444;
+      --pesto-error-700: #b91c1c;
+
+      --pesto-warning-50:  #fffbeb;
+      --pesto-warning-500: #f59e0b;
+      --pesto-warning-700: #b45309;
+
+      --pesto-success-50:  #f0fdf4;
+      --pesto-success-500: #22c55e;
+      --pesto-success-700: #15803d;
+
+      --pesto-info-50:  #eff6ff;
+      --pesto-info-500: #3b82f6;
+      --pesto-info-700: #1d4ed8;
+
+      --pesto-surface-page:    var(--pesto-neutral-0);
+      --pesto-surface-raised:  var(--pesto-neutral-0);
+      --pesto-surface-sunken:  var(--pesto-neutral-50);
+      --pesto-surface-overlay: rgba(0, 0, 0, 0.45);
+
+      --pesto-text-primary:    var(--pesto-neutral-900);
+      --pesto-text-secondary:  var(--pesto-neutral-600);
+      --pesto-text-tertiary:   var(--pesto-neutral-400);
+      --pesto-text-inverse:    var(--pesto-neutral-0);
+      --pesto-text-link:       var(--pesto-brand-600);
+      --pesto-text-link-hover: var(--pesto-brand-700);
+
+      --pesto-border-default:  var(--pesto-neutral-200);
+      --pesto-border-strong:   var(--pesto-neutral-300);
+      --pesto-border-focus:    var(--pesto-brand-500);
+
+      --pesto-font-sans: "Inter", system-ui, -apple-system, sans-serif;
+      --pesto-font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+      --pesto-text-xs:   0.75rem;
+      --pesto-text-sm:   0.875rem;
+      --pesto-text-base: 1rem;
+      --pesto-text-lg:   1.125rem;
+      --pesto-text-xl:   1.25rem;
+      --pesto-text-2xl:  1.5rem;
+      --pesto-text-3xl:  1.875rem;
+      --pesto-text-4xl:  2.25rem;
+      --pesto-text-5xl:  3rem;
+
+      --pesto-leading-tight:  1.25;
+      --pesto-leading-normal: 1.5;
+      --pesto-leading-loose:  1.75;
+
+      --pesto-weight-normal:   400;
+      --pesto-weight-medium:   500;
+      --pesto-weight-semibold: 600;
+      --pesto-weight-bold:     700;
+
+      --pesto-space-0:  0;
+      --pesto-space-1:  0.25rem;
+      --pesto-space-2:  0.5rem;
+      --pesto-space-3:  0.75rem;
+      --pesto-space-4:  1rem;
+      --pesto-space-5:  1.25rem;
+      --pesto-space-6:  1.5rem;
+      --pesto-space-8:  2rem;
+      --pesto-space-10: 2.5rem;
+      --pesto-space-12: 3rem;
+      --pesto-space-16: 4rem;
+      --pesto-space-20: 5rem;
+      --pesto-space-24: 6rem;
+
+      --pesto-container-sm:  640px;
+      --pesto-container-md:  768px;
+      --pesto-container-lg:  1024px;
+      --pesto-container-xl:  1280px;
+      --pesto-container-2xl: 1536px;
+
+      --pesto-content-width: min(100% - var(--pesto-space-8), var(--pesto-container-xl));
+
+      --pesto-radius-sm:   4px;
+      --pesto-radius-md:   8px;
+      --pesto-radius-lg:   12px;
+      --pesto-radius-xl:   16px;
+      --pesto-radius-full: 9999px;
+
+      --pesto-shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.05);
+      --pesto-shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --pesto-shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+      --pesto-shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+
+      --pesto-duration-fast:   100ms;
+      --pesto-duration-normal: 200ms;
+      --pesto-duration-slow:   300ms;
+      --pesto-ease-default:    cubic-bezier(0.4, 0, 0.2, 1);
+      --pesto-ease-in:         cubic-bezier(0.4, 0, 1, 1);
+      --pesto-ease-out:        cubic-bezier(0, 0, 0.2, 1);
+
+      --pesto-z-dropdown: 10;
+      --pesto-z-sticky:   20;
+      --pesto-z-overlay:  30;
+      --pesto-z-modal:    40;
+      --pesto-z-toast:    50;
+
+      --header-height: 64px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --pesto-surface-page:   var(--pesto-neutral-900);
+        --pesto-surface-raised: var(--pesto-neutral-800);
+        --pesto-surface-sunken: var(--pesto-neutral-900);
+
+        --pesto-text-primary:   var(--pesto-neutral-50);
+        --pesto-text-secondary: var(--pesto-neutral-400);
+        --pesto-text-tertiary:  var(--pesto-neutral-500);
+        --pesto-text-inverse:   var(--pesto-neutral-900);
+        --pesto-text-link:      var(--pesto-brand-400);
+        --pesto-text-link-hover: var(--pesto-brand-300);
+
+        --pesto-border-default: var(--pesto-neutral-700);
+        --pesto-border-strong:  var(--pesto-neutral-600);
+      }
+    }
+
+    /* ─────────────────────────────────────────────────────────
+       Global Reset & Base
+       ───────────────────────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--pesto-font-sans);
+      font-size: var(--pesto-text-base);
+      line-height: var(--pesto-leading-normal);
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-page);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body.nav-open { overflow: hidden; }
+
+    img, picture, video, svg { display: block; max-width: 100%; }
+    input, button, textarea, select { font: inherit; }
+    ul, ol { list-style: none; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─────────────────────────────────────────────────────────
+       Shell: Site Header
+       ───────────────────────────────────────────────────────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: var(--pesto-z-sticky);
+      background: var(--pesto-surface-page);
+      border-bottom: 1px solid var(--pesto-border-default);
+      box-shadow: var(--pesto-shadow-sm);
+      height: var(--header-height);
+    }
+
+    .site-header__inner {
+      width: var(--pesto-content-width);
+      margin-inline: auto;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--pesto-space-6);
+    }
+
+    .site-header__brand { flex-shrink: 0; }
+
+    .site-header__logo {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-2);
+      text-decoration: none;
+    }
+
+    .site-header__logo-text {
+      font-size: var(--pesto-text-lg);
+      font-weight: var(--pesto-weight-bold);
+      color: var(--pesto-text-primary);
+    }
+
+    .site-nav { flex: 1; }
+
+    .site-nav__list {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-1);
+      list-style: none;
+    }
+
+    .site-nav__link {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-2);
+      padding: var(--pesto-space-2) var(--pesto-space-3);
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-secondary);
+      border-radius: var(--pesto-radius-md);
+      transition: color var(--pesto-duration-normal) var(--pesto-ease-default),
+                  background var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .site-nav__link:hover {
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-sunken);
+    }
+
+    .site-nav__link.active,
+    .site-nav__link[aria-current="page"] {
+      color: var(--pesto-text-primary);
+      font-weight: var(--pesto-weight-semibold);
+      background: var(--pesto-surface-sunken);
+    }
+
+    .site-nav__link:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .site-nav__icon { flex-shrink: 0; }
+
+    .site-header__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-3);
+      flex-shrink: 0;
+    }
+
+    /* User Menu */
+    .user-menu { position: relative; }
+
+    .user-menu__trigger {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-2);
+      padding: var(--pesto-space-2) var(--pesto-space-3);
+      background: transparent;
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-md);
+      cursor: pointer;
+      color: var(--pesto-text-primary);
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      transition: background var(--pesto-duration-normal) var(--pesto-ease-default);
+      min-height: 44px;
+    }
+
+    .user-menu__trigger:hover { background: var(--pesto-surface-sunken); }
+
+    .user-menu__trigger:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .user-menu__avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--pesto-radius-full);
+      background: var(--pesto-brand-600);
+      color: var(--pesto-text-inverse);
+      font-size: var(--pesto-text-xs);
+      font-weight: var(--pesto-weight-bold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .user-menu__name { color: var(--pesto-text-primary); }
+
+    .user-menu__chevron {
+      color: var(--pesto-text-tertiary);
+      transition: transform var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .user-menu__trigger[aria-expanded="true"] .user-menu__chevron {
+      transform: rotate(180deg);
+    }
+
+    .user-menu__dropdown {
+      position: absolute;
+      top: calc(100% + var(--pesto-space-2));
+      right: 0;
+      background: var(--pesto-surface-raised);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      box-shadow: var(--pesto-shadow-lg);
+      min-width: 160px;
+      z-index: var(--pesto-z-dropdown);
+      overflow: hidden;
+      list-style: none;
+    }
+
+    .user-menu__option {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-2);
+      padding: var(--pesto-space-3) var(--pesto-space-4);
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-primary);
+      transition: background var(--pesto-duration-fast) var(--pesto-ease-default);
+      cursor: pointer;
+    }
+
+    .user-menu__option:hover { background: var(--pesto-surface-sunken); }
+
+    .user-menu__option--danger { color: var(--pesto-error-700); }
+
+    .user-menu__option:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: -2px;
+    }
+
+    /* Hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-md);
+      cursor: pointer;
+      padding: var(--pesto-space-2);
+      transition: background var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .nav-hamburger:hover { background: var(--pesto-surface-sunken); }
+
+    .nav-hamburger:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .nav-hamburger__bar {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--pesto-text-primary);
+      border-radius: var(--pesto-radius-full);
+      transition: transform var(--pesto-duration-normal) var(--pesto-ease-default),
+                  opacity var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .nav-hamburger.is-active .nav-hamburger__bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nav-hamburger.is-active .nav-hamburger__bar:nth-child(2) { opacity: 0; }
+    .nav-hamburger.is-active .nav-hamburger__bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile Nav */
+    .mobile-nav {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--pesto-surface-page);
+      z-index: var(--pesto-z-overlay);
+      padding: var(--pesto-space-6);
+      transform: translateX(-100%);
+      transition: transform var(--pesto-duration-slow) var(--pesto-ease-default);
+      overflow-y: auto;
+      width: 280px;
+      border-right: 1px solid var(--pesto-border-default);
+    }
+
+    .mobile-nav.is-open { transform: translateX(0); }
+
+    .mobile-nav__list { display: flex; flex-direction: column; gap: var(--pesto-space-1); }
+
+    .mobile-nav__link {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-3);
+      padding: var(--pesto-space-3) var(--pesto-space-4);
+      font-size: var(--pesto-text-base);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-secondary);
+      border-radius: var(--pesto-radius-md);
+      transition: color var(--pesto-duration-normal) var(--pesto-ease-default),
+                  background var(--pesto-duration-normal) var(--pesto-ease-default);
+      min-height: 44px;
+    }
+
+    .mobile-nav__link:hover,
+    .mobile-nav__link.active { color: var(--pesto-text-primary); background: var(--pesto-surface-sunken); }
+
+    .mobile-nav__link--secondary { color: var(--pesto-text-secondary); }
+    .mobile-nav__link--danger { color: var(--pesto-error-700); }
+
+    .mobile-nav__divider {
+      height: 1px;
+      background: var(--pesto-border-default);
+      margin: var(--pesto-space-4) 0;
+    }
+
+    .mobile-nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--pesto-surface-overlay);
+      z-index: calc(var(--pesto-z-overlay) - 1);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--pesto-duration-slow) var(--pesto-ease-default);
+    }
+
+    .mobile-nav-overlay.is-visible { opacity: 1; pointer-events: auto; }
+
+    /* ─────────────────────────────────────────────────────────
+       Shell: Site Footer
+       ───────────────────────────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--pesto-border-default);
+      padding: var(--pesto-space-8) 0;
+      margin-top: auto;
+    }
+
+    .site-footer__inner {
+      width: var(--pesto-content-width);
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--pesto-space-8);
+      flex-wrap: wrap;
+    }
+
+    .site-footer__brand {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-4);
+    }
+
+    .site-footer__logo {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-2);
+    }
+
+    .site-footer__logo-text {
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-semibold);
+      color: var(--pesto-text-primary);
+    }
+
+    .site-footer__copy {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-tertiary);
+    }
+
+    .site-footer__nav {}
+
+    .site-footer__links {
+      display: flex;
+      gap: var(--pesto-space-6);
+      list-style: none;
+    }
+
+    .site-footer__link {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-secondary);
+      transition: color var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .site-footer__link:hover { color: var(--pesto-text-primary); }
+
+    .site-footer__link:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+      border-radius: var(--pesto-radius-sm);
+    }
+
+    .site-footer__social {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-3);
+    }
+
+    .site-footer__social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      color: var(--pesto-text-tertiary);
+      border-radius: var(--pesto-radius-md);
+      transition: color var(--pesto-duration-normal) var(--pesto-ease-default),
+                  background var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .site-footer__social-link:hover {
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-sunken);
+    }
+
+    .site-footer__social-link:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    /* ─────────────────────────────────────────────────────────
+       Layout
+       ───────────────────────────────────────────────────────── */
+    main {
+      flex: 1;
+      padding-block: var(--pesto-space-8);
+    }
+
+    .page-container {
+      width: var(--pesto-content-width);
+      margin-inline: auto;
+    }
+
+    /* ─────────────────────────────────────────────────────────
+       Responsive Shell
+       ───────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .site-nav { display: none; }
+      .nav-hamburger { display: flex; }
+      .user-menu__name { display: none; }
+      .site-footer__inner { flex-direction: column; align-items: flex-start; gap: var(--pesto-space-6); }
+      .site-footer__links { flex-wrap: wrap; gap: var(--pesto-space-4); }
+    }
+
+    /* ─────────────────────────────────────────────────────────
+       Page-specific: Kanban Board
+       ───────────────────────────────────────────────────────── */
+
+    /* Board Header */
+    .kanban-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--pesto-space-4);
+      margin-bottom: var(--pesto-space-6);
+      flex-wrap: wrap;
+    }
+
+    .kanban-header__title-group {}
+
+    .kanban-header__title {
+      font-size: var(--pesto-text-4xl);
+      font-weight: var(--pesto-weight-bold);
+      line-height: var(--pesto-leading-tight);
+      color: var(--pesto-text-primary);
+      margin-bottom: var(--pesto-space-1);
+    }
+
+    .kanban-header__subtitle {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-secondary);
+    }
+
+    .kanban-header__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-3);
+      flex-wrap: wrap;
+    }
+
+    /* Search */
+    .search-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-wrapper__icon {
+      position: absolute;
+      left: var(--pesto-space-3);
+      color: var(--pesto-text-tertiary);
+      pointer-events: none;
+      flex-shrink: 0;
+    }
+
+    .search-input {
+      padding: var(--pesto-space-3) var(--pesto-space-4) var(--pesto-space-3) calc(var(--pesto-space-3) + 16px + var(--pesto-space-2));
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-md);
+      background: var(--pesto-surface-page);
+      color: var(--pesto-text-primary);
+      font-size: var(--pesto-text-sm);
+      min-height: 44px;
+      width: 220px;
+      transition: border-color var(--pesto-duration-normal) var(--pesto-ease-default),
+                  box-shadow var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .search-input::placeholder { color: var(--pesto-text-tertiary); }
+
+    .search-input:focus {
+      outline: 2px solid var(--pesto-border-focus); outline-offset: 2px;
+      border-color: var(--pesto-border-focus);
+      box-shadow: 0 0 0 2px var(--pesto-brand-200);
+    }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--pesto-space-2);
+      padding: var(--pesto-space-3) var(--pesto-space-6);
+      background: var(--pesto-brand-600);
+      color: var(--pesto-text-inverse);
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      border: none;
+      border-radius: var(--pesto-radius-md);
+      cursor: pointer;
+      transition: all var(--pesto-duration-normal) var(--pesto-ease-default);
+      min-height: 44px;
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover { background: var(--pesto-brand-700); box-shadow: var(--pesto-shadow-md); }
+    .btn-primary:active { background: var(--pesto-brand-800); }
+    .btn-primary:focus-visible { outline: 2px solid var(--pesto-border-focus); outline-offset: 2px; }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--pesto-space-2);
+      padding: var(--pesto-space-3) var(--pesto-space-6);
+      background: transparent;
+      color: var(--pesto-text-primary);
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-md);
+      cursor: pointer;
+      transition: all var(--pesto-duration-normal) var(--pesto-ease-default);
+      min-height: 44px;
+      white-space: nowrap;
+    }
+
+    .btn-secondary:hover { background: var(--pesto-surface-sunken); }
+    .btn-secondary:focus-visible { outline: 2px solid var(--pesto-border-focus); outline-offset: 2px; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--pesto-space-2);
+      padding: var(--pesto-space-2) var(--pesto-space-3);
+      background: transparent;
+      color: var(--pesto-text-link);
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      border: none;
+      border-radius: var(--pesto-radius-md);
+      cursor: pointer;
+      transition: all var(--pesto-duration-normal) var(--pesto-ease-default);
+      min-height: 44px;
+      width: 100%;
+    }
+
+    .btn-ghost:hover { text-decoration: underline; background: var(--pesto-surface-sunken); }
+    .btn-ghost:focus-visible { outline: 2px solid var(--pesto-border-focus); outline-offset: 2px; }
+
+    /* Board layout */
+    .kanban-board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--pesto-space-6);
+      align-items: start;
+    }
+
+    /* Column */
+    .kanban-column {
+      background: var(--pesto-surface-sunken);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-3);
+      min-height: 480px;
+      transition: background var(--pesto-duration-normal) var(--pesto-ease-default),
+                  border-color var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .kanban-column.drag-over {
+      background: var(--pesto-brand-50);
+      border-color: var(--pesto-brand-300);
+    }
+
+    .kanban-column__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--pesto-space-4) var(--pesto-space-4) 0;
+    }
+
+    .kanban-column__title-row {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-2);
+    }
+
+    .kanban-column__dot {
+      width: 10px;
+      height: 10px;
+      border-radius: var(--pesto-radius-full);
+      flex-shrink: 0;
+    }
+
+    .kanban-column__title {
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-semibold);
+      color: var(--pesto-text-primary);
+    }
+
+    .kanban-column__count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 22px;
+      height: 22px;
+      padding: 0 var(--pesto-space-2);
+      background: var(--pesto-neutral-200);
+      color: var(--pesto-text-secondary);
+      font-size: var(--pesto-text-xs);
+      font-weight: var(--pesto-weight-medium);
+      border-radius: var(--pesto-radius-full);
+    }
+
+    .kanban-column__cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-3);
+      padding: 0 var(--pesto-space-4);
+      flex: 1;
+      min-height: 60px;
+    }
+
+    .kanban-column__footer {
+      padding: 0 var(--pesto-space-4) var(--pesto-space-4);
+    }
+
+    /* Column color dots */
+    .dot--backlog { background: var(--pesto-neutral-400); }
+    .dot--todo { background: var(--pesto-info-500); }
+    .dot--inprogress { background: var(--pesto-warning-500); }
+    .dot--done { background: var(--pesto-success-500); }
+
+    /* Task Card */
+    .task-card {
+      background: var(--pesto-surface-raised);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      padding: var(--pesto-space-4);
+      box-shadow: var(--pesto-shadow-sm);
+      cursor: grab;
+      transition: box-shadow var(--pesto-duration-normal) var(--pesto-ease-default),
+                  transform var(--pesto-duration-normal) var(--pesto-ease-default),
+                  border-color var(--pesto-duration-normal) var(--pesto-ease-default);
+      user-select: none;
+    }
+
+    .task-card:hover {
+      box-shadow: var(--pesto-shadow-md);
+      transform: scale(1.02);
+      border-color: var(--pesto-border-strong);
+    }
+
+    .task-card:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .task-card.is-dragging {
+      opacity: 0.5;
+      cursor: grabbing;
+    }
+
+    .task-card__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--pesto-space-1);
+      margin-bottom: var(--pesto-space-3);
+    }
+
+    .task-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--pesto-space-1) var(--pesto-space-3);
+      font-size: var(--pesto-text-xs);
+      font-weight: var(--pesto-weight-medium);
+      border-radius: var(--pesto-radius-full);
+    }
+
+    .task-tag--brand { background: var(--pesto-brand-100); color: var(--pesto-brand-800); }
+    .task-tag--info { background: var(--pesto-info-50); color: var(--pesto-info-700); }
+    .task-tag--warning { background: var(--pesto-warning-50); color: var(--pesto-warning-700); }
+    .task-tag--error { background: var(--pesto-error-50); color: var(--pesto-error-700); }
+    .task-tag--neutral { background: var(--pesto-neutral-100); color: var(--pesto-neutral-600); }
+
+    .task-card__title {
+      font-size: var(--pesto-text-base);
+      font-weight: var(--pesto-weight-semibold);
+      color: var(--pesto-text-primary);
+      line-height: var(--pesto-leading-tight);
+      margin-bottom: var(--pesto-space-2);
+    }
+
+    .task-card__desc {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-secondary);
+      line-height: var(--pesto-leading-normal);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: var(--pesto-space-4);
+    }
+
+    .task-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--pesto-space-2);
+    }
+
+    .task-card__assignees {
+      display: flex;
+      align-items: center;
+    }
+
+    .task-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--pesto-radius-full);
+      background: var(--pesto-brand-600);
+      color: var(--pesto-text-inverse);
+      font-size: var(--pesto-text-xs);
+      font-weight: var(--pesto-weight-bold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--pesto-surface-raised);
+      flex-shrink: 0;
+    }
+
+    .task-avatar:not(:first-child) { margin-left: -8px; }
+
+    .task-avatar--purple { background: #7c3aed; }
+    .task-avatar--blue { background: var(--pesto-info-500); }
+    .task-avatar--orange { background: var(--pesto-warning-500); }
+    .task-avatar--rose { background: #e11d48; }
+
+    .task-card__due {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-1);
+      font-size: var(--pesto-text-xs);
+      color: var(--pesto-text-secondary);
+    }
+
+    .task-card__due--overdue { color: var(--pesto-error-700); }
+
+    .task-card__due-icon { flex-shrink: 0; }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--pesto-surface-overlay);
+      z-index: var(--pesto-z-modal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--pesto-space-4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .modal-overlay.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      background: var(--pesto-surface-raised);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      box-shadow: var(--pesto-shadow-xl);
+      width: 100%;
+      max-width: var(--pesto-container-md);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: var(--pesto-space-8);
+      position: relative;
+      transform: translateY(12px);
+      transition: transform var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .modal-overlay.is-open .modal { transform: translateY(0); }
+
+    .modal__close {
+      position: absolute;
+      top: var(--pesto-space-4);
+      right: var(--pesto-space-4);
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-md);
+      cursor: pointer;
+      color: var(--pesto-text-secondary);
+      transition: background var(--pesto-duration-normal) var(--pesto-ease-default),
+                  color var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .modal__close:hover { background: var(--pesto-surface-sunken); color: var(--pesto-text-primary); }
+    .modal__close:focus-visible { outline: 2px solid var(--pesto-border-focus); outline-offset: 2px; }
+
+    .modal__title {
+      font-size: var(--pesto-text-2xl);
+      font-weight: var(--pesto-weight-semibold);
+      color: var(--pesto-text-primary);
+      margin-bottom: var(--pesto-space-6);
+      padding-right: var(--pesto-space-10);
+      line-height: var(--pesto-leading-tight);
+    }
+
+    .modal__field { margin-bottom: var(--pesto-space-5); }
+
+    .modal__label {
+      display: block;
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-primary);
+      margin-bottom: var(--pesto-space-2);
+    }
+
+    .modal__select,
+    .modal__input,
+    .modal__textarea {
+      width: 100%;
+      padding: var(--pesto-space-3) var(--pesto-space-4);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-md);
+      background: var(--pesto-surface-page);
+      color: var(--pesto-text-primary);
+      font-size: var(--pesto-text-sm);
+      transition: border-color var(--pesto-duration-normal) var(--pesto-ease-default),
+                  box-shadow var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .modal__select:focus,
+    .modal__input:focus,
+    .modal__textarea:focus {
+      outline: 2px solid var(--pesto-border-focus); outline-offset: 2px;
+      border-color: var(--pesto-border-focus);
+      box-shadow: 0 0 0 2px var(--pesto-brand-200);
+    }
+
+    .modal__textarea {
+      resize: vertical;
+      min-height: 100px;
+      line-height: var(--pesto-leading-normal);
+    }
+
+    .modal__row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--pesto-space-4);
+    }
+
+    .modal__actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: var(--pesto-space-3);
+      margin-top: var(--pesto-space-8);
+      padding-top: var(--pesto-space-6);
+      border-top: 1px solid var(--pesto-border-default);
+    }
+
+    .modal__activity {
+      margin-top: var(--pesto-space-6);
+      padding-top: var(--pesto-space-6);
+      border-top: 1px solid var(--pesto-border-default);
+    }
+
+    .modal__activity-title {
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-semibold);
+      color: var(--pesto-text-primary);
+      margin-bottom: var(--pesto-space-4);
+    }
+
+    .activity-feed { display: flex; flex-direction: column; gap: var(--pesto-space-3); }
+
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--pesto-space-3);
+    }
+
+    .activity-item__avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--pesto-radius-full);
+      background: var(--pesto-brand-600);
+      color: var(--pesto-text-inverse);
+      font-size: var(--pesto-text-xs);
+      font-weight: var(--pesto-weight-bold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .activity-item__body { flex: 1; }
+
+    .activity-item__text {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-primary);
+      line-height: var(--pesto-leading-normal);
+    }
+
+    .activity-item__time {
+      font-size: var(--pesto-text-xs);
+      color: var(--pesto-text-tertiary);
+      margin-top: var(--pesto-space-1);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .kanban-board {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .kanban-board {
+        grid-template-columns: 1fr;
+      }
+
+      .kanban-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .kanban-header__actions {
+        flex-direction: column;
+      }
+
+      .search-input { width: 100%; }
+      .search-wrapper { width: 100%; }
+
+      .kanban-header__title { font-size: var(--pesto-text-3xl); }
+
+      .modal__row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .modal { padding: var(--pesto-space-6); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SHARED NAV -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <header class="site-header" role="banner">
+    <div class="site-header__inner">
+
+      <div class="site-header__brand">
+        <a href="dashboard.html" class="site-header__logo" aria-label="TaskFlow – Go to Dashboard">
+          <svg class="site-header__logo-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true" focusable="false">
+            <rect width="28" height="28" rx="7" fill="var(--pesto-brand-600)"/>
+            <path d="M7 14.5l4.5 4.5 9.5-10" stroke="var(--pesto-neutral-0)" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="site-header__logo-text">TaskFlow</span>
+        </a>
+      </div>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <ul class="site-nav__list" role="list">
+          <li class="site-nav__item">
+            <a href="dashboard.html" class="site-nav__link" data-page="dashboard">
+              <svg class="site-nav__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+                <rect x="1" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity=".85"/>
+                <rect x="9" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity=".85"/>
+                <rect x="1" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity=".85"/>
+                <rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity=".85"/>
+              </svg>
+              Dashboard
+            </a>
+          </li>
+          <li class="site-nav__item">
+            <a href="kanban-board.html" class="site-nav__link active" data-page="kanban-board" aria-current="page">
+              <svg class="site-nav__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+                <rect x="1" y="1" width="4" height="14" rx="1.5" fill="currentColor" opacity=".85"/>
+                <rect x="6" y="1" width="4" height="10" rx="1.5" fill="currentColor" opacity=".85"/>
+                <rect x="11" y="1" width="4" height="7" rx="1.5" fill="currentColor" opacity=".85"/>
+              </svg>
+              Kanban Board
+            </a>
+          </li>
+          <li class="site-nav__item">
+            <a href="team-settings.html" class="site-nav__link" data-page="team-settings">
+              <svg class="site-nav__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+                <circle cx="6" cy="5" r="3" fill="currentColor" opacity=".85"/>
+                <path d="M1 13c0-2.761 2.239-4 5-4s5 1.239 5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".85"/>
+                <circle cx="12.5" cy="5.5" r="2" fill="currentColor" opacity=".6"/>
+                <path d="M14 13c0-1.657-1.119-3-2.5-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".6"/>
+              </svg>
+              Team Settings
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <div class="user-menu">
+          <button class="user-menu__trigger" aria-haspopup="true" aria-expanded="false" aria-label="User menu" id="user-menu-btn">
+            <span class="user-menu__avatar" aria-hidden="true">JD</span>
+            <span class="user-menu__name">Jane Doe</span>
+            <svg class="user-menu__chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false">
+              <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul class="user-menu__dropdown" role="menu" aria-labelledby="user-menu-btn" hidden>
+            <li role="none">
+              <a href="#profile" class="user-menu__option" role="menuitem">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false">
+                  <circle cx="7" cy="4.5" r="2.5" fill="currentColor" opacity=".8"/>
+                  <path d="M1 12c0-2.761 2.686-4 6-4s6 1.239 6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".8"/>
+                </svg>
+                Profile
+              </a>
+            </li>
+            <li role="none">
+              <a href="#logout" class="user-menu__option user-menu__option--danger" role="menuitem">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false">
+                  <path d="M5 2H2.5A1.5 1.5 0 001 3.5v7A1.5 1.5 0 002.5 12H5M9 10l3-3-3-3M13 7H5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/>
+                </svg>
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <button
+          class="nav-hamburger"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="mobile-nav-drawer"
+          id="hamburger-btn"
+        >
+          <span class="nav-hamburger__bar"></span>
+          <span class="nav-hamburger__bar"></span>
+          <span class="nav-hamburger__bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="mobile-nav" id="mobile-nav-drawer" aria-hidden="true">
+      <nav aria-label="Mobile navigation">
+        <ul class="mobile-nav__list" role="list">
+          <li>
+            <a href="dashboard.html" class="mobile-nav__link" data-page="dashboard">
+              <svg class="site-nav__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+                <rect x="1" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity=".85"/>
+                <rect x="9" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity=".85"/>
+                <rect x="1" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity=".85"/>
+                <rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity=".85"/>
+              </svg>
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="kanban-board.html" class="mobile-nav__link active" data-page="kanban-board" aria-current="page">
+              <svg class="site-nav__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+                <rect x="1" y="1" width="4" height="14" rx="1.5" fill="currentColor" opacity=".85"/>
+                <rect x="6" y="1" width="4" height="10" rx="1.5" fill="currentColor" opacity=".85"/>
+                <rect x="11" y="1" width="4" height="7" rx="1.5" fill="currentColor" opacity=".85"/>
+              </svg>
+              Kanban Board
+            </a>
+          </li>
+          <li>
+            <a href="team-settings.html" class="mobile-nav__link" data-page="team-settings">
+              <svg class="site-nav__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+                <circle cx="6" cy="5" r="3" fill="currentColor" opacity=".85"/>
+                <path d="M1 13c0-2.761 2.239-4 5-4s5 1.239 5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".85"/>
+                <circle cx="12.5" cy="5.5" r="2" fill="currentColor" opacity=".6"/>
+                <path d="M14 13c0-1.657-1.119-3-2.5-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".6"/>
+              </svg>
+              Team Settings
+            </a>
+          </li>
+        </ul>
+        <div class="mobile-nav__divider" role="separator"></div>
+        <ul class="mobile-nav__list" role="list">
+          <li>
+            <a href="#profile" class="mobile-nav__link mobile-nav__link--secondary">Profile</a>
+          </li>
+          <li>
+            <a href="#logout" class="mobile-nav__link mobile-nav__link--danger">Logout</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay" aria-hidden="true"></div>
+  </header>
+
+  <script>
+  (function () {
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileNav = document.getElementById('mobile-nav-drawer');
+    const overlay = document.getElementById('mobile-nav-overlay');
+
+    function openMobileNav() {
+      mobileNav.setAttribute('aria-hidden', 'false');
+      mobileNav.classList.add('is-open');
+      overlay.classList.add('is-visible');
+      hamburgerBtn.setAttribute('aria-expanded', 'true');
+      hamburgerBtn.setAttribute('aria-label', 'Close navigation menu');
+      hamburgerBtn.classList.add('is-active');
+      document.body.classList.add('nav-open');
+    }
+
+    function closeMobileNav() {
+      mobileNav.setAttribute('aria-hidden', 'true');
+      mobileNav.classList.remove('is-open');
+      overlay.classList.remove('is-visible');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+      hamburgerBtn.setAttribute('aria-label', 'Open navigation menu');
+      hamburgerBtn.classList.remove('is-active');
+      document.body.classList.remove('nav-open');
+    }
+
+    hamburgerBtn.addEventListener('click', function () {
+      const isOpen = mobileNav.classList.contains('is-open');
+      isOpen ? closeMobileNav() : openMobileNav();
+    });
+
+    overlay.addEventListener('click', closeMobileNav);
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mobileNav.classList.contains('is-open')) {
+        closeMobileNav();
+        hamburgerBtn.focus();
+      }
+    });
+
+    const userMenuBtn = document.getElementById('user-menu-btn');
+    const userDropdown = userMenuBtn.nextElementSibling;
+
+    userMenuBtn.addEventListener('click', function () {
+      const isExpanded = userMenuBtn.getAttribute('aria-expanded') === 'true';
+      userMenuBtn.setAttribute('aria-expanded', String(!isExpanded));
+      userDropdown.hidden = isExpanded;
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!userMenuBtn.closest('.user-menu').contains(e.target)) {
+        userMenuBtn.setAttribute('aria-expanded', 'false');
+        userDropdown.hidden = true;
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && userMenuBtn.getAttribute('aria-expanded') === 'true') {
+        userMenuBtn.setAttribute('aria-expanded', 'false');
+        userDropdown.hidden = true;
+        userMenuBtn.focus();
+      }
+    });
+  })();
+  </script>
+
+  <main>
+    <div class="page-container">
+
+      <!-- Board Header -->
+      <section class="kanban-header" aria-labelledby="kanban-title">
+        <div class="kanban-header__title-group">
+          <h1 class="kanban-header__title" id="kanban-title">Kanban Board</h1>
+          <p class="kanban-header__subtitle">Drag and drop tasks to update their status</p>
+        </div>
+        <div class="kanban-header__actions">
+          <div class="search-wrapper">
+            <svg class="search-wrapper__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+              <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10 10l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <label for="task-search" class="sr-only">Search tasks</label>
+            <input
+              type="search"
+              id="task-search"
+              class="search-input"
+              placeholder="Search tasks..."
+              aria-label="Search tasks"
+            >
+          </div>
+          <button class="btn-secondary" id="filter-btn" aria-label="Filter by assignee">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+              <path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            Filter by assignee
+          </button>
+          <button class="btn-primary" id="add-task-btn" aria-label="Add new task">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+              <path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Add Task
+          </button>
+        </div>
+      </section>
+
+      <!-- Kanban Board -->
+      <section aria-label="Task board">
+        <div class="kanban-board" id="kanban-board">
+
+          <!-- Backlog Column -->
+          <div class="kanban-column" id="col-backlog" data-column="backlog" aria-label="Backlog column">
+            <div class="kanban-column__header">
+              <div class="kanban-column__title-row">
+                <span class="kanban-column__dot dot--backlog" aria-hidden="true"></span>
+                <h2 class="kanban-column__title">Backlog</h2>
+              </div>
+              <span class="kanban-column__count" id="count-backlog" aria-label="3 tasks">3</span>
+            </div>
+            <div class="kanban-column__cards" id="cards-backlog" aria-label="Backlog tasks" role="list">
+
+              <article class="task-card" draggable="true" data-task-id="1" role="listitem" tabindex="0" aria-label="Task: Redesign onboarding flow">
+                <div class="task-card__tags">
+                  <span class="task-tag task-tag--info">UX</span>
+                  <span class="task-tag task-tag--neutral">Design</span>
+                </div>
+                <h3 class="task-card__title">Redesign onboarding flow</h3>
+                <p class="task-card__desc">Improve the new user experience by simplifying the initial setup steps and reducing friction.</p>
+                <div class="task-card__footer">
+                  <div class="task-card__assignees" aria-label="Assigned to Sarah">
+                    <div class="task-avatar task-avatar--purple" title="Sarah Kim" aria-label="Sarah Kim">SK</div>
+                  </div>
+                  <div class="task-card__due" aria-label="Due Jan 28">
+                    <svg class="task-card__due-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+                      <path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+                    Jan 28
+                  </div>
+                </div>
+              </article>
+
+              <article class="task-card" draggable="true" data-task-id="2" role="listitem" tabindex="0" aria-label="Task: Set up CI/CD pipeline">
+                <div class="task-card__tags">
+                  <span class="task-tag task-tag--brand">DevOps</span>
+                </div>
+                <h3 class="task-card__title">Set up CI/CD pipeline</h3>
+                <p class="task-card__desc">Configure automated testing and deployment workflows for the main repository.</p>
+                <div class="task-card__footer">
+                  <div class="task-card__assignees" aria-label="Unassigned">
+                    <div class="task-avatar" title="Tom Reed" aria-label="Tom Reed">TR</div>
+                  </div>
+                  <div class="task-card__due" aria-label="Due Feb 5">
+                    <svg class="task-card__due-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+                      <path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+                    Feb 5
+                  </div>
+                </div>
+              </article>
+
+              <article class="task-card" draggable="true" data-task-id="3" role="listitem" tabindex="0" aria-label="Task: Write API documentation">
+                <div class="task-card__tags">
+                  <span class="task-tag task-tag--neutral">Docs</span>
+                </div>
+                <h3 class="task-card__title">Write API documentation</h3>
+                <p class="task-card__desc">Document all public endpoints with examples, request/response schemas, and error codes.</p>
+                <div class="task-card__footer">
+                  <div class="task-card__assignees" aria-label="Assigned to Mark">
+                    <div class="task-avatar task-avatar--blue" title="Mark Chen" aria-label="Mark Chen">MC</div>
+                  </div>
+                  <div class="task-card__due" aria-label="Due Feb 10">
+                    <svg class="task-card__due-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+                      <path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+                    Feb 10
+                  </div>
+                </div>
+              </article>
+
+            </div>
+            <div class="kanban-column__footer">
+              <button class="btn-ghost" aria-label="Add task to Backlog">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+                </svg>
+                Add task
+              </button>
+            </div>
+          </div>
+
+          <!-- To Do Column -->
+          <div class="kanban-column" id="col-todo" data-column="todo" aria-label="To Do column">
+            <div class="kanban-column__header">
+              <div class="kanban-column__title-row">
+                <span class="kanban-column__dot dot--todo" aria-hidden="true"></span>
+                <h2 class="kanban-column__title">To Do</h2>
+              </div>
+              <span class="kanban-column__count" id="count-todo" aria-label="4 tasks">4</span>
+            </div>
+            <div class="kanban-column__cards" id="cards-todo" aria-label="To Do tasks" role="list">
+
+              <article class="task-card" draggable="true" data-task-id="4" role="listitem" tabindex="0" aria-label="Task: Implement dark mode">
+                <div class="task-card__tags">
+                  <span class="task-tag task-tag--brand">Feature</span>
+                  <span class="task-tag task-tag--neutral">Frontend</span>
+                </div>
+                <h3 class="task-card__title">Implement dark mode</h3>
+                <p class="task-card__desc">Add system-aware dark mode support using CSS custom properties across all components.</p>
+                <div class="task-card__footer">
+                  <div class="task-card__assignees" aria-label="Assigned to Sarah and Mark">
+                    <div class="task-avatar task-avatar--purple" title="Sarah Kim" aria-label="Sarah Kim">SK</div>
+                    <div class="task-avatar task-avatar--blue" title="Mark Chen" aria-label="Mark Chen">MC</div>
+                  </div>
+                  <div class="task-card__due" aria-label="Due Jan 30">
+                    <svg class="task-card__due-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+                      <path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+                    Jan 30
+                  </div>
+                </div>
+              </article>
+
+              <article class="task-card" draggable="true" data-task-id="5" role="listitem" tabindex="0" aria-label="Task: User profile settings page">
+                <div class="task-card__tags">
+                  <span class="task-tag task-tag--info">UI</span>
+                </div>
+                <h3 class="task-card__title">User profile settings page</h3>
+                <p class="task-card__desc">Build a settings page allowing users to update their name, avatar, email, and password.</p>
+                <div class="task-card__footer">
+                  <div class="task-card__assignees" aria-label="Assigned to Jane">
+                    <div class="task-avatar" title="Jane Doe" aria-label="Jane Doe">JD</div>
+                  </div>
+                  <div class="task-card__due" aria-label="Due Feb 2">
+                    <svg class="task-card__due-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+                      <path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+                    Feb 2
+                  </div>
+                </div>
+              </article>
+
+              <article class="task-card" draggable="true" data-task-id="6" role="listitem" tabindex="0" aria-label="Task: Notification system">
+                <div class="task-card__tags">
+                  <span class="task-tag task-tag--warning">Backend</span>
+                  <span class="task-tag task-tag--brand">Feature</span>
+                </div>
+                <h3 class="task-card__title">Notification system</h3>
+                <p class="task-card__desc">Design and implement real-time in-app notifications for task assignments and updates.</p>
+                <div class="task-card__footer">
+                  <div class="task-card__assignees" aria-label="Assigned to Tom">
+                    <div class="task-avatar task-avatar--orange" title="Tom Reed" aria-label="Tom Reed">TR</div>
+                  </div>
+                  <div class="task-card__due" aria-label="Due Jan 25, overdue">
+                    <svg class="task-card__due-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+                      <path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+                    <span class="task-card__due task-card__due--overdue">Jan 25 · Overdue</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="task-card" draggable="true" data-task-id="7" role="listitem" tabindex="0" aria-label="Task: Mobile responsive audit">
+                <div class="task-card__tags">
+                  <span class="task-tag task-tag--neutral">QA</span>
+                </div>
+                <h3 class="task-card__title">Mobile responsive audit</h3>
+                <p class="task-card__desc">Review all pages for mobile responsiveness issues and document fixes needed.</p>
+                <div class="task-card__footer">
+                  <div class="task-card__assignees" aria-label="Assigned to Lisa">
+                    <div class="task-avatar task-avatar--rose" title="Lisa Park" aria-label="Lisa Park">LP</div>
+                  </div>
+                  <div class="task-card__due" aria-label="Due Feb 8">
+                    <svg class="task-card__due-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+                      <path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+                    Feb 8
+                  </div>
+                </div>
+              </article>
+
+            </div>
+            <div class="kanban-column__footer">
+              <button class="btn-ghost" aria-label="Add task to To Do">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+                </svg>
+                Add task
+              </button>
+            </div>
+          </div>
+
+          <!-- In Progress Column -->
+          <div class="kanban-column" id="col-inprogress" data-column="inprogress" aria-label="In Progress column">
+            <div class="kanban-column__header">
+              <div class="kanban-column__title-row">
+                <span class="kanban-column__dot dot--inprogress" aria-hidden="true"></span>
+                <h2 class="kanban-column__title">In Progress</h2>
+              </div>
+              <span class="kanban-column__count" id="count-inprogress" aria-label="3 tasks">3</span>
+            </div>
+            <div class="kanban-column__cards" id="cards-inprogress" aria-label="In Progress tasks" role="list">
+
+              <article class="task-card" draggable="true" data-task-id="8" role="listitem" tabindex="0" aria-label="Task: API Integration with Slack">
+                <div class="task-card__tags">
+                  <span class="task-tag task-tag--warning">Integration</span>
+                  <span class="task-tag task-tag--brand">Backend</span>
+                </div>
+                <h3 class="task-card__title">API Integration with Slack</h3>
+                <p class="task-card__desc">Connect TaskFlow to Slack to send notifications and allow task creation from Slack commands.</p>
+                <div class="task-card__footer">
+                  <div class="task-card__assignees" aria-label="Assigned to Tom and Mark">
+                    <div class="task-avatar task-avatar--orange" title="Tom Reed" aria-label="Tom Reed">TR</div>
+                    <div class="task-avatar task-avatar--blue" title="Mark Chen" aria-label="Mark Chen">MC</div>
+                  </div>
+                  <div class="task-card__due" aria-label="Due Jan 31">
+                    <svg class="task-card__due-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+                      <path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+                    Jan 31
+                  </div>
+                </div>
+              </article>
+
+              <article class="task-card" draggable="true" data-task-id="9" role="listitem" tabindex="0" aria-label="Task: Design system component library">
+                <div class="task-card__tags">
+                  <span class="task-tag task-tag--info">Design</span>
+                  <span class="task-tag task-tag--neutral">Frontend</span>
+                </div>
+                <h3 class="task-card__title">Design system component library</h3>
+                <p class="task-card__desc">Build and document a shared component library for consistent UI across all product areas.</p>
+                <div class="task-card__footer">
+                  <div class="task-card__assignees" aria-label="Assigned to Sarah">
+                    <div class="task-avatar task-avatar--purple" title="Sarah Kim" aria-label="Sarah Kim">SK</div>
+                  </div>
+                  <div class="task-card__due" aria-label="Due Feb 3">
+                    <svg class="task-card__due-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+                      <path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+                    Feb 3
+                  </div>
+                </div>
+              </article>
+
+              <article class="task-card" draggable="true" data-task-id="10" role="listitem" tabindex="0" aria-label="Task: Performance optimization">
+                <div class="task-card__tags">
+                  <span class="task-tag task-tag--error">High Priority</span>
+                </div>
+                <h3 class="task-card__title">Performance optimization</h3>
+                <p class="task-card__desc">Profile and optimize slow database queries affecting the dashboard load time.</p>
+                <div class="task-card__footer">
+                  <div class="task-card__assignees" aria-label="Assigned to Jane and Tom">
+                    <div class="task-avatar" title="Jane Doe" aria-label="Jane Doe">JD</div>
+                    <div class="task-avatar task-avatar--orange" title="Tom Reed" aria-label="Tom Reed">TR</div>
+                  </div>
+                  <div class="task-card__due" aria-label="Due Jan 27, overdue">
+                    <svg class="task-card__due-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+                      <path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+                    <span class="task-card__due task-card__due--overdue">Jan 27 · Overdue</span>
+                  </div>
+                </div>
+              </article>
+
+            </div>
+            <div class="kanban-column__footer">
+              <button class="btn-ghost" aria-label="Add task to In Progress">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+                </svg>
+                Add task
+              </button>
+            </div>
+          </div>
+
+          <!-- Done Column -->
+          <div class="kanban-column" id="col-done" data-column="done" aria-label="Done column">
+            <div class="kanban-column__header">
+              <div class="kanban-column__title-row">
+                <span class="kanban-column__dot dot--done" aria-hidden="true"></span>
+                <h2 class="kanban-column__title">Done</h2>
+              </div>
+              <span class="kanban-column__count" id="count-done" aria-label="3 tasks">3</span>
+            </div>
+            <div class="kanban-column__cards" id="cards-done" aria-label="Done tasks" role="list">
+
+              <article class="task-card" draggable="true" data-task-id="11" role="listitem" tabindex="0" aria-label="Task: Authentication system">
+                <div class="task-card__tags">
+                  <span class="task-tag task-tag--brand">Security</span>
+                </div>
+                <h3 class="task-card__title">Authentication system</h3>
+                <p class="task-card__desc">Implement JWT-based auth with refresh tokens, email verification, and OAuth providers.</p>
+                <div class="task-card__footer">
+                  <div class="task-card__assignees" aria-label="Assigned to Mark">
+                    <div class="task-avatar task-avatar--blue" title="Mark Chen" aria-label="Mark Chen">MC</div>
+                  </div>
+                  <div class="task-card__due" aria-label="Completed Jan 20">
+                    <svg class="task-card__due-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.2"/>
+                      <path d="M3.5 6l2 2 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Jan 20
+                  </div>
+                </div>
+              </article>
+
+              <article class="task-card" draggable="true" data-task-id="12" role="listitem" tabindex="0" aria-label="Task: Dashboard analytics charts">
+                <div class="task-card__tags">
+                  <span class="task-tag task-tag--info">Analytics</span>
+                  <span class="task-tag task-tag--neutral">Frontend</span>
+                </div>
+                <h3 class="task-card__title">Dashboard analytics charts</h3>
+                <p class="task-card__desc">Build interactive charts for the main dashboard showing task completion trends over time.</p>
+                <div class="task-card__footer">
+                  <div class="task-card__assignees" aria-label="Assigned to Sarah and Jane">
+                    <div class="task-avatar task-avatar--purple" title="Sarah Kim" aria-label="Sarah Kim">SK</div>
+                    <div class="task-avatar" title="Jane Doe" aria-label="Jane Doe">JD</div>
+                  </div>
+                  <div class="task-card__due" aria-label="Completed Jan 18">
+                    <svg class="task-card__due-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.2"/>
+                      <path d="M3.5 6l2 2 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Jan 18
+                  </div>
+                </div>
+              </article>
+
+              <article class="task-card" draggable="true" data-task-id="13" role="listitem" tabindex="0" aria-label="Task: Team onboarding docs">
+                <div class="task-card__tags">
+                  <span class="task-tag task-tag--neutral">Docs</span>
+                </div>
+                <h3 class="task-card__title">Team onboarding docs</h3>
+                <p class="task-card__desc">Write comprehensive onboarding documentation for new team members joining the engineering team.</p>
+                <div class="task-card__footer">
+                  <div class="task-card__assignees" aria-label="Assigned to Lisa">
+                    <div class="task-avatar task-avatar--rose" title="Lisa Park" aria-label="Lisa Park">LP</div>
+                  </div>
+                  <div class="task-card__due" aria-label="Completed Jan 15">
+                    <svg class="task-card__due-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.2"/>
+                      <path d="M3.5 6l2 2 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Jan 15
+                  </div>
+                </div>
+              </article>
+
+            </div>
+            <div class="kanban-column__footer">
+              <button class="btn-ghost" aria-label="Add task to Done">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+                </svg>
+                Add task
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Task Detail Modal -->
+  <div class="modal-overlay" id="task-modal" role="dialog" aria-modal="true" aria-labelledby="modal-task-title" aria-hidden="true">
+    <div class="modal">
+      <button class="modal__close" id="modal-close-btn" aria-label="Close task detail">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <h2 class="modal__title" id="modal-task-title">API Integration with Slack</h2>
+
+      <div class="modal__row">
+        <div class="modal__field">
+          <label class="modal__label" for="modal-status">Status</label>
+          <select class="modal__select" id="modal-status">
+            <option>Backlog</option>
+            <option>To Do</option>
+            <option selected>In Progress</option>
+            <option>Done</option>
+          </select>
+        </div>
+        <div class="modal__field">
+          <label class="modal__label" for="modal-due">Due Date</label>
+          <input type="date" class="modal__input" id="modal-due" value="2024-01-31">
+        </div>
+      </div>
+
+      <div class="modal__field">
+        <label class="modal__label" for="modal-desc">Description</label>
+        <textarea class="modal__textarea" id="modal-desc">Connect TaskFlow to Slack to send notifications and allow task creation from Slack commands. Requires OAuth setup and webhook configuration.</textarea>
+      </div>
+
+      <div class="modal__row">
+        <div class="modal__field">
+          <label class="modal__label" for="modal-assignees">Assignees</label>
+          <select class="modal__select" id="modal-assignees" multiple>
+            <option>Jane Doe</option>
+            <option selected>Tom Reed</option>
+            <option selected>Mark Chen</option>
+            <option>Sarah Kim</option>
+            <option>Lisa Park</option>
+          </select>
+        </div>
+        <div class="modal__field">
+          <label class="modal__label" for="modal-tags">Tags</label>
+          <input type="text" class="modal__input" id="modal-tags" value="Integration, Backend" placeholder="Add tags...">
+        </div>
+      </div>
+
+      <div class="modal__activity">
+        <h3 class="modal__activity-title">Activity</h3>
+        <div class="activity-feed" aria-label="Task activity">
+          <div class="activity-item">
+            <div class="activity-item__avatar task-avatar--orange" aria-hidden="true">TR</div>
+            <div class="activity-item__body">
+              <p class="activity-item__text"><strong>Tom Reed</strong> moved this task to <strong>In Progress</strong></p>
+              <p class="activity-item__time">2 hours ago</p>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-item__avatar" aria-hidden="true">MC</div>
+            <div class="activity-item__body">
+              <p class="activity-item__text"><strong>Mark Chen</strong> added a comment: "OAuth flow is ready, working on webhooks now."</p>
+              <p class="activity-item__time">5 hours ago</p>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-item__avatar" aria-hidden="true">JD</div>
+            <div class="activity-item__body">
+              <p class="activity-item__text"><strong>Jane Doe</strong> created this task and assigned Tom Reed and Mark Chen</p>
+              <p class="activity-item__time">Jan 22, 2024</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal__actions">
+        <button class="btn-secondary" id="modal-cancel-btn">Cancel</button>
+        <button class="btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHARED FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand">
+        <a href="dashboard.html" class="site-footer__logo" aria-label="TaskFlow – Go to Dashboard">
+          <svg width="20" height="20" viewBox="0 0 28 28" fill="none" aria-hidden="true" focusable="false">
+            <rect width="28" height="28" rx="7" fill="var(--pesto-brand-600)"/>
+            <path d="M7 14.5l4.5 4.5 9.5-10" stroke="var(--pesto-neutral-0)" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="site-footer__logo-text">TaskFlow</span>
+        </a>
+        <p class="site-footer__copy">© 2024 TaskFlow. All rights reserved.</p>
+      </div>
+
+      <nav class="site-footer__nav" aria-label="Footer navigation">
+        <ul class="site-footer__links" role="list">
+          <li><a href="#privacy" class="site-footer__link">Privacy Policy</a></li>
+          <li><a href="#terms" class="site-footer__link">Terms of Service</a></li>
+          <li><a href="#support" class="site-footer__link">Contact Support</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-footer__social" aria-label="Social links">
+        <a href="#twitter" class="site-footer__social-link" aria-label="TaskFlow on Twitter">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <path d="M22 4.01c-.77.35-1.6.58-2.46.69a4.3 4.3 0 001.88-2.37c-.82.49-1.73.84-2.7 1.03A4.28 4.28 0 0015.5 2c-2.37 0-4.29 1.92-4.29 4.29 0 .34.04.67.1.98C7.69 7.1 4.07 5.38 1.64 2.65c-.37.64-.58 1.38-.58 2.17 0 1.49.76 2.8 1.91 3.57-.7-.02-1.37-.21-1.95-.53v.05c0 2.08 1.48 3.82 3.44 4.21-.36.1-.74.15-1.13.15-.28 0-.54-.03-.8-.07.55 1.7 2.13 2.94 4 2.97A8.6 8.6 0 012 17.54 12.13 12.13 0 008.29 19.5c7.55 0 11.68-6.25 11.68-11.67l-.01-.53A8.34 8.34 0 0022 4.01z" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="#github" class="site-footer__social-link" aria-label="TaskFlow on GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="#linkedin" class="site-footer__social-link" aria-label="TaskFlow on LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z" fill="currentColor"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    // ── Drag and Drop ──────────────────────────────────────
+    let draggedCard = null;
+    let dragSourceColumn = null;
+
+    const cards = document.querySelectorAll('.task-card[draggable="true"]');
+    const columns = document.querySelectorAll('.kanban-column');
+
+    cards.forEach(function (card) {
+      card.addEventListener('dragstart', function (e) {
+        draggedCard = card;
+        dragSourceColumn = card.closest('.kanban-column');
+        card.classList.add('is-dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', card.dataset.taskId);
+      });
+
+      card.addEventListener('dragend', function () {
+        card.classList.remove('is-dragging');
+        columns.forEach(function (col) { col.classList.remove('drag-over'); });
+        draggedCard = null;
+        dragSourceColumn = null;
+        updateCounts();
+      });
+    });
+
+    columns.forEach(function (col) {
+      col.addEventListener('dragover', function (e) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        col.classList.add('drag-over');
+      });
+
+      col.addEventListener('dragleave', function (e) {
+        if (!col.contains(e.relatedTarget)) {
+          col.classList.remove('drag-over');
+        }
+      });
+
+      col.addEventListener('drop', function (e) {
+        e.preventDefault();
+        col.classList.remove('drag-over');
+        if (draggedCard && col !== dragSourceColumn) {
+          const cardsContainer = col.querySelector('.kanban-column__cards');
+          cardsContainer.appendChild(draggedCard);
+        }
+      });
+    });
+
+    function updateCounts() {
+      const columnMap = {
+        'backlog': 'count-backlog',
+        'todo': 'count-todo',
+        'inprogress': 'count-inprogress',
+        'done': 'count-done'
+      };
+      Object.entries(columnMap).forEach(function ([colId, countId]) {
+        const col = document.getElementById('col-' + colId);
+        const cardsContainer = col ? col.querySelector('.kanban-column__cards') : null;
+        const countEl = document.getElementById(countId);
+        if (cardsContainer && countEl) {
+          const count = cardsContainer.querySelectorAll('.task-card').length;
+          countEl.textContent = count;
+          countEl.setAttribute('aria-label', count + ' tasks');
+        }
+      });
+    }
+
+    // ── Modal ──────────────────────────────────────────────
+    const modalOverlay = document.getElementById('task-modal');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const modalCancelBtn = document.getElementById('modal-cancel-btn');
+
+    function openModal(card) {
+      const title = card.querySelector('.task-card__title').textContent;
+      document.getElementById('modal-task-title').textContent = title;
+      modalOverlay.classList.add('is-open');
+      modalOverlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      modalCloseBtn.focus();
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove('is-open');
+      modalOverlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.task-card').forEach(function (card) {
+      card.addEventListener('click', function () { openModal(card); });
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal(card);
+        }
+      });
+    });
+
+    modalCloseBtn.addEventListener('click', closeModal);
+    modalCancelBtn.addEventListener('click', closeModal);
+
+    modalOverlay.addEventListener('click', function (e) {
+      if (e.target === modalOverlay) closeModal();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('is-open')) {
+        closeModal();
+      }
+    });
+
+    // ── Add Task button ────────────────────────────────────
+    document.getElementById('add-task-btn').addEventListener('click', function () {
+      document.getElementById('modal-task-title').textContent = 'New Task';
+      document.getElementById('modal-status').value = 'To Do';
+      document.getElementById('modal-desc').value = '';
+      document.getElementById('modal-due').value = '';
+      document.getElementById('modal-tags').value = '';
+      modalOverlay.classList.add('is-open');
+      modalOverlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      modalCloseBtn.focus();
+    });
+
+    // ── Search filter ──────────────────────────────────────
+    document.getElementById('task-search').addEventListener('input', function (e) {
+      const query = e.target.value.toLowerCase().trim();
+      document.querySelectorAll('.task-card').forEach(function (card) {
+        const title = card.querySelector('.task-card__title').textContent.toLowerCase();
+        const desc = card.querySelector('.task-card__desc') ? card.querySelector('.task-card__desc').textContent.toLowerCase() : '';
+        const match = title.includes(query) || desc.includes(query);
+        card.style.display = match ? '' : 'none';
+      });
+    });
+
+    // ── sr-only utility ────────────────────────────────────
+    const style = document.createElement('style');
+    style.textContent = '.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0;}';
+    document.head.appendChild(style);
+  })();
+  </script>
+
+</body>
+</html>

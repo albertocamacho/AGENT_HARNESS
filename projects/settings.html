@@ -1,0 +1,2180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings — ProjectFlow</title>
+  <style id="pesto-tokens">
+/*
+ * Pesto Design System — Core Variables
+ * ─────────────────────────────────────
+ * All generated pages MUST use these tokens.
+ * Do not hardcode values — reference the custom properties below.
+ */
+
+:root {
+  /* ── Color: Brand ─────────────────────────────────────── */
+  --pesto-brand-50:  #f0fdf4;
+  --pesto-brand-100: #dcfce7;
+  --pesto-brand-200: #bbf7d0;
+  --pesto-brand-300: #86efac;
+  --pesto-brand-400: #4ade80;
+  --pesto-brand-500: #22c55e;
+  --pesto-brand-600: #16a34a;
+  --pesto-brand-700: #15803d;
+  --pesto-brand-800: #166534;
+  --pesto-brand-900: #14532d;
+
+  /* ── Color: Neutral ───────────────────────────────────── */
+  --pesto-neutral-0:   #ffffff;
+  --pesto-neutral-50:  #fafaf9;
+  --pesto-neutral-100: #f5f5f4;
+  --pesto-neutral-200: #e7e5e4;
+  --pesto-neutral-300: #d6d3d1;
+  --pesto-neutral-400: #a8a29e;
+  --pesto-neutral-500: #78716c;
+  --pesto-neutral-600: #57534e;
+  --pesto-neutral-700: #44403c;
+  --pesto-neutral-800: #292524;
+  --pesto-neutral-900: #1c1917;
+
+  /* ── Color: Accent ────────────────────────────────────── */
+  --pesto-accent-50:  #fefce8;
+  --pesto-accent-100: #fef9c3;
+  --pesto-accent-200: #fef08a;
+  --pesto-accent-400: #facc15;
+  --pesto-accent-600: #ca8a04;
+
+  /* ── Color: Semantic ──────────────────────────────────── */
+  --pesto-error-50:  #fef2f2;
+  --pesto-error-500: #ef4444;
+  --pesto-error-700: #b91c1c;
+
+  --pesto-warning-50:  #fffbeb;
+  --pesto-warning-500: #f59e0b;
+  --pesto-warning-700: #b45309;
+
+  --pesto-success-50:  #f0fdf4;
+  --pesto-success-500: #22c55e;
+  --pesto-success-700: #15803d;
+
+  --pesto-info-50:  #eff6ff;
+  --pesto-info-500: #3b82f6;
+  --pesto-info-700: #1d4ed8;
+
+  /* ── Color: Surfaces ──────────────────────────────────── */
+  --pesto-surface-page:    var(--pesto-neutral-0);
+  --pesto-surface-raised:  var(--pesto-neutral-0);
+  --pesto-surface-sunken:  var(--pesto-neutral-50);
+  --pesto-surface-overlay: rgba(0, 0, 0, 0.45);
+
+  /* ── Color: Text ──────────────────────────────────────── */
+  --pesto-text-primary:   var(--pesto-neutral-900);
+  --pesto-text-secondary: var(--pesto-neutral-600);
+  --pesto-text-tertiary:  var(--pesto-neutral-400);
+  --pesto-text-inverse:   var(--pesto-neutral-0);
+  --pesto-text-link:      var(--pesto-brand-600);
+  --pesto-text-link-hover: var(--pesto-brand-700);
+
+  /* ── Color: Borders ───────────────────────────────────── */
+  --pesto-border-default: var(--pesto-neutral-200);
+  --pesto-border-strong:  var(--pesto-neutral-300);
+  --pesto-border-focus:   var(--pesto-brand-500);
+
+  /* ── Typography ───────────────────────────────────────── */
+  --pesto-font-sans:  "Inter", system-ui, -apple-system, sans-serif;
+  --pesto-font-mono:  "JetBrains Mono", ui-monospace, monospace;
+
+  --pesto-text-xs:   0.75rem;    /* 12px */
+  --pesto-text-sm:   0.875rem;   /* 14px */
+  --pesto-text-base: 1rem;       /* 16px */
+  --pesto-text-lg:   1.125rem;   /* 18px */
+  --pesto-text-xl:   1.25rem;    /* 20px */
+  --pesto-text-2xl:  1.5rem;     /* 24px */
+  --pesto-text-3xl:  1.875rem;   /* 30px */
+  --pesto-text-4xl:  2.25rem;    /* 36px */
+  --pesto-text-5xl:  3rem;       /* 48px */
+
+  --pesto-leading-tight:  1.25;
+  --pesto-leading-normal: 1.5;
+  --pesto-leading-loose:  1.75;
+
+  --pesto-weight-normal:   400;
+  --pesto-weight-medium:   500;
+  --pesto-weight-semibold: 600;
+  --pesto-weight-bold:     700;
+
+  /* ── Spacing ──────────────────────────────────────────── */
+  --pesto-space-0:   0;
+  --pesto-space-1:   0.25rem;   /*  4px */
+  --pesto-space-2:   0.5rem;    /*  8px */
+  --pesto-space-3:   0.75rem;   /* 12px */
+  --pesto-space-4:   1rem;      /* 16px */
+  --pesto-space-5:   1.25rem;   /* 20px */
+  --pesto-space-6:   1.5rem;    /* 24px */
+  --pesto-space-8:   2rem;      /* 32px */
+  --pesto-space-10:  2.5rem;    /* 40px */
+  --pesto-space-12:  3rem;      /* 48px */
+  --pesto-space-16:  4rem;      /* 64px */
+  --pesto-space-20:  5rem;      /* 80px */
+  --pesto-space-24:  6rem;      /* 96px */
+
+  /* ── Layout ───────────────────────────────────────────── */
+  --pesto-container-sm:  640px;
+  --pesto-container-md:  768px;
+  --pesto-container-lg:  1024px;
+  --pesto-container-xl:  1280px;
+  --pesto-container-2xl: 1536px;
+
+  --pesto-content-width: min(100% - var(--pesto-space-8), var(--pesto-container-xl));
+
+  /* ── Surfaces ─────────────────────────────────────────── */
+  --pesto-radius-sm:   4px;
+  --pesto-radius-md:   8px;
+  --pesto-radius-lg:   12px;
+  --pesto-radius-xl:   16px;
+  --pesto-radius-full: 9999px;
+
+  --pesto-shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.05);
+  --pesto-shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --pesto-shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --pesto-shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+
+  /* ── Transitions ──────────────────────────────────────── */
+  --pesto-duration-fast:   100ms;
+  --pesto-duration-normal: 200ms;
+  --pesto-duration-slow:   300ms;
+  --pesto-ease-default:    cubic-bezier(0.4, 0, 0.2, 1);
+  --pesto-ease-in:         cubic-bezier(0.4, 0, 1, 1);
+  --pesto-ease-out:        cubic-bezier(0, 0, 0.2, 1);
+  --pesto-ease-interact:   cubic-bezier(1, 0, 0, 1);
+
+  /* ── Z-index ──────────────────────────────────────────── */
+  --pesto-z-dropdown: 10;
+  --pesto-z-sticky:   20;
+  --pesto-z-overlay:  30;
+  --pesto-z-modal:    40;
+  --pesto-z-toast:    50;
+}
+
+/* ── Base Styles ─────────────────────────────────────────── */
+/* These resets and defaults ensure every generated page starts
+   from a consistent, polished baseline. */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--pesto-font-sans);
+  font-size: var(--pesto-text-base);
+  line-height: var(--pesto-leading-normal);
+  color: var(--pesto-text-primary);
+  background: var(--pesto-surface-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, picture, video, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Dark mode overrides ──────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pesto-surface-page:   var(--pesto-neutral-900);
+    --pesto-surface-raised: var(--pesto-neutral-800);
+    --pesto-surface-sunken: var(--pesto-neutral-900);
+
+    --pesto-text-primary:   var(--pesto-neutral-50);
+    --pesto-text-secondary: var(--pesto-neutral-400);
+    --pesto-text-tertiary:  var(--pesto-neutral-500);
+    --pesto-text-inverse:   var(--pesto-neutral-900);
+    --pesto-text-link:      var(--pesto-brand-400);
+    --pesto-text-link-hover: var(--pesto-brand-300);
+
+    --pesto-border-default: var(--pesto-neutral-700);
+    --pesto-border-strong:  var(--pesto-neutral-600);
+  }
+}
+
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─────────────────────────────────────────────
+       BASE LAYOUT
+    ───────────────────────────────────────────── */
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .page-main {
+      flex: 1;
+      padding-block: var(--pesto-space-20);
+    }
+
+    .container {
+      width: var(--pesto-content-width);
+      margin-inline: auto;
+    }
+
+    /* ─────────────────────────────────────────────
+       SITE HEADER
+    ───────────────────────────────────────────── */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: var(--pesto-z-sticky);
+      background: var(--pesto-surface-page);
+      border-bottom: 1px solid var(--pesto-border-default);
+      box-shadow: var(--pesto-shadow-sm);
+    }
+
+    .site-header__inner {
+      width: var(--pesto-content-width);
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-8);
+      height: 64px;
+    }
+
+    .site-header__brand { flex-shrink: 0; }
+
+    .site-header__logo {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-2);
+      text-decoration: none;
+      color: var(--pesto-text-primary);
+      border-radius: var(--pesto-radius-md);
+      padding: var(--pesto-space-1);
+      transition: opacity var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .site-header__logo:hover { opacity: 0.85; }
+
+    .site-header__logo:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .site-header__logo-mark {
+      color: var(--pesto-brand-600);
+      flex-shrink: 0;
+    }
+
+    .site-header__logo-text {
+      font-size: var(--pesto-text-lg);
+      font-weight: var(--pesto-weight-bold);
+      color: var(--pesto-text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .site-nav { flex: 1; }
+
+    .site-nav__list {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-1);
+    }
+
+    .site-nav__link {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--pesto-space-2) var(--pesto-space-3);
+      border-radius: var(--pesto-radius-md);
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-secondary);
+      text-decoration: none;
+      transition:
+        color var(--pesto-duration-normal) var(--pesto-ease-default),
+        background var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .site-nav__link:hover {
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-sunken);
+    }
+
+    .site-nav__link:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+      color: var(--pesto-text-primary);
+    }
+
+    .site-nav__link.active,
+    .site-nav__link[aria-current="page"] {
+      font-weight: var(--pesto-weight-semibold);
+      background: var(--pesto-brand-50);
+      color: var(--pesto-brand-700);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .site-nav__link.active,
+      .site-nav__link[aria-current="page"] {
+        background: var(--pesto-neutral-800);
+        color: var(--pesto-brand-400);
+      }
+    }
+
+    .site-header__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-3);
+      margin-left: auto;
+    }
+
+    .user-menu { position: relative; }
+
+    .user-menu__trigger {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-2);
+      padding: var(--pesto-space-2) var(--pesto-space-3);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-full);
+      background: transparent;
+      color: var(--pesto-text-primary);
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      cursor: pointer;
+      min-height: 44px;
+      transition:
+        background var(--pesto-duration-normal) var(--pesto-ease-default),
+        border-color var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .user-menu__trigger:hover {
+      background: var(--pesto-surface-sunken);
+      border-color: var(--pesto-border-strong);
+    }
+
+    .user-menu__trigger:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .user-menu__avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: var(--pesto-radius-full);
+      background: var(--pesto-brand-600);
+      color: var(--pesto-text-inverse);
+      font-size: var(--pesto-text-xs);
+      font-weight: var(--pesto-weight-semibold);
+      flex-shrink: 0;
+    }
+
+    .user-menu__name { color: var(--pesto-text-primary); }
+
+    .user-menu__chevron {
+      color: var(--pesto-text-tertiary);
+      transition: transform var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .user-menu__trigger[aria-expanded="true"] .user-menu__chevron {
+      transform: rotate(180deg);
+    }
+
+    .user-menu__dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + var(--pesto-space-2));
+      right: 0;
+      min-width: 160px;
+      background: var(--pesto-surface-raised);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      box-shadow: var(--pesto-shadow-lg);
+      padding: var(--pesto-space-2);
+      z-index: var(--pesto-z-dropdown);
+      list-style: none;
+    }
+
+    .user-menu__dropdown--open { display: block; }
+
+    .user-menu__option {
+      display: block;
+      padding: var(--pesto-space-2) var(--pesto-space-3);
+      border-radius: var(--pesto-radius-md);
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-primary);
+      text-decoration: none;
+      transition: background var(--pesto-duration-fast) var(--pesto-ease-default);
+    }
+
+    .user-menu__option:hover {
+      background: var(--pesto-surface-sunken);
+      color: var(--pesto-text-primary);
+    }
+
+    .user-menu__option:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-md);
+      background: transparent;
+      cursor: pointer;
+      padding: var(--pesto-space-2);
+      transition: background var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .hamburger:hover { background: var(--pesto-surface-sunken); }
+
+    .hamburger:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .hamburger__bar {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--pesto-text-primary);
+      border-radius: var(--pesto-radius-full);
+      transition:
+        transform var(--pesto-duration-normal) var(--pesto-ease-default),
+        opacity var(--pesto-duration-normal) var(--pesto-ease-default);
+      transform-origin: center;
+    }
+
+    .hamburger--open .hamburger__bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger--open .hamburger__bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger--open .hamburger__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-nav {
+      display: none;
+      border-top: 1px solid var(--pesto-border-default);
+      background: var(--pesto-surface-page);
+      padding: var(--pesto-space-4);
+    }
+
+    .mobile-nav--open { display: block; }
+
+    .mobile-nav__list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-1);
+    }
+
+    .mobile-nav__link {
+      display: block;
+      padding: var(--pesto-space-3) var(--pesto-space-4);
+      border-radius: var(--pesto-radius-md);
+      font-size: var(--pesto-text-base);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-secondary);
+      text-decoration: none;
+      transition:
+        color var(--pesto-duration-normal) var(--pesto-ease-default),
+        background var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .mobile-nav__link:hover {
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-sunken);
+    }
+
+    .mobile-nav__link:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .mobile-nav__link.active,
+    .mobile-nav__link[aria-current="page"] {
+      color: var(--pesto-brand-700);
+      background: var(--pesto-brand-50);
+      font-weight: var(--pesto-weight-semibold);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .mobile-nav__link.active,
+      .mobile-nav__link[aria-current="page"] {
+        background: var(--pesto-neutral-800);
+        color: var(--pesto-brand-400);
+      }
+    }
+
+    .mobile-nav__link--danger { color: var(--pesto-error-700); }
+
+    .mobile-nav__link--danger:hover {
+      background: var(--pesto-error-50);
+      color: var(--pesto-error-700);
+    }
+
+    .mobile-nav__divider {
+      height: 1px;
+      background: var(--pesto-border-default);
+      margin-block: var(--pesto-space-2);
+    }
+
+    @media (max-width: 768px) {
+      .site-nav { display: none; }
+      .user-menu { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ─────────────────────────────────────────────
+       SITE FOOTER
+    ───────────────────────────────────────────── */
+
+    .site-footer {
+      border-top: 1px solid var(--pesto-border-default);
+      background: var(--pesto-surface-page);
+      padding-block: var(--pesto-space-8);
+    }
+
+    .site-footer__inner {
+      width: var(--pesto-content-width);
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--pesto-space-6);
+      flex-wrap: wrap;
+    }
+
+    .site-footer__brand {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-1);
+    }
+
+    .site-footer__logo-text {
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-semibold);
+      color: var(--pesto-text-primary);
+    }
+
+    .site-footer__copy {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-tertiary);
+    }
+
+    .site-footer__nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .site-footer__links {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-6);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .site-footer__link {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-secondary);
+      text-decoration: none;
+      transition: color var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .site-footer__link:hover {
+      color: var(--pesto-text-primary);
+      text-decoration: underline;
+    }
+
+    .site-footer__link:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+      border-radius: var(--pesto-radius-sm);
+    }
+
+    .site-footer__social {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-3);
+    }
+
+    .site-footer__social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--pesto-radius-md);
+      color: var(--pesto-text-tertiary);
+      text-decoration: none;
+      transition:
+        color var(--pesto-duration-normal) var(--pesto-ease-default),
+        background var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .site-footer__social-link:hover {
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-sunken);
+    }
+
+    .site-footer__social-link:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 640px) {
+      .site-footer__inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: var(--pesto-space-4);
+      }
+
+      .site-footer__brand { align-items: center; }
+      .site-footer__nav { width: 100%; }
+      .site-footer__links { gap: var(--pesto-space-4); }
+    }
+
+    /* ─────────────────────────────────────────────
+       SHARED UTILITIES
+    ───────────────────────────────────────────── */
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--pesto-space-2);
+      padding: var(--pesto-space-3) var(--pesto-space-6);
+      border-radius: var(--pesto-radius-md);
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      line-height: 1;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid transparent;
+      min-height: 44px;
+      transition: all var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .btn:disabled,
+    .btn[aria-disabled="true"] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .btn--primary {
+      background: var(--pesto-brand-600);
+      color: var(--pesto-text-inverse);
+      border-color: var(--pesto-brand-600);
+    }
+
+    .btn--primary:hover {
+      background: var(--pesto-brand-700);
+      border-color: var(--pesto-brand-700);
+      transform: translateY(-1px);
+    }
+
+    .btn--secondary {
+      background: transparent;
+      color: var(--pesto-text-primary);
+      border-color: var(--pesto-border-default);
+    }
+
+    .btn--secondary:hover {
+      background: var(--pesto-surface-sunken);
+      border-color: var(--pesto-border-strong);
+    }
+
+    .btn--ghost {
+      background: transparent;
+      border-color: transparent;
+      color: var(--pesto-text-link);
+      padding-inline: var(--pesto-space-3);
+    }
+
+    .btn--ghost:hover { text-decoration: underline; }
+
+    .btn--danger {
+      background: transparent;
+      color: var(--pesto-error-700);
+      border-color: transparent;
+    }
+
+    .btn--danger:hover {
+      background: var(--pesto-error-50);
+    }
+
+    .btn--sm {
+      padding: var(--pesto-space-2) var(--pesto-space-4);
+      min-height: 36px;
+      font-size: var(--pesto-text-xs);
+    }
+
+    /* ─────────────────────────────────────────────
+       PAGE ENTRANCE ANIMATION
+    ───────────────────────────────────────────── */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .settings-layout {
+      animation: fadeUp var(--pesto-duration-slow) var(--pesto-ease-out) both;
+    }
+
+    /* ─────────────────────────────────────────────
+       SETTINGS LAYOUT
+    ───────────────────────────────────────────── */
+
+    .settings-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: var(--pesto-space-8);
+      align-items: start;
+    }
+
+    /* ─────────────────────────────────────────────
+       SETTINGS SIDEBAR
+    ───────────────────────────────────────────── */
+
+    .settings-sidebar {
+      position: sticky;
+      top: calc(64px + var(--pesto-space-8));
+      background: var(--pesto-surface-raised);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      box-shadow: var(--pesto-shadow-sm);
+      padding: var(--pesto-space-3);
+    }
+
+    .settings-sidebar__label {
+      font-size: var(--pesto-text-xs);
+      font-weight: var(--pesto-weight-semibold);
+      color: var(--pesto-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: var(--pesto-space-2) var(--pesto-space-3);
+      margin-bottom: var(--pesto-space-1);
+    }
+
+    .settings-nav__list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-1);
+    }
+
+    .settings-nav__link {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-3);
+      padding: var(--pesto-space-2) var(--pesto-space-3);
+      border-radius: var(--pesto-radius-md);
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-secondary);
+      text-decoration: none;
+      transition:
+        color var(--pesto-duration-normal) var(--pesto-ease-default),
+        background var(--pesto-duration-normal) var(--pesto-ease-default);
+      min-height: 40px;
+    }
+
+    .settings-nav__link:hover {
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-sunken);
+    }
+
+    .settings-nav__link:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .settings-nav__link.active {
+      color: var(--pesto-brand-700);
+      background: var(--pesto-brand-50);
+      font-weight: var(--pesto-weight-semibold);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .settings-nav__link.active {
+        background: var(--pesto-neutral-800);
+        color: var(--pesto-brand-400);
+      }
+    }
+
+    .settings-nav__icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+
+    .settings-nav__link.active .settings-nav__icon { opacity: 1; }
+
+    /* ─────────────────────────────────────────────
+       SETTINGS CONTENT
+    ───────────────────────────────────────────── */
+
+    .settings-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-16);
+      min-width: 0;
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION HEADER
+    ───────────────────────────────────────────── */
+
+    .section-header {
+      margin-bottom: var(--pesto-space-6);
+    }
+
+    .section-header h2 {
+      font-size: var(--pesto-text-2xl);
+      font-weight: var(--pesto-weight-semibold);
+      color: var(--pesto-text-primary);
+      line-height: var(--pesto-leading-tight);
+      margin-bottom: var(--pesto-space-2);
+    }
+
+    .section-header p {
+      font-size: var(--pesto-text-base);
+      color: var(--pesto-text-secondary);
+      max-width: 65ch;
+    }
+
+    /* ─────────────────────────────────────────────
+       TEAM TABLE
+    ───────────────────────────────────────────── */
+
+    .team-table-wrapper {
+      background: var(--pesto-surface-raised);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      box-shadow: var(--pesto-shadow-sm);
+      overflow: hidden;
+    }
+
+    .team-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .team-table thead {
+      background: var(--pesto-surface-sunken);
+      border-bottom: 1px solid var(--pesto-border-default);
+    }
+
+    .team-table th {
+      padding: var(--pesto-space-3) var(--pesto-space-4);
+      text-align: left;
+      font-size: var(--pesto-text-xs);
+      font-weight: var(--pesto-weight-semibold);
+      color: var(--pesto-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .team-table td {
+      padding: var(--pesto-space-4);
+      border-bottom: 1px solid var(--pesto-border-default);
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-primary);
+      vertical-align: middle;
+    }
+
+    .team-table tbody tr:last-child td { border-bottom: none; }
+
+    .team-table tbody tr {
+      transition: background var(--pesto-duration-fast) var(--pesto-ease-default);
+    }
+
+    .team-table tbody tr:hover {
+      background: var(--pesto-surface-sunken);
+    }
+
+    .member-cell {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-3);
+    }
+
+    .member-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--pesto-radius-full);
+      background: var(--pesto-brand-100);
+      color: var(--pesto-brand-700);
+      font-size: var(--pesto-text-xs);
+      font-weight: var(--pesto-weight-semibold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .member-avatar--alt1 { background: var(--pesto-accent-100); color: var(--pesto-accent-600); }
+    .member-avatar--alt2 { background: var(--pesto-info-50); color: var(--pesto-info-700); }
+    .member-avatar--alt3 { background: var(--pesto-error-50); color: var(--pesto-error-700); }
+    .member-avatar--alt4 { background: var(--pesto-warning-50); color: var(--pesto-warning-700); }
+
+    .member-name {
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-primary);
+    }
+
+    .member-email {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-secondary);
+    }
+
+    .role-select {
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-md);
+      padding: var(--pesto-space-2) var(--pesto-space-3);
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-page);
+      cursor: pointer;
+      min-height: 36px;
+      transition:
+        border-color var(--pesto-duration-normal) var(--pesto-ease-default),
+        box-shadow var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .role-select:focus-visible {
+      outline: 2px solid var(--pesto-border-focus); outline-offset: 2px;
+      border-color: var(--pesto-border-focus);
+      box-shadow: 0 0 0 3px var(--pesto-brand-200);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--pesto-space-1) var(--pesto-space-3);
+      border-radius: var(--pesto-radius-full);
+      font-size: var(--pesto-text-xs);
+      font-weight: var(--pesto-weight-medium);
+      line-height: var(--pesto-leading-tight);
+      white-space: nowrap;
+    }
+
+    .badge--success {
+      background: var(--pesto-success-50);
+      color: var(--pesto-success-700);
+    }
+
+    .badge--info {
+      background: var(--pesto-info-50);
+      color: var(--pesto-info-700);
+    }
+
+    .badge--neutral {
+      background: var(--pesto-neutral-100);
+      color: var(--pesto-neutral-600);
+    }
+
+    .badge--error {
+      background: var(--pesto-error-50);
+      color: var(--pesto-error-700);
+    }
+
+    .actions-cell {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-1);
+    }
+
+    .icon-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: var(--pesto-radius-md);
+      border: none;
+      background: transparent;
+      color: var(--pesto-text-secondary);
+      cursor: pointer;
+      transition:
+        background var(--pesto-duration-fast) var(--pesto-ease-default),
+        color var(--pesto-duration-fast) var(--pesto-ease-default);
+    }
+
+    .icon-btn:hover {
+      background: var(--pesto-surface-sunken);
+      color: var(--pesto-text-primary);
+    }
+
+    .icon-btn--danger:hover {
+      background: var(--pesto-error-50);
+      color: var(--pesto-error-700);
+    }
+
+    .icon-btn:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    /* ─────────────────────────────────────────────
+       ADD TEAM MEMBER FORM
+    ───────────────────────────────────────────── */
+
+    .invite-form-card {
+      background: var(--pesto-surface-raised);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      padding: var(--pesto-space-6);
+      box-shadow: var(--pesto-shadow-sm);
+      margin-top: var(--pesto-space-6);
+    }
+
+    .invite-form-card h3 {
+      font-size: var(--pesto-text-xl);
+      font-weight: var(--pesto-weight-semibold);
+      color: var(--pesto-text-primary);
+      margin-bottom: var(--pesto-space-1);
+    }
+
+    .invite-form-card p {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-secondary);
+      margin-bottom: var(--pesto-space-6);
+    }
+
+    .invite-form {
+      display: grid;
+      grid-template-columns: 1fr 200px auto;
+      gap: var(--pesto-space-4);
+      align-items: end;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-2);
+    }
+
+    .form-field label {
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-primary);
+    }
+
+    .form-input,
+    .form-select {
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-md);
+      padding: var(--pesto-space-3) var(--pesto-space-4);
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-page);
+      width: 100%;
+      min-height: 44px;
+      transition:
+        border-color var(--pesto-duration-normal) var(--pesto-ease-default),
+        box-shadow var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .form-input::placeholder { color: var(--pesto-text-tertiary); }
+
+    .form-input:focus,
+    .form-select:focus {
+      outline: 2px solid var(--pesto-border-focus); outline-offset: 2px;
+      border-color: var(--pesto-border-focus);
+      box-shadow: 0 0 0 3px var(--pesto-brand-200);
+    }
+
+    /* ─────────────────────────────────────────────
+       INTEGRATIONS
+    ───────────────────────────────────────────── */
+
+    .integrations-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--pesto-space-6);
+    }
+
+    .integration-card {
+      background: var(--pesto-surface-raised);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      padding: var(--pesto-space-6);
+      box-shadow: var(--pesto-shadow-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: var(--pesto-space-3);
+      transition:
+        box-shadow var(--pesto-duration-normal) var(--pesto-ease-default),
+        transform var(--pesto-duration-normal) var(--pesto-ease-interact);
+    }
+
+    .integration-card:hover {
+      box-shadow: var(--pesto-shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .integration-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--pesto-radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--pesto-text-xl);
+      flex-shrink: 0;
+    }
+
+    .integration-logo--slack { background: #4A154B; color: #fff; }
+    .integration-logo--github { background: var(--pesto-neutral-900); color: #fff; }
+    .integration-logo--jira { background: #0052CC; color: #fff; }
+    .integration-logo--gdrive { background: #fff; border: 1px solid var(--pesto-border-default); color: #34A853; }
+    .integration-logo--figma { background: #1E1E1E; color: #fff; }
+    .integration-logo--zapier { background: #FF4A00; color: #fff; }
+
+    .integration-card h4 {
+      font-size: var(--pesto-text-lg);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-primary);
+    }
+
+    .integration-card p {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-secondary);
+      line-height: var(--pesto-leading-normal);
+      flex: 1;
+    }
+
+    /* ─────────────────────────────────────────────
+       NOTIFICATIONS
+    ───────────────────────────────────────────── */
+
+    .notifications-card {
+      background: var(--pesto-surface-raised);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      box-shadow: var(--pesto-shadow-sm);
+      overflow: hidden;
+    }
+
+    .notification-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--pesto-space-6);
+      padding: var(--pesto-space-5) var(--pesto-space-6);
+      border-bottom: 1px solid var(--pesto-border-default);
+    }
+
+    .notification-row:last-child { border-bottom: none; }
+
+    .notification-label {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-1);
+    }
+
+    .notification-label strong {
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-primary);
+    }
+
+    .notification-label span {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-secondary);
+    }
+
+    /* Toggle switch */
+    .toggle-wrapper {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-3);
+      flex-shrink: 0;
+    }
+
+    .toggle {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      position: absolute;
+    }
+
+    .toggle__track {
+      position: absolute;
+      inset: 0;
+      background: var(--pesto-neutral-300);
+      border-radius: var(--pesto-radius-full);
+      cursor: pointer;
+      transition: background var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .toggle__thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      background: var(--pesto-neutral-0);
+      border-radius: var(--pesto-radius-full);
+      box-shadow: var(--pesto-shadow-sm);
+      transition: transform var(--pesto-duration-normal) var(--pesto-ease-interact);
+      pointer-events: none;
+    }
+
+    .toggle input:checked + .toggle__track {
+      background: var(--pesto-brand-600);
+    }
+
+    .toggle input:checked ~ .toggle__thumb,
+    .toggle input:checked + .toggle__track + .toggle__thumb {
+      transform: translateX(20px);
+    }
+
+    .toggle input:focus-visible + .toggle__track {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    /* Radio group */
+    .radio-group {
+      display: flex;
+      gap: var(--pesto-space-4);
+      flex-shrink: 0;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-2);
+      cursor: pointer;
+    }
+
+    .radio-option input[type="radio"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--pesto-brand-600);
+      cursor: pointer;
+    }
+
+    .radio-option input[type="radio"]:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .radio-option span {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-primary);
+    }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
+
+    @media (max-width: 1024px) {
+      .settings-layout {
+        grid-template-columns: 200px 1fr;
+        gap: var(--pesto-space-6);
+      }
+
+      .integrations-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .invite-form {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .invite-form .btn--primary {
+        grid-column: 1 / -1;
+        justify-self: start;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .settings-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .settings-sidebar {
+        position: static;
+      }
+
+      .settings-nav__list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: var(--pesto-space-1);
+      }
+
+      .settings-nav__link {
+        padding: var(--pesto-space-2) var(--pesto-space-3);
+      }
+
+      .team-table-wrapper {
+        overflow-x: auto;
+      }
+
+      .team-table {
+        min-width: 640px;
+      }
+
+      .invite-form {
+        grid-template-columns: 1fr;
+      }
+
+      .invite-form .btn--primary {
+        grid-column: 1;
+        width: 100%;
+      }
+
+      .integrations-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .notification-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--pesto-space-3);
+      }
+
+      .radio-group {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .integrations-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .page-main {
+        padding-block: var(--pesto-space-12);
+      }
+    }
+  </style>
+</head>
+<body class="page-wrapper">
+
+  <!-- SHARED NAV -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <header class="site-header" role="banner">
+    <div class="site-header__inner">
+
+      <div class="site-header__brand">
+        <a href="dashboard.html" class="site-header__logo" aria-label="ProjectFlow home">
+          <svg class="site-header__logo-mark" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true" focusable="false">
+            <rect width="28" height="28" rx="7" fill="currentColor"/>
+            <rect x="6" y="6" width="7" height="7" rx="1.5" fill="white"/>
+            <rect x="15" y="6" width="7" height="7" rx="1.5" fill="white" opacity="0.6"/>
+            <rect x="6" y="15" width="7" height="7" rx="1.5" fill="white" opacity="0.6"/>
+            <rect x="15" y="15" width="7" height="7" rx="1.5" fill="white" opacity="0.3"/>
+          </svg>
+          <span class="site-header__logo-text">ProjectFlow</span>
+        </a>
+      </div>
+
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul class="site-nav__list" role="list">
+          <li class="site-nav__item">
+            <a href="dashboard.html" class="site-nav__link" data-page="dashboard">Dashboard</a>
+          </li>
+          <li class="site-nav__item">
+            <a href="task-board.html" class="site-nav__link" data-page="task-board">Board</a>
+          </li>
+          <li class="site-nav__item">
+            <a href="settings.html" class="site-nav__link active" data-page="settings" aria-current="page">Settings</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <div class="user-menu" aria-label="User menu">
+          <button class="user-menu__trigger" aria-haspopup="true" aria-expanded="false" aria-controls="user-dropdown">
+            <span class="user-menu__avatar" aria-hidden="true">JD</span>
+            <span class="user-menu__name">Jane Doe</span>
+            <svg class="user-menu__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+              <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul class="user-menu__dropdown" id="user-dropdown" role="menu" aria-label="User options">
+            <li role="none">
+              <a href="#profile" class="user-menu__option" role="menuitem">Profile</a>
+            </li>
+            <li role="none">
+              <a href="#logout" class="user-menu__option" role="menuitem">Logout</a>
+            </li>
+          </ul>
+        </div>
+
+        <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+          <span class="hamburger__bar"></span>
+          <span class="hamburger__bar"></span>
+          <span class="hamburger__bar"></span>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+      <nav aria-label="Mobile navigation">
+        <ul class="mobile-nav__list" role="list">
+          <li>
+            <a href="dashboard.html" class="mobile-nav__link" data-page="dashboard">Dashboard</a>
+          </li>
+          <li>
+            <a href="task-board.html" class="mobile-nav__link" data-page="task-board">Board</a>
+          </li>
+          <li>
+            <a href="settings.html" class="mobile-nav__link active" data-page="settings" aria-current="page">Settings</a>
+          </li>
+          <li class="mobile-nav__divider" aria-hidden="true"></li>
+          <li>
+            <a href="#profile" class="mobile-nav__link">Profile</a>
+          </li>
+          <li>
+            <a href="#logout" class="mobile-nav__link mobile-nav__link--danger">Logout</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <script>
+    (function () {
+      const hamburger = document.querySelector('.hamburger');
+      const mobileNav = document.querySelector('.mobile-nav');
+
+      if (hamburger && mobileNav) {
+        hamburger.addEventListener('click', function () {
+          const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+          hamburger.setAttribute('aria-expanded', String(!isOpen));
+          mobileNav.setAttribute('aria-hidden', String(isOpen));
+          mobileNav.classList.toggle('mobile-nav--open', !isOpen);
+          hamburger.classList.toggle('hamburger--open', !isOpen);
+        });
+      }
+
+      const userTrigger = document.querySelector('.user-menu__trigger');
+      const userDropdown = document.querySelector('.user-menu__dropdown');
+
+      if (userTrigger && userDropdown) {
+        userTrigger.addEventListener('click', function () {
+          const isOpen = userTrigger.getAttribute('aria-expanded') === 'true';
+          userTrigger.setAttribute('aria-expanded', String(!isOpen));
+          userDropdown.classList.toggle('user-menu__dropdown--open', !isOpen);
+        });
+
+        document.addEventListener('click', function (e) {
+          if (!userTrigger.contains(e.target) && !userDropdown.contains(e.target)) {
+            userTrigger.setAttribute('aria-expanded', 'false');
+            userDropdown.classList.remove('user-menu__dropdown--open');
+          }
+        });
+      }
+    })();
+  </script>
+
+  <!-- MAIN CONTENT -->
+  <main class="page-main" id="main-content">
+    <div class="container">
+
+      <div class="settings-layout">
+
+        <!-- Sidebar -->
+        <aside class="settings-sidebar" aria-label="Settings navigation">
+          <p class="settings-sidebar__label">Settings</p>
+          <nav aria-label="Settings sections">
+            <ul class="settings-nav__list" role="list">
+              <li>
+                <a href="#team-roles" class="settings-nav__link active" aria-current="true">
+                  <svg class="settings-nav__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M10.5 2.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zM2 13c0-2.761 2.686-5 6-5s6 2.239 6 5"/>
+                  </svg>
+                  Team &amp; Roles
+                </a>
+              </li>
+              <li>
+                <a href="#integrations" class="settings-nav__link">
+                  <svg class="settings-nav__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 2L2 6l4 4M10 2l4 4-4 4M9 1l-2 14"/>
+                  </svg>
+                  Integrations
+                </a>
+              </li>
+              <li>
+                <a href="#notifications" class="settings-nav__link">
+                  <svg class="settings-nav__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M8 1a5 5 0 00-5 5v3l-1.5 2h13L13 9V6a5 5 0 00-5-5zM6.5 13.5a1.5 1.5 0 003 0"/>
+                  </svg>
+                  Notifications
+                </a>
+              </li>
+              <li>
+                <a href="#billing" class="settings-nav__link">
+                  <svg class="settings-nav__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="1" y="3" width="14" height="10" rx="1.5"/>
+                    <path d="M1 6h14"/>
+                  </svg>
+                  Billing
+                </a>
+              </li>
+              <li>
+                <a href="#general" class="settings-nav__link">
+                  <svg class="settings-nav__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="8" cy="8" r="2"/>
+                    <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41"/>
+                  </svg>
+                  General
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </aside>
+
+        <!-- Content -->
+        <div class="settings-content">
+
+          <!-- ── Team & Roles ── -->
+          <section id="team-roles" aria-labelledby="team-roles-heading">
+            <div class="section-header">
+              <h2 id="team-roles-heading">Team &amp; Roles</h2>
+              <p>Manage team members and their permissions.</p>
+            </div>
+
+            <div class="team-table-wrapper" role="region" aria-label="Team members table" tabindex="0">
+              <table class="team-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"><span class="sr-only">Actions</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="member-cell">
+                        <div class="member-avatar" aria-hidden="true">JD</div>
+                        <span class="member-name">Jane Doe</span>
+                      </div>
+                    </td>
+                    <td class="member-email">jane.doe@company.com</td>
+                    <td>
+                      <label class="sr-only" for="role-jane">Role for Jane Doe</label>
+                      <select id="role-jane" class="role-select">
+                        <option selected>Admin</option>
+                        <option>Manager</option>
+                        <option>Member</option>
+                        <option>Viewer</option>
+                      </select>
+                    </td>
+                    <td><span class="badge badge--success">Active</span></td>
+                    <td>
+                      <div class="actions-cell">
+                        <button class="icon-btn" aria-label="Edit Jane Doe">
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M11.5 2.5l2 2L5 13H3v-2L11.5 2.5z"/>
+                          </svg>
+                        </button>
+                        <button class="icon-btn icon-btn--danger" aria-label="Remove Jane Doe">
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M2 4h12M5 4V2h6v2M6 7v5M10 7v5M3 4l1 9h8l1-9"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="member-cell">
+                        <div class="member-avatar member-avatar--alt1" aria-hidden="true">MS</div>
+                        <span class="member-name">Marcus Silva</span>
+                      </div>
+                    </td>
+                    <td class="member-email">marcus.silva@company.com</td>
+                    <td>
+                      <label class="sr-only" for="role-marcus">Role for Marcus Silva</label>
+                      <select id="role-marcus" class="role-select">
+                        <option>Admin</option>
+                        <option selected>Manager</option>
+                        <option>Member</option>
+                        <option>Viewer</option>
+                      </select>
+                    </td>
+                    <td><span class="badge badge--success">Active</span></td>
+                    <td>
+                      <div class="actions-cell">
+                        <button class="icon-btn" aria-label="Edit Marcus Silva">
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M11.5 2.5l2 2L5 13H3v-2L11.5 2.5z"/>
+                          </svg>
+                        </button>
+                        <button class="icon-btn icon-btn--danger" aria-label="Remove Marcus Silva">
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M2 4h12M5 4V2h6v2M6 7v5M10 7v5M3 4l1 9h8l1-9"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="member-cell">
+                        <div class="member-avatar member-avatar--alt2" aria-hidden="true">PC</div>
+                        <span class="member-name">Priya Chen</span>
+                      </div>
+                    </td>
+                    <td class="member-email">priya.chen@company.com</td>
+                    <td>
+                      <label class="sr-only" for="role-priya">Role for Priya Chen</label>
+                      <select id="role-priya" class="role-select">
+                        <option>Admin</option>
+                        <option>Manager</option>
+                        <option selected>Member</option>
+                        <option>Viewer</option>
+                      </select>
+                    </td>
+                    <td><span class="badge badge--success">Active</span></td>
+                    <td>
+                      <div class="actions-cell">
+                        <button class="icon-btn" aria-label="Edit Priya Chen">
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M11.5 2.5l2 2L5 13H3v-2L11.5 2.5z"/>
+                          </svg>
+                        </button>
+                        <button class="icon-btn icon-btn--danger" aria-label="Remove Priya Chen">
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M2 4h12M5 4V2h6v2M6 7v5M10 7v5M3 4l1 9h8l1-9"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="member-cell">
+                        <div class="member-avatar member-avatar--alt3" aria-hidden="true">TR</div>
+                        <span class="member-name">Tom Rivera</span>
+                      </div>
+                    </td>
+                    <td class="member-email">tom.rivera@company.com</td>
+                    <td>
+                      <label class="sr-only" for="role-tom">Role for Tom Rivera</label>
+                      <select id="role-tom" class="role-select">
+                        <option>Admin</option>
+                        <option>Manager</option>
+                        <option selected>Member</option>
+                        <option>Viewer</option>
+                      </select>
+                    </td>
+                    <td><span class="badge badge--info">Pending</span></td>
+                    <td>
+                      <div class="actions-cell">
+                        <button class="icon-btn" aria-label="Edit Tom Rivera">
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M11.5 2.5l2 2L5 13H3v-2L11.5 2.5z"/>
+                          </svg>
+                        </button>
+                        <button class="icon-btn icon-btn--danger" aria-label="Remove Tom Rivera">
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M2 4h12M5 4V2h6v2M6 7v5M10 7v5M3 4l1 9h8l1-9"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="member-cell">
+                        <div class="member-avatar member-avatar--alt4" aria-hidden="true">AL</div>
+                        <span class="member-name">Aisha Lamont</span>
+                      </div>
+                    </td>
+                    <td class="member-email">aisha.lamont@company.com</td>
+                    <td>
+                      <label class="sr-only" for="role-aisha">Role for Aisha Lamont</label>
+                      <select id="role-aisha" class="role-select">
+                        <option>Admin</option>
+                        <option>Manager</option>
+                        <option>Member</option>
+                        <option selected>Viewer</option>
+                      </select>
+                    </td>
+                    <td><span class="badge badge--neutral">Inactive</span></td>
+                    <td>
+                      <div class="actions-cell">
+                        <button class="icon-btn" aria-label="Edit Aisha Lamont">
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M11.5 2.5l2 2L5 13H3v-2L11.5 2.5z"/>
+                          </svg>
+                        </button>
+                        <button class="icon-btn icon-btn--danger" aria-label="Remove Aisha Lamont">
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M2 4h12M5 4V2h6v2M6 7v5M10 7v5M3 4l1 9h8l1-9"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="member-cell">
+                        <div class="member-avatar" aria-hidden="true">NK</div>
+                        <span class="member-name">Noah Kim</span>
+                      </div>
+                    </td>
+                    <td class="member-email">noah.kim@company.com</td>
+                    <td>
+                      <label class="sr-only" for="role-noah">Role for Noah Kim</label>
+                      <select id="role-noah" class="role-select">
+                        <option>Admin</option>
+                        <option selected>Manager</option>
+                        <option>Member</option>
+                        <option>Viewer</option>
+                      </select>
+                    </td>
+                    <td><span class="badge badge--success">Active</span></td>
+                    <td>
+                      <div class="actions-cell">
+                        <button class="icon-btn" aria-label="Edit Noah Kim">
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M11.5 2.5l2 2L5 13H3v-2L11.5 2.5z"/>
+                          </svg>
+                        </button>
+                        <button class="icon-btn icon-btn--danger" aria-label="Remove Noah Kim">
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M2 4h12M5 4V2h6v2M6 7v5M10 7v5M3 4l1 9h8l1-9"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="member-cell">
+                        <div class="member-avatar member-avatar--alt2" aria-hidden="true">SP</div>
+                        <span class="member-name">Sofia Patel</span>
+                      </div>
+                    </td>
+                    <td class="member-email">sofia.patel@company.com</td>
+                    <td>
+                      <label class="sr-only" for="role-sofia">Role for Sofia Patel</label>
+                      <select id="role-sofia" class="role-select">
+                        <option>Admin</option>
+                        <option>Manager</option>
+                        <option selected>Member</option>
+                        <option>Viewer</option>
+                      </select>
+                    </td>
+                    <td><span class="badge badge--info">Pending</span></td>
+                    <td>
+                      <div class="actions-cell">
+                        <button class="icon-btn" aria-label="Edit Sofia Patel">
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M11.5 2.5l2 2L5 13H3v-2L11.5 2.5z"/>
+                          </svg>
+                        </button>
+                        <button class="icon-btn icon-btn--danger" aria-label="Remove Sofia Patel">
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M2 4h12M5 4V2h6v2M6 7v5M10 7v5M3 4l1 9h8l1-9"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="member-cell">
+                        <div class="member-avatar member-avatar--alt1" aria-hidden="true">BW</div>
+                        <span class="member-name">Ben Walsh</span>
+                      </div>
+                    </td>
+                    <td class="member-email">ben.walsh@company.com</td>
+                    <td>
+                      <label class="sr-only" for="role-ben">Role for Ben Walsh</label>
+                      <select id="role-ben" class="role-select">
+                        <option>Admin</option>
+                        <option>Manager</option>
+                        <option>Member</option>
+                        <option selected>Viewer</option>
+                      </select>
+                    </td>
+                    <td><span class="badge badge--success">Active</span></td>
+                    <td>
+                      <div class="actions-cell">
+                        <button class="icon-btn" aria-label="Edit Ben Walsh">
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M11.5 2.5l2 2L5 13H3v-2L11.5 2.5z"/>
+                          </svg>
+                        </button>
+                        <button class="icon-btn icon-btn--danger" aria-label="Remove Ben Walsh">
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M2 4h12M5 4V2h6v2M6 7v5M10 7v5M3 4l1 9h8l1-9"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Invite Form -->
+            <div class="invite-form-card">
+              <h3>Invite a Team Member</h3>
+              <p>Send an invite link to add someone to your workspace.</p>
+              <form class="invite-form" aria-label="Invite team member form" novalidate>
+                <div class="form-field">
+                  <label for="invite-email">Email address</label>
+                  <input
+                    type="email"
+                    id="invite-email"
+                    class="form-input"
+                    placeholder="colleague@company.com"
+                    autocomplete="email"
+                    required
+                  >
+                </div>
+                <div class="form-field">
+                  <label for="invite-role">Role</label>
+                  <select id="invite-role" class="form-select" required>
+                    <option value="" disabled selected>Select role</option>
+                    <option value="admin">Admin</option>
+                    <option value="manager">Manager</option>
+                    <option value="member">Member</option>
+                    <option value="viewer">Viewer</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn--primary">Send Invite</button>
+              </form>
+            </div>
+          </section>
+
+          <!-- ── Integrations ── -->
+          <section id="integrations" aria-labelledby="integrations-heading">
+            <div class="section-header">
+              <h2 id="integrations-heading">Integrations</h2>
+              <p>Connect external tools to ProjectFlow.</p>
+            </div>
+
+            <div class="integrations-grid">
+
+              <article class="integration-card">
+                <div class="integration-logo integration-logo--slack" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M5.042 15.165a2.528 2.528 0 01-2.52 2.523A2.528 2.528 0 010 15.165a2.527 2.527 0 012.522-2.52h2.52v2.52zm1.271 0a2.527 2.527 0 012.521-2.52 2.527 2.527 0 012.521 2.52v6.313A2.528 2.528 0 018.834 24a2.528 2.528 0 01-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 01-2.521-2.52A2.528 2.528 0 018.834 0a2.528 2.528 0 012.521 2.522v2.52H8.834zm0 1.271a2.528 2.528 0 012.521 2.521 2.528 2.528 0 01-2.521 2.521H2.522A2.528 2.528 0 010 8.834a2.528 2.528 0 012.522-2.521h6.312zm10.122 2.521a2.528 2.528 0 012.522-2.521A2.528 2.528 0 0124 8.834a2.528 2.528 0 01-2.522 2.521h-2.522V8.834zm-1.268 0a2.528 2.528 0 01-2.523 2.521 2.527 2.527 0 01-2.52-2.521V2.522A2.527 2.527 0 0115.165 0a2.528 2.528 0 012.523 2.522v6.312zm-2.523 10.122a2.528 2.528 0 012.523 2.522A2.528 2.528 0 0115.165 24a2.527 2.527 0 01-2.52-2.522v-2.522h2.52zm0-1.268a2.527 2.527 0 01-2.52-2.523 2.526 2.526 0 012.52-2.52h6.313A2.527 2.527 0 0124 15.165a2.528 2.528 0 01-2.522 2.523h-6.313z"/>
+                  </svg>
+                </div>
+                <h4>Slack</h4>
+                <p>Get real-time notifications and task updates directly in your Slack channels.</p>
+                <span class="badge badge--success">Connected</span>
+                <button class="btn btn--primary btn--sm">Manage</button>
+              </article>
+
+              <article class="integration-card">
+                <div class="integration-logo integration-logo--github" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                  </svg>
+                </div>
+                <h4>GitHub</h4>
+                <p>Link pull requests and commits to tasks for full development visibility.</p>
+                <span class="badge badge--success">Connected</span>
+                <button class="btn btn--primary btn--sm">Manage</button>
+              </article>
+
+              <article class="integration-card">
+                <div class="integration-logo integration-logo--jira" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M11.571 11.513H0a5.218 5.218 0 005.232 5.215h2.13v2.057A5.215 5.215 0 0012.575 24V12.518a1.005 1.005 0 00-1.004-1.005zm5.723-5.756H5.736a5.215 5.215 0 005.215 5.214h2.129v2.058a5.218 5.218 0 005.215 5.214V6.758a1.001 1.001 0 00-1.001-1.001zM23.013 0H11.455a5.215 5.215 0 005.215 5.215h2.129v2.057A5.215 5.215 0 0024 12.483V1.005A1.001 1.001 0 0023.013 0z"/>
+                  </svg>
+                </div>
+                <h4>Jira</h4>
+                <p>Sync issues and sprints with ProjectFlow for unified project tracking.</p>
+                <span class="badge badge--neutral">Not Connected</span>
+                <button class="btn btn--primary btn--sm">Connect</button>
+              </article>
+
+              <article class="integration-card">
+                <div class="integration-logo integration-logo--gdrive" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M4.433 22.396l2.028-3.516H24l-2.028 3.516zm3.693-6.394L6.098 13.49 14.275 0l2.028 2.512zm15.874.878H8.164l-2.028-3.516L14.275 0z" fill="#4285F4"/>
+                  </svg>
+                </div>
+                <h4>Google Drive</h4>
+                <p>Attach Drive files and folders directly to tasks and projects.</p>
+                <span class="badge badge--success">Connected</span>
+                <button class="btn btn--primary btn--sm">Manage</button>
+              </article>
+
+              <article class="integration-card">
+                <div class="integration-logo integration-logo--figma" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M8 24c2.208 0 4-1.792 4-4v-4H8c-2.208 0-4 1.792-4 4s1.792 4 4 4zm0-10H4c-2.208 0-4-1.792-4-4s1.792-4 4-4h4v8zm0-10H4C1.792 4 0 2.208 0 0h8v4zm4 0V0h4c2.208 0 4 1.792 4 4s-1.792 4-4 4h-4zm4 10a4 4 0 100-8 4 4 0 000 8z"/>
+                  </svg>
+                </div>
+                <h4>Figma</h4>
+                <p>Embed design files and prototypes into tasks for seamless design handoff.</p>
+                <span class="badge badge--neutral">Not Connected</span>
+                <button class="btn btn--primary btn--sm">Connect</button>
+              </article>
+
+              <article class="integration-card">
+                <div class="integration-logo integration-logo--zapier" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M14.974 9.005l-.002-.006a.14.14 0 01-.006-.019l-.001-.003L12 0 9.035 8.977l-.001.003a.14.14 0 01-.006.019l-.002.006H0l7.514 5.53.003.002a.138.138 0 01.021.025l.002.003.003.005L4.58 23.563 12 18.03l7.42 5.534-2.963-8.993.003-.005.002-.003a.138.138 0 01.021-.025l.003-.002L24 9.005h-9.026z"/>
+                  </svg>
+                </div>
+                <h4>Zapier</h4>
+                <p>Automate workflows by connecting ProjectFlow with 5,000+ apps.</p>
+                <span class="badge badge--neutral">Not Connected</span>
+                <button class="btn btn--primary btn--sm">Connect</button>
+              </article>
+
+            </div>
+          </section>
+
+          <!-- ── Notifications ── -->
+          <section id="notifications" aria-labelledby="notifications-heading">
+            <div class="section-header">
+              <h2 id="notifications-heading">Notifications</h2>
+              <p>Choose how you want to be notified.</p>
+            </div>
+
+            <div class="notifications-card">
+
+              <div class="notification-row">
+                <div class="notification-label">
+                  <strong>Email notifications for task assignments</strong>
+                  <span>Receive an email whenever a task is assigned to you.</span>
+                </div>
+                <div class="toggle-wrapper">
+                  <label class="toggle" aria-label="Email notifications for task assignments">
+                    <input type="checkbox" checked>
+                    <span class="toggle__track"></span>
+                    <span class="toggle__thumb"></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="notification-row">
+                <div class="notification-label">
+                  <strong>Email digest</strong>
+                  <span>How often to receive a summary of your project activity.</span>
+                </div>
+                <fieldset>
+                  <legend class="sr-only">Email digest frequency</legend>
+                  <div class="radio-group">
+                    <label class="radio-option">
+                      <input type="radio" name="digest" value="daily">
+                      <span>Daily</span>
+                    </label>
+                    <label class="radio-option">
+                      <input type="radio" name="digest" value="weekly" checked>
+                      <span>Weekly</span>
+                    </label>
+                    <label class="radio-option">
+                      <input type="radio" name="digest" value="never">
+                      <span>Never</span>
+                    </label>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="notification-row">
+                <div class="notification-label">
+                  <strong>Slack notifications for mentions</strong>
+                  <span>Get a Slack message when someone mentions you in a comment.</span>
+                </div>
+                <div class="toggle-wrapper">
+                  <label class="toggle" aria-label="Slack notifications for mentions">
+                    <input type="checkbox" checked>
+                    <span class="toggle__track"></span>
+                    <span class="toggle__thumb"></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="notification-row">
+                <div class="notification-label">
+                  <strong>Browser notifications</strong>
+                  <span>Show desktop notifications for important updates while you work.</span>
+                </div>
+                <div class="toggle-wrapper">
+                  <label class="toggle" aria-label="Browser notifications">
+                    <input type="checkbox">
+                    <span class="toggle__track"></span>
+                    <span class="toggle__thumb"></span>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+        </div>
+        <!-- /settings-content -->
+
+      </div>
+      <!-- /settings-layout -->
+
+    </div>
+    <!-- /container -->
+  </main>
+
+  <!-- SHARED FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__inner">
+
+      <div class="site-footer__brand">
+        <span class="site-footer__logo-text">ProjectFlow</span>
+        <p class="site-footer__copy">&copy; 2024 ProjectFlow. All rights reserved.</p>
+      </div>
+
+      <nav class="site-footer__nav" aria-label="Footer navigation">
+        <ul class="site-footer__links" role="list">
+          <li>
+            <a href="#privacy" class="site-footer__link">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="#terms" class="site-footer__link">Terms of Service</a>
+          </li>
+          <li>
+            <a href="#support" class="site-footer__link">Contact Support</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="site-footer__social">
+        <a href="https://linkedin.com" class="site-footer__social-link" aria-label="ProjectFlow on LinkedIn" target="_blank" rel="noopener noreferrer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+        <a href="https://twitter.com" class="site-footer__social-link" aria-label="ProjectFlow on Twitter" target="_blank" rel="noopener noreferrer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://github.com" class="site-footer__social-link" aria-label="ProjectFlow on GitHub" target="_blank" rel="noopener noreferrer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    // Settings sidebar navigation — smooth scroll + active state
+    (function () {
+      const sidebarLinks = document.querySelectorAll('.settings-nav__link[href^="#"]');
+
+      sidebarLinks.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = link.getAttribute('href').slice(1);
+          const target = document.getElementById(targetId);
+
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+
+          sidebarLinks.forEach(function (l) {
+            l.classList.remove('active');
+            l.removeAttribute('aria-current');
+          });
+
+          link.classList.add('active');
+          link.setAttribute('aria-current', 'true');
+        });
+      });
+
+      // Toggle switch thumb position fix for checked state
+      const toggles = document.querySelectorAll('.toggle input[type="checkbox"]');
+      toggles.forEach(function (checkbox) {
+        function updateThumb() {
+          const thumb = checkbox.parentElement.querySelector('.toggle__thumb');
+          if (thumb) {
+            thumb.style.transform = checkbox.checked ? 'translateX(20px)' : 'translateX(0)';
+          }
+        }
+        updateThumb();
+        checkbox.addEventListener('change', updateThumb);
+      });
+    })();
+  </script>
+
+</body>
+</html>

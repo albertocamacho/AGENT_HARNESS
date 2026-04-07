@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — ProjectFlow</title>
+  <style id="pesto-tokens">
+/*
+ * Pesto Design System — Core Variables
+ * ─────────────────────────────────────
+ * All generated pages MUST use these tokens.
+ * Do not hardcode values — reference the custom properties below.
+ */
+
+:root {
+  /* ── Color: Brand ─────────────────────────────────────── */
+  --pesto-brand-50:  #f0fdf4;
+  --pesto-brand-100: #dcfce7;
+  --pesto-brand-200: #bbf7d0;
+  --pesto-brand-300: #86efac;
+  --pesto-brand-400: #4ade80;
+  --pesto-brand-500: #22c55e;
+  --pesto-brand-600: #16a34a;
+  --pesto-brand-700: #15803d;
+  --pesto-brand-800: #166534;
+  --pesto-brand-900: #14532d;
+
+  /* ── Color: Neutral ───────────────────────────────────── */
+  --pesto-neutral-0:   #ffffff;
+  --pesto-neutral-50:  #fafaf9;
+  --pesto-neutral-100: #f5f5f4;
+  --pesto-neutral-200: #e7e5e4;
+  --pesto-neutral-300: #d6d3d1;
+  --pesto-neutral-400: #a8a29e;
+  --pesto-neutral-500: #78716c;
+  --pesto-neutral-600: #57534e;
+  --pesto-neutral-700: #44403c;
+  --pesto-neutral-800: #292524;
+  --pesto-neutral-900: #1c1917;
+
+  /* ── Color: Accent ────────────────────────────────────── */
+  --pesto-accent-50:  #fefce8;
+  --pesto-accent-100: #fef9c3;
+  --pesto-accent-200: #fef08a;
+  --pesto-accent-400: #facc15;
+  --pesto-accent-600: #ca8a04;
+
+  /* ── Color: Semantic ──────────────────────────────────── */
+  --pesto-error-50:  #fef2f2;
+  --pesto-error-500: #ef4444;
+  --pesto-error-700: #b91c1c;
+
+  --pesto-warning-50:  #fffbeb;
+  --pesto-warning-500: #f59e0b;
+  --pesto-warning-700: #b45309;
+
+  --pesto-success-50:  #f0fdf4;
+  --pesto-success-500: #22c55e;
+  --pesto-success-700: #15803d;
+
+  --pesto-info-50:  #eff6ff;
+  --pesto-info-500: #3b82f6;
+  --pesto-info-700: #1d4ed8;
+
+  /* ── Color: Surfaces ──────────────────────────────────── */
+  --pesto-surface-page:    var(--pesto-neutral-0);
+  --pesto-surface-raised:  var(--pesto-neutral-0);
+  --pesto-surface-sunken:  var(--pesto-neutral-50);
+  --pesto-surface-overlay: rgba(0, 0, 0, 0.45);
+
+  /* ── Color: Text ──────────────────────────────────────── */
+  --pesto-text-primary:   var(--pesto-neutral-900);
+  --pesto-text-secondary: var(--pesto-neutral-600);
+  --pesto-text-tertiary:  var(--pesto-neutral-400);
+  --pesto-text-inverse:   var(--pesto-neutral-0);
+  --pesto-text-link:      var(--pesto-brand-600);
+  --pesto-text-link-hover: var(--pesto-brand-700);
+
+  /* ── Color: Borders ───────────────────────────────────── */
+  --pesto-border-default: var(--pesto-neutral-200);
+  --pesto-border-strong:  var(--pesto-neutral-300);
+  --pesto-border-focus:   var(--pesto-brand-500);
+
+  /* ── Typography ───────────────────────────────────────── */
+  --pesto-font-sans:  "Inter", system-ui, -apple-system, sans-serif;
+  --pesto-font-mono:  "JetBrains Mono", ui-monospace, monospace;
+
+  --pesto-text-xs:   0.75rem;    /* 12px */
+  --pesto-text-sm:   0.875rem;   /* 14px */
+  --pesto-text-base: 1rem;       /* 16px */
+  --pesto-text-lg:   1.125rem;   /* 18px */
+  --pesto-text-xl:   1.25rem;    /* 20px */
+  --pesto-text-2xl:  1.5rem;     /* 24px */
+  --pesto-text-3xl:  1.875rem;   /* 30px */
+  --pesto-text-4xl:  2.25rem;    /* 36px */
+  --pesto-text-5xl:  3rem;       /* 48px */
+
+  --pesto-leading-tight:  1.25;
+  --pesto-leading-normal: 1.5;
+  --pesto-leading-loose:  1.75;
+
+  --pesto-weight-normal:   400;
+  --pesto-weight-medium:   500;
+  --pesto-weight-semibold: 600;
+  --pesto-weight-bold:     700;
+
+  /* ── Spacing ──────────────────────────────────────────── */
+  --pesto-space-0:   0;
+  --pesto-space-1:   0.25rem;   /*  4px */
+  --pesto-space-2:   0.5rem;    /*  8px */
+  --pesto-space-3:   0.75rem;   /* 12px */
+  --pesto-space-4:   1rem;      /* 16px */
+  --pesto-space-5:   1.25rem;   /* 20px */
+  --pesto-space-6:   1.5rem;    /* 24px */
+  --pesto-space-8:   2rem;      /* 32px */
+  --pesto-space-10:  2.5rem;    /* 40px */
+  --pesto-space-12:  3rem;      /* 48px */
+  --pesto-space-16:  4rem;      /* 64px */
+  --pesto-space-20:  5rem;      /* 80px */
+  --pesto-space-24:  6rem;      /* 96px */
+
+  /* ── Layout ───────────────────────────────────────────── */
+  --pesto-container-sm:  640px;
+  --pesto-container-md:  768px;
+  --pesto-container-lg:  1024px;
+  --pesto-container-xl:  1280px;
+  --pesto-container-2xl: 1536px;
+
+  --pesto-content-width: min(100% - var(--pesto-space-8), var(--pesto-container-xl));
+
+  /* ── Surfaces ─────────────────────────────────────────── */
+  --pesto-radius-sm:   4px;
+  --pesto-radius-md:   8px;
+  --pesto-radius-lg:   12px;
+  --pesto-radius-xl:   16px;
+  --pesto-radius-full: 9999px;
+
+  --pesto-shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.05);
+  --pesto-shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --pesto-shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --pesto-shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+
+  /* ── Transitions ──────────────────────────────────────── */
+  --pesto-duration-fast:   100ms;
+  --pesto-duration-normal: 200ms;
+  --pesto-duration-slow:   300ms;
+  --pesto-ease-default:    cubic-bezier(0.4, 0, 0.2, 1);
+  --pesto-ease-in:         cubic-bezier(0.4, 0, 1, 1);
+  --pesto-ease-out:        cubic-bezier(0, 0, 0.2, 1);
+  --pesto-ease-interact:   cubic-bezier(1, 0, 0, 1);
+
+  /* ── Z-index ──────────────────────────────────────────── */
+  --pesto-z-dropdown: 10;
+  --pesto-z-sticky:   20;
+  --pesto-z-overlay:  30;
+  --pesto-z-modal:    40;
+  --pesto-z-toast:    50;
+}
+
+/* ── Base Styles ─────────────────────────────────────────── */
+/* These resets and defaults ensure every generated page starts
+   from a consistent, polished baseline. */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--pesto-font-sans);
+  font-size: var(--pesto-text-base);
+  line-height: var(--pesto-leading-normal);
+  color: var(--pesto-text-primary);
+  background: var(--pesto-surface-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, picture, video, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Dark mode overrides ──────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pesto-surface-page:   var(--pesto-neutral-900);
+    --pesto-surface-raised: var(--pesto-neutral-800);
+    --pesto-surface-sunken: var(--pesto-neutral-900);
+
+    --pesto-text-primary:   var(--pesto-neutral-50);
+    --pesto-text-secondary: var(--pesto-neutral-400);
+    --pesto-text-tertiary:  var(--pesto-neutral-500);
+    --pesto-text-inverse:   var(--pesto-neutral-900);
+    --pesto-text-link:      var(--pesto-brand-400);
+    --pesto-text-link-hover: var(--pesto-brand-300);
+
+    --pesto-border-default: var(--pesto-neutral-700);
+    --pesto-border-strong:  var(--pesto-neutral-600);
+  }
+}
+
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ─────────────────────────────────────────────
+       BASE LAYOUT
+    ───────────────────────────────────────────── */
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .page-main {
+      flex: 1;
+      padding-block: var(--pesto-space-20);
+    }
+
+    .container {
+      width: var(--pesto-content-width);
+      margin-inline: auto;
+    }
+
+    /* ─────────────────────────────────────────────
+       SITE HEADER
+    ───────────────────────────────────────────── */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: var(--pesto-z-sticky);
+      background: var(--pesto-surface-page);
+      border-bottom: 1px solid var(--pesto-border-default);
+      box-shadow: var(--pesto-shadow-sm);
+    }
+
+    .site-header__inner {
+      width: var(--pesto-content-width);
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-8);
+      height: 64px;
+    }
+
+    .site-header__brand { flex-shrink: 0; }
+
+    .site-header__logo {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-2);
+      text-decoration: none;
+      color: var(--pesto-text-primary);
+      border-radius: var(--pesto-radius-md);
+      padding: var(--pesto-space-1);
+      transition: opacity var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .site-header__logo:hover { opacity: 0.85; }
+
+    .site-header__logo:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .site-header__logo-mark {
+      color: var(--pesto-brand-600);
+      flex-shrink: 0;
+    }
+
+    .site-header__logo-text {
+      font-size: var(--pesto-text-lg);
+      font-weight: var(--pesto-weight-bold);
+      color: var(--pesto-text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .site-nav { flex: 1; }
+
+    .site-nav__list {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-1);
+    }
+
+    .site-nav__link {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--pesto-space-2) var(--pesto-space-3);
+      border-radius: var(--pesto-radius-md);
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-secondary);
+      text-decoration: none;
+      transition:
+        color var(--pesto-duration-normal) var(--pesto-ease-default),
+        background var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .site-nav__link:hover {
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-sunken);
+    }
+
+    .site-nav__link:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+      color: var(--pesto-text-primary);
+    }
+
+    .site-nav__link.active,
+    .site-nav__link[aria-current="page"] {
+      font-weight: var(--pesto-weight-semibold);
+      background: var(--pesto-brand-50);
+      color: var(--pesto-brand-700);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .site-nav__link.active,
+      .site-nav__link[aria-current="page"] {
+        background: var(--pesto-neutral-800);
+        color: var(--pesto-brand-400);
+      }
+    }
+
+    .site-header__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-3);
+      margin-left: auto;
+    }
+
+    .user-menu { position: relative; }
+
+    .user-menu__trigger {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-2);
+      padding: var(--pesto-space-2) var(--pesto-space-3);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-full);
+      background: transparent;
+      color: var(--pesto-text-primary);
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      cursor: pointer;
+      min-height: 44px;
+      transition:
+        background var(--pesto-duration-normal) var(--pesto-ease-default),
+        border-color var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .user-menu__trigger:hover {
+      background: var(--pesto-surface-sunken);
+      border-color: var(--pesto-border-strong);
+    }
+
+    .user-menu__trigger:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .user-menu__avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: var(--pesto-radius-full);
+      background: var(--pesto-brand-600);
+      color: var(--pesto-text-inverse);
+      font-size: var(--pesto-text-xs);
+      font-weight: var(--pesto-weight-semibold);
+      flex-shrink: 0;
+    }
+
+    .user-menu__name { color: var(--pesto-text-primary); }
+
+    .user-menu__chevron {
+      color: var(--pesto-text-tertiary);
+      transition: transform var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .user-menu__trigger[aria-expanded="true"] .user-menu__chevron {
+      transform: rotate(180deg);
+    }
+
+    .user-menu__dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + var(--pesto-space-2));
+      right: 0;
+      min-width: 160px;
+      background: var(--pesto-surface-raised);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      box-shadow: var(--pesto-shadow-lg);
+      padding: var(--pesto-space-2);
+      z-index: var(--pesto-z-dropdown);
+      list-style: none;
+    }
+
+    .user-menu__dropdown--open { display: block; }
+
+    .user-menu__option {
+      display: block;
+      padding: var(--pesto-space-2) var(--pesto-space-3);
+      border-radius: var(--pesto-radius-md);
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-primary);
+      text-decoration: none;
+      transition: background var(--pesto-duration-fast) var(--pesto-ease-default);
+    }
+
+    .user-menu__option:hover {
+      background: var(--pesto-surface-sunken);
+      color: var(--pesto-text-primary);
+    }
+
+    .user-menu__option:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-md);
+      background: transparent;
+      cursor: pointer;
+      padding: var(--pesto-space-2);
+      transition: background var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .hamburger:hover { background: var(--pesto-surface-sunken); }
+
+    .hamburger:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .hamburger__bar {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--pesto-text-primary);
+      border-radius: var(--pesto-radius-full);
+      transition:
+        transform var(--pesto-duration-normal) var(--pesto-ease-default),
+        opacity var(--pesto-duration-normal) var(--pesto-ease-default);
+      transform-origin: center;
+    }
+
+    .hamburger--open .hamburger__bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger--open .hamburger__bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger--open .hamburger__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-nav {
+      display: none;
+      border-top: 1px solid var(--pesto-border-default);
+      background: var(--pesto-surface-page);
+      padding: var(--pesto-space-4);
+    }
+
+    .mobile-nav--open { display: block; }
+
+    .mobile-nav__list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-1);
+    }
+
+    .mobile-nav__link {
+      display: block;
+      padding: var(--pesto-space-3) var(--pesto-space-4);
+      border-radius: var(--pesto-radius-md);
+      font-size: var(--pesto-text-base);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-secondary);
+      text-decoration: none;
+      transition:
+        color var(--pesto-duration-normal) var(--pesto-ease-default),
+        background var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .mobile-nav__link:hover {
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-sunken);
+    }
+
+    .mobile-nav__link:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .mobile-nav__link.active,
+    .mobile-nav__link[aria-current="page"] {
+      color: var(--pesto-brand-700);
+      background: var(--pesto-brand-50);
+      font-weight: var(--pesto-weight-semibold);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .mobile-nav__link.active,
+      .mobile-nav__link[aria-current="page"] {
+        background: var(--pesto-neutral-800);
+        color: var(--pesto-brand-400);
+      }
+    }
+
+    .mobile-nav__link--danger { color: var(--pesto-error-700); }
+
+    .mobile-nav__link--danger:hover {
+      background: var(--pesto-error-50);
+      color: var(--pesto-error-700);
+    }
+
+    .mobile-nav__divider {
+      height: 1px;
+      background: var(--pesto-border-default);
+      margin-block: var(--pesto-space-2);
+    }
+
+    @media (max-width: 768px) {
+      .site-nav { display: none; }
+      .user-menu { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ─────────────────────────────────────────────
+       SITE FOOTER
+    ───────────────────────────────────────────── */
+
+    .site-footer {
+      border-top: 1px solid var(--pesto-border-default);
+      background: var(--pesto-surface-page);
+      padding-block: var(--pesto-space-8);
+    }
+
+    .site-footer__inner {
+      width: var(--pesto-content-width);
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--pesto-space-6);
+      flex-wrap: wrap;
+    }
+
+    .site-footer__brand {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-1);
+    }
+
+    .site-footer__logo-text {
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-semibold);
+      color: var(--pesto-text-primary);
+    }
+
+    .site-footer__copy {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-tertiary);
+    }
+
+    .site-footer__nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .site-footer__links {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-6);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .site-footer__link {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-secondary);
+      text-decoration: none;
+      transition: color var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .site-footer__link:hover {
+      color: var(--pesto-text-primary);
+      text-decoration: underline;
+    }
+
+    .site-footer__link:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+      border-radius: var(--pesto-radius-sm);
+    }
+
+    .site-footer__social {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-3);
+    }
+
+    .site-footer__social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--pesto-radius-md);
+      color: var(--pesto-text-tertiary);
+      text-decoration: none;
+      transition:
+        color var(--pesto-duration-normal) var(--pesto-ease-default),
+        background var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    .site-footer__social-link:hover {
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-sunken);
+    }
+
+    .site-footer__social-link:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 640px) {
+      .site-footer__inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: var(--pesto-space-4);
+      }
+      .site-footer__brand { align-items: center; }
+      .site-footer__nav { width: 100%; }
+      .site-footer__links { gap: var(--pesto-space-4); }
+    }
+
+    /* ─────────────────────────────────────────────
+       SHARED UTILITIES
+    ───────────────────────────────────────────── */
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--pesto-space-2);
+      padding: var(--pesto-space-3) var(--pesto-space-6);
+      border-radius: var(--pesto-radius-md);
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      line-height: 1;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid transparent;
+      min-height: 44px;
+      transition: all var(--pesto-duration-normal) var(--pesto-ease-interact);
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--pesto-border-focus);
+      outline-offset: 2px;
+    }
+
+    .btn:disabled,
+    .btn[aria-disabled="true"] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .btn--primary {
+      background: var(--pesto-brand-600);
+      color: var(--pesto-text-inverse);
+      border-color: var(--pesto-brand-600);
+    }
+
+    .btn--primary:hover {
+      background: var(--pesto-brand-700);
+      border-color: var(--pesto-brand-700);
+      transform: translateY(-1px);
+      box-shadow: var(--pesto-shadow-md);
+    }
+
+    .btn--secondary {
+      background: transparent;
+      color: var(--pesto-text-primary);
+      border-color: var(--pesto-border-default);
+    }
+
+    .btn--secondary:hover {
+      background: var(--pesto-surface-sunken);
+      transform: translateY(-1px);
+    }
+
+    .btn--ghost {
+      background: transparent;
+      border-color: transparent;
+      color: var(--pesto-text-link);
+    }
+
+    .btn--ghost:hover {
+      text-decoration: underline;
+      color: var(--pesto-text-link-hover);
+    }
+
+    /* ─────────────────────────────────────────────
+       PAGE ENTRANCE ANIMATION
+    ───────────────────────────────────────────── */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-in {
+      animation: fadeUp 400ms var(--pesto-ease-out) both;
+    }
+
+    .animate-in--delay-1 { animation-delay: 60ms; }
+    .animate-in--delay-2 { animation-delay: 120ms; }
+    .animate-in--delay-3 { animation-delay: 180ms; }
+    .animate-in--delay-4 { animation-delay: 240ms; }
+
+    /* ─────────────────────────────────────────────
+       DASHBOARD PAGE STYLES
+    ───────────────────────────────────────────── */
+
+    /* Page Header */
+    .dashboard-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--pesto-space-6);
+      margin-bottom: var(--pesto-space-16);
+    }
+
+    .dashboard-header__text h1 {
+      font-size: var(--pesto-text-4xl);
+      font-weight: var(--pesto-weight-bold);
+      line-height: var(--pesto-leading-tight);
+      color: var(--pesto-text-primary);
+      margin-bottom: var(--pesto-space-2);
+    }
+
+    .dashboard-header__text p {
+      font-size: var(--pesto-text-base);
+      color: var(--pesto-text-secondary);
+      line-height: var(--pesto-leading-normal);
+      max-width: 65ch;
+    }
+
+    /* Section spacing */
+    .dashboard-section {
+      margin-bottom: var(--pesto-space-16);
+    }
+
+    .dashboard-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-heading {
+      font-size: var(--pesto-text-2xl);
+      font-weight: var(--pesto-weight-semibold);
+      color: var(--pesto-text-primary);
+      line-height: var(--pesto-leading-normal);
+      margin-bottom: var(--pesto-space-6);
+    }
+
+    /* ── Badge ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--pesto-space-1) var(--pesto-space-3);
+      border-radius: var(--pesto-radius-full);
+      font-size: var(--pesto-text-xs);
+      font-weight: var(--pesto-weight-medium);
+      line-height: var(--pesto-leading-tight);
+      white-space: nowrap;
+    }
+
+    .badge--success {
+      background: var(--pesto-success-50);
+      color: var(--pesto-success-700);
+    }
+
+    .badge--warning {
+      background: var(--pesto-warning-50);
+      color: var(--pesto-warning-700);
+    }
+
+    .badge--neutral {
+      background: var(--pesto-neutral-100);
+      color: var(--pesto-neutral-600);
+    }
+
+    .badge--info {
+      background: var(--pesto-info-50);
+      color: var(--pesto-info-700);
+    }
+
+    .badge--error {
+      background: var(--pesto-error-50);
+      color: var(--pesto-error-700);
+    }
+
+    /* ── Project Cards Grid ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--pesto-space-6);
+    }
+
+    .project-card {
+      background: var(--pesto-surface-raised);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      padding: var(--pesto-space-6);
+      box-shadow: var(--pesto-shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-4);
+      transition: box-shadow var(--pesto-duration-normal) var(--pesto-ease-interact),
+                  transform var(--pesto-duration-normal) var(--pesto-ease-interact);
+      position: relative;
+    }
+
+    .project-card:hover {
+      box-shadow: var(--pesto-shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .project-card:hover .project-card__cta {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .project-card__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--pesto-space-3);
+    }
+
+    .project-card__name {
+      font-size: var(--pesto-text-xl);
+      font-weight: var(--pesto-weight-semibold);
+      color: var(--pesto-text-primary);
+      line-height: var(--pesto-leading-normal);
+    }
+
+    .project-card__desc {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-secondary);
+      line-height: var(--pesto-leading-normal);
+      max-width: 65ch;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    /* Progress bar */
+    .progress-bar {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-2);
+    }
+
+    .progress-bar__meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .progress-bar__label {
+      font-size: var(--pesto-text-xs);
+      color: var(--pesto-text-secondary);
+      font-weight: var(--pesto-weight-medium);
+    }
+
+    .progress-bar__value {
+      font-size: var(--pesto-text-xs);
+      color: var(--pesto-text-secondary);
+      font-weight: var(--pesto-weight-medium);
+    }
+
+    .progress-bar__track {
+      height: 6px;
+      background: var(--pesto-neutral-100);
+      border-radius: var(--pesto-radius-full);
+      overflow: hidden;
+    }
+
+    .progress-bar__fill {
+      height: 100%;
+      background: var(--pesto-brand-500);
+      border-radius: var(--pesto-radius-full);
+      transition: width var(--pesto-duration-slow) var(--pesto-ease-out);
+    }
+
+    /* Team avatars */
+    .avatar-stack {
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar-stack__item {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--pesto-radius-full);
+      border: 2px solid var(--pesto-surface-raised);
+      overflow: hidden;
+      margin-left: -8px;
+      flex-shrink: 0;
+    }
+
+    .avatar-stack__item:first-child { margin-left: 0; }
+
+    .avatar-stack__item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Card footer */
+    .project-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--pesto-space-3);
+      margin-top: auto;
+    }
+
+    .project-card__meta {
+      display: flex;
+      align-items: center;
+      gap: var(--pesto-space-2);
+      flex-wrap: wrap;
+    }
+
+    .project-card__due {
+      font-size: var(--pesto-text-xs);
+      color: var(--pesto-text-tertiary);
+      background: var(--pesto-neutral-100);
+      padding: var(--pesto-space-1) var(--pesto-space-3);
+      border-radius: var(--pesto-radius-full);
+      font-weight: var(--pesto-weight-medium);
+    }
+
+    .project-card__cta {
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity var(--pesto-duration-normal) var(--pesto-ease-default),
+                  transform var(--pesto-duration-normal) var(--pesto-ease-default);
+    }
+
+    /* ── Team Workload Section ── */
+    .workload-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pesto-space-4);
+    }
+
+    .workload-row {
+      display: grid;
+      grid-template-columns: 160px 1fr 48px;
+      align-items: center;
+      gap: var(--pesto-space-4);
+    }
+
+    .workload-row__name {
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .workload-bar-track {
+      height: 10px;
+      background: var(--pesto-neutral-100);
+      border-radius: var(--pesto-radius-full);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .workload-bar-fill {
+      height: 100%;
+      border-radius: var(--pesto-radius-full);
+      transition: width var(--pesto-duration-slow) var(--pesto-ease-out);
+    }
+
+    .workload-bar-fill--low { background: var(--pesto-success-500); }
+    .workload-bar-fill--mid { background: var(--pesto-warning-500); }
+    .workload-bar-fill--high { background: var(--pesto-error-500); }
+
+    .workload-row__count {
+      font-size: var(--pesto-text-sm);
+      font-weight: var(--pesto-weight-medium);
+      color: var(--pesto-text-secondary);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    /* Tooltip wrapper */
+    .workload-bar-wrapper {
+      position: relative;
+    }
+
+    .workload-bar-wrapper:hover .workload-tooltip {
+      opacity: 1;
+      transform: translateY(-4px);
+      pointer-events: auto;
+    }
+
+    .workload-tooltip {
+      position: absolute;
+      bottom: calc(100% + var(--pesto-space-2));
+      left: 50%;
+      transform: translateX(-50%) translateY(0);
+      background: var(--pesto-neutral-800);
+      color: var(--pesto-text-inverse);
+      font-size: var(--pesto-text-xs);
+      font-weight: var(--pesto-weight-medium);
+      padding: var(--pesto-space-2) var(--pesto-space-3);
+      border-radius: var(--pesto-radius-md);
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--pesto-duration-normal) var(--pesto-ease-default),
+                  transform var(--pesto-duration-normal) var(--pesto-ease-default);
+      z-index: var(--pesto-z-dropdown);
+    }
+
+    /* ── Recent Activity Feed ── */
+    .activity-feed {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--pesto-space-4);
+      padding: var(--pesto-space-4) 0;
+      border-top: 1px solid var(--pesto-border-default);
+    }
+
+    .activity-item:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .activity-item__icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--pesto-radius-full);
+      background: var(--pesto-brand-100);
+      color: var(--pesto-brand-700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--pesto-text-sm);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .activity-item__body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .activity-item__text {
+      font-size: var(--pesto-text-base);
+      color: var(--pesto-text-primary);
+      line-height: var(--pesto-leading-normal);
+    }
+
+    .activity-item__text strong {
+      font-weight: var(--pesto-weight-semibold);
+    }
+
+    .activity-item__time {
+      font-size: var(--pesto-text-sm);
+      color: var(--pesto-text-tertiary);
+      margin-top: var(--pesto-space-1);
+    }
+
+    /* ── Responsive ── */
+
+    @media (max-width: 1024px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .workload-row {
+        grid-template-columns: 120px 1fr 40px;
+        gap: var(--pesto-space-3);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-main {
+        padding-block: var(--pesto-space-12);
+      }
+
+      .dashboard-header {
+        flex-direction: column;
+        gap: var(--pesto-space-4);
+        margin-bottom: var(--pesto-space-12);
+      }
+
+      .dashboard-header__text h1 {
+        font-size: var(--pesto-text-3xl);
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card__cta {
+        opacity: 1;
+        transform: none;
+      }
+
+      .workload-row {
+        grid-template-columns: 100px 1fr 36px;
+        gap: var(--pesto-space-2);
+      }
+
+      .workload-row__name {
+        font-size: var(--pesto-text-xs);
+      }
+
+      .dashboard-section {
+        margin-bottom: var(--pesto-space-12);
+      }
+
+      .section-heading {
+        font-size: var(--pesto-text-xl);
+      }
+    }
+  </style>
+</head>
+<body class="page-wrapper">
+
+  <!-- SHARED NAV -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <header class="site-header" role="banner">
+    <div class="site-header__inner">
+
+      <div class="site-header__brand">
+        <a href="dashboard.html" class="site-header__logo" aria-label="ProjectFlow home">
+          <svg class="site-header__logo-mark" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true" focusable="false">
+            <rect width="28" height="28" rx="7" fill="currentColor"/>
+            <rect x="6" y="6" width="7" height="7" rx="1.5" fill="white"/>
+            <rect x="15" y="6" width="7" height="7" rx="1.5" fill="white" opacity="0.6"/>
+            <rect x="6" y="15" width="7" height="7" rx="1.5" fill="white" opacity="0.6"/>
+            <rect x="15" y="15" width="7" height="7" rx="1.5" fill="white" opacity="0.3"/>
+          </svg>
+          <span class="site-header__logo-text">ProjectFlow</span>
+        </a>
+      </div>
+
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul class="site-nav__list" role="list">
+          <li class="site-nav__item">
+            <a href="dashboard.html" class="site-nav__link active" data-page="dashboard" aria-current="page">Dashboard</a>
+          </li>
+          <li class="site-nav__item">
+            <a href="task-board.html" class="site-nav__link" data-page="task-board">Board</a>
+          </li>
+          <li class="site-nav__item">
+            <a href="settings.html" class="site-nav__link" data-page="settings">Settings</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <div class="user-menu" aria-label="User menu">
+          <button class="user-menu__trigger" aria-haspopup="true" aria-expanded="false" aria-controls="user-dropdown">
+            <span class="user-menu__avatar" aria-hidden="true">JD</span>
+            <span class="user-menu__name">Jane Doe</span>
+            <svg class="user-menu__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+              <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul class="user-menu__dropdown" id="user-dropdown" role="menu" aria-label="User options">
+            <li role="none">
+              <a href="#profile" class="user-menu__option" role="menuitem">Profile</a>
+            </li>
+            <li role="none">
+              <a href="#logout" class="user-menu__option" role="menuitem">Logout</a>
+            </li>
+          </ul>
+        </div>
+
+        <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+          <span class="hamburger__bar"></span>
+          <span class="hamburger__bar"></span>
+          <span class="hamburger__bar"></span>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+      <nav aria-label="Mobile navigation">
+        <ul class="mobile-nav__list" role="list">
+          <li>
+            <a href="dashboard.html" class="mobile-nav__link active" data-page="dashboard" aria-current="page">Dashboard</a>
+          </li>
+          <li>
+            <a href="task-board.html" class="mobile-nav__link" data-page="task-board">Board</a>
+          </li>
+          <li>
+            <a href="settings.html" class="mobile-nav__link" data-page="settings">Settings</a>
+          </li>
+          <li class="mobile-nav__divider" aria-hidden="true"></li>
+          <li>
+            <a href="#profile" class="mobile-nav__link">Profile</a>
+          </li>
+          <li>
+            <a href="#logout" class="mobile-nav__link mobile-nav__link--danger">Logout</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <script>
+    (function () {
+      const hamburger = document.querySelector('.hamburger');
+      const mobileNav = document.querySelector('.mobile-nav');
+
+      if (hamburger && mobileNav) {
+        hamburger.addEventListener('click', function () {
+          const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+          hamburger.setAttribute('aria-expanded', String(!isOpen));
+          mobileNav.setAttribute('aria-hidden', String(isOpen));
+          mobileNav.classList.toggle('mobile-nav--open', !isOpen);
+          hamburger.classList.toggle('hamburger--open', !isOpen);
+        });
+      }
+
+      const userTrigger = document.querySelector('.user-menu__trigger');
+      const userDropdown = document.querySelector('.user-menu__dropdown');
+
+      if (userTrigger && userDropdown) {
+        userTrigger.addEventListener('click', function () {
+          const isOpen = userTrigger.getAttribute('aria-expanded') === 'true';
+          userTrigger.setAttribute('aria-expanded', String(!isOpen));
+          userDropdown.classList.toggle('user-menu__dropdown--open', !isOpen);
+        });
+
+        document.addEventListener('click', function (e) {
+          if (!userTrigger.contains(e.target) && !userDropdown.contains(e.target)) {
+            userTrigger.setAttribute('aria-expanded', 'false');
+            userDropdown.classList.remove('user-menu__dropdown--open');
+          }
+        });
+      }
+    })();
+  </script>
+
+  <!-- MAIN CONTENT -->
+  <main class="page-main" id="main-content">
+    <div class="container">
+
+      <!-- 2a. Page Header -->
+      <section class="dashboard-header animate-in" aria-labelledby="dashboard-title">
+        <div class="dashboard-header__text">
+          <h1 id="dashboard-title">Dashboard</h1>
+          <p>Welcome back, Jane. Here's your project overview.</p>
+        </div>
+        <button class="btn btn--primary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+            <path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          New Project
+        </button>
+      </section>
+
+      <!-- 2b. Active Projects Grid -->
+      <section class="dashboard-section animate-in animate-in--delay-1" aria-labelledby="projects-heading">
+        <h2 class="section-heading" id="projects-heading">Active Projects</h2>
+        <div class="projects-grid">
+
+          <!-- Card 1 -->
+          <article class="project-card">
+            <div class="project-card__header">
+              <h3 class="project-card__name">Website Redesign</h3>
+              <span class="badge badge--success">On Track</span>
+            </div>
+            <p class="project-card__desc">Overhaul the public-facing marketing site with new brand guidelines.</p>
+            <div class="progress-bar">
+              <div class="progress-bar__meta">
+                <span class="progress-bar__label">Progress</span>
+                <span class="progress-bar__value">72%</span>
+              </div>
+              <div class="progress-bar__track" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" aria-label="Website Redesign progress">
+                <div class="progress-bar__fill"></div>
+              </div>
+            </div>
+            <div class="project-card__footer">
+              <div class="avatar-stack" aria-label="Team members">
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+              </div>
+              <div class="project-card__meta">
+                <span class="project-card__due">Due Jan 15</span>
+              </div>
+            </div>
+            <a href="task-board.html" class="btn btn--ghost project-card__cta">View Project</a>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="project-card">
+            <div class="project-card__header">
+              <h3 class="project-card__name">Mobile App v2</h3>
+              <span class="badge badge--warning">At Risk</span>
+            </div>
+            <p class="project-card__desc">Build and ship the next major version of the iOS and Android apps.</p>
+            <div class="progress-bar">
+              <div class="progress-bar__meta">
+                <span class="progress-bar__label">Progress</span>
+                <span class="progress-bar__value">38%</span>
+              </div>
+              <div class="progress-bar__track" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" aria-label="Mobile App v2 progress">
+                <div class="progress-bar__fill"></div>
+              </div>
+            </div>
+            <div class="project-card__footer">
+              <div class="avatar-stack" aria-label="Team members">
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+              </div>
+              <div class="project-card__meta">
+                <span class="project-card__due">Due Feb 28</span>
+              </div>
+            </div>
+            <a href="task-board.html" class="btn btn--ghost project-card__cta">View Project</a>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="project-card">
+            <div class="project-card__header">
+              <h3 class="project-card__name">API Integration</h3>
+              <span class="badge badge--neutral">On Hold</span>
+            </div>
+            <p class="project-card__desc">Connect third-party payment and analytics APIs to the core platform.</p>
+            <div class="progress-bar">
+              <div class="progress-bar__meta">
+                <span class="progress-bar__label">Progress</span>
+                <span class="progress-bar__value">55%</span>
+              </div>
+              <div class="progress-bar__track" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" aria-label="API Integration progress">
+                <div class="progress-bar__fill"></div>
+              </div>
+            </div>
+            <div class="project-card__footer">
+              <div class="avatar-stack" aria-label="Team members">
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+              </div>
+              <div class="project-card__meta">
+                <span class="project-card__due">Due Mar 10</span>
+              </div>
+            </div>
+            <a href="task-board.html" class="btn btn--ghost project-card__cta">View Project</a>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="project-card">
+            <div class="project-card__header">
+              <h3 class="project-card__name">Design System</h3>
+              <span class="badge badge--success">On Track</span>
+            </div>
+            <p class="project-card__desc">Document and publish a shared component library for all product teams.</p>
+            <div class="progress-bar">
+              <div class="progress-bar__meta">
+                <span class="progress-bar__label">Progress</span>
+                <span class="progress-bar__value">89%</span>
+              </div>
+              <div class="progress-bar__track" role="progressbar" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100" aria-label="Design System progress">
+                <div class="progress-bar__fill"></div>
+              </div>
+            </div>
+            <div class="project-card__footer">
+              <div class="avatar-stack" aria-label="Team members">
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+              </div>
+              <div class="project-card__meta">
+                <span class="project-card__due">Due Jan 30</span>
+              </div>
+            </div>
+            <a href="task-board.html" class="btn btn--ghost project-card__cta">View Project</a>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="project-card">
+            <div class="project-card__header">
+              <h3 class="project-card__name">Data Pipeline</h3>
+              <span class="badge badge--warning">At Risk</span>
+            </div>
+            <p class="project-card__desc">Migrate legacy ETL jobs to a modern streaming data infrastructure.</p>
+            <div class="progress-bar">
+              <div class="progress-bar__meta">
+                <span class="progress-bar__label">Progress</span>
+                <span class="progress-bar__value">21%</span>
+              </div>
+              <div class="progress-bar__track" role="progressbar" aria-valuenow="21" aria-valuemin="0" aria-valuemax="100" aria-label="Data Pipeline progress">
+                <div class="progress-bar__fill"></div>
+              </div>
+            </div>
+            <div class="project-card__footer">
+              <div class="avatar-stack" aria-label="Team members">
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+              </div>
+              <div class="project-card__meta">
+                <span class="project-card__due">Due Apr 5</span>
+              </div>
+            </div>
+            <a href="task-board.html" class="btn btn--ghost project-card__cta">View Project</a>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="project-card">
+            <div class="project-card__header">
+              <h3 class="project-card__name">Onboarding Flow</h3>
+              <span class="badge badge--success">On Track</span>
+            </div>
+            <p class="project-card__desc">Redesign the new user onboarding experience to improve activation rates.</p>
+            <div class="progress-bar">
+              <div class="progress-bar__meta">
+                <span class="progress-bar__label">Progress</span>
+                <span class="progress-bar__value">63%</span>
+              </div>
+              <div class="progress-bar__track" role="progressbar" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100" aria-label="Onboarding Flow progress">
+                <div class="progress-bar__fill"></div>
+              </div>
+            </div>
+            <div class="project-card__footer">
+              <div class="avatar-stack" aria-label="Team members">
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+                <div class="avatar-stack__item">
+                  <img src="https://placehold.co/28x28" alt="Team member avatar">
+                </div>
+              </div>
+              <div class="project-card__meta">
+                <span class="project-card__due">Due Feb 14</span>
+              </div>
+            </div>
+            <a href="task-board.html" class="btn btn--ghost project-card__cta">View Project</a>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- 2c. Team Workload -->
+      <section class="dashboard-section animate-in animate-in--delay-2" aria-labelledby="workload-heading">
+        <h2 class="section-heading" id="workload-heading">Team Workload</h2>
+        <div class="workload-list" role="list">
+
+          <div class="workload-row" role="listitem">
+            <span class="workload-row__name">Alex Chen</span>
+            <div class="workload-bar-wrapper">
+              <div class="workload-bar-track" aria-label="Alex Chen workload: 8 tasks, 25% capacity">
+                <div class="workload-bar-fill workload-bar-fill--low"></div>
+              </div>
+              <div class="workload-tooltip" role="tooltip">8 tasks · 25% capacity</div>
+            </div>
+            <span class="workload-row__count">8 tasks</span>
+          </div>
+
+          <div class="workload-row" role="listitem">
+            <span class="workload-row__name">Maria Garcia</span>
+            <div class="workload-bar-wrapper">
+              <div class="workload-bar-track" aria-label="Maria Garcia workload: 14 tasks, 58% capacity">
+                <div class="workload-bar-fill workload-bar-fill--mid"></div>
+              </div>
+              <div class="workload-tooltip" role="tooltip">14 tasks · 58% capacity</div>
+            </div>
+            <span class="workload-row__count">14 tasks</span>
+          </div>
+
+          <div class="workload-row" role="listitem">
+            <span class="workload-row__name">Sam Patel</span>
+            <div class="workload-bar-wrapper">
+              <div class="workload-bar-track" aria-label="Sam Patel workload: 19 tasks, 87% capacity">
+                <div class="workload-bar-fill workload-bar-fill--high"></div>
+              </div>
+              <div class="workload-tooltip" role="tooltip">19 tasks · 87% capacity</div>
+            </div>
+            <span class="workload-row__count">19 tasks</span>
+          </div>
+
+          <div class="workload-row" role="listitem">
+            <span class="workload-row__name">Jordan Kim</span>
+            <div class="workload-bar-wrapper">
+              <div class="workload-bar-track" aria-label="Jordan Kim workload: 6 tasks, 18% capacity">
+                <div class="workload-bar-fill workload-bar-fill--low"></div>
+              </div>
+              <div class="workload-tooltip" role="tooltip">6 tasks · 18% capacity</div>
+            </div>
+            <span class="workload-row__count">6 tasks</span>
+          </div>
+
+          <div class="workload-row" role="listitem">
+            <span class="workload-row__name">Taylor Brooks</span>
+            <div class="workload-bar-wrapper">
+              <div class="workload-bar-track" aria-label="Taylor Brooks workload: 11 tasks, 45% capacity">
+                <div class="workload-bar-fill workload-bar-fill--mid"></div>
+              </div>
+              <div class="workload-tooltip" role="tooltip">11 tasks · 45% capacity</div>
+            </div>
+            <span class="workload-row__count">11 tasks</span>
+          </div>
+
+          <div class="workload-row" role="listitem">
+            <span class="workload-row__name">Riley Nguyen</span>
+            <div class="workload-bar-wrapper">
+              <div class="workload-bar-track" aria-label="Riley Nguyen workload: 22 tasks, 102% capacity">
+                <div class="workload-bar-fill workload-bar-fill--high"></div>
+              </div>
+              <div class="workload-tooltip" role="tooltip">22 tasks · 102% capacity</div>
+            </div>
+            <span class="workload-row__count">22 tasks</span>
+          </div>
+
+          <div class="workload-row" role="listitem">
+            <span class="workload-row__name">Casey Morgan</span>
+            <div class="workload-bar-wrapper">
+              <div class="workload-bar-track" aria-label="Casey Morgan workload: 9 tasks, 32% capacity">
+                <div class="workload-bar-fill workload-bar-fill--mid"></div>
+              </div>
+              <div class="workload-tooltip" role="tooltip">9 tasks · 32% capacity</div>
+            </div>
+            <span class="workload-row__count">9 tasks</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 2d. Recent Activity Feed -->
+      <section class="dashboard-section animate-in animate-in--delay-3" aria-labelledby="activity-heading">
+        <h2 class="section-heading" id="activity-heading">Recent Activity</h2>
+        <div class="activity-feed" role="feed" aria-label="Recent activity">
+
+          <article class="activity-item">
+            <div class="activity-item__icon" aria-hidden="true">✓</div>
+            <div class="activity-item__body">
+              <p class="activity-item__text"><strong>Alex Chen</strong> completed task "Design homepage mockups"</p>
+              <time class="activity-item__time" datetime="2024-01-10T10:30:00">2 hours ago</time>
+            </div>
+          </article>
+
+          <article class="activity-item">
+            <div class="activity-item__icon" aria-hidden="true">+</div>
+            <div class="activity-item__body">
+              <p class="activity-item__text"><strong>Maria Garcia</strong> added a new task "API endpoint documentation" to Mobile App v2</p>
+              <time class="activity-item__time" datetime="2024-01-10T09:15:00">3 hours ago</time>
+            </div>
+          </article>
+
+          <article class="activity-item">
+            <div class="activity-item__icon" aria-hidden="true">↑</div>
+            <div class="activity-item__body">
+              <p class="activity-item__text"><strong>Sam Patel</strong> moved "Set up CI/CD pipeline" to In Progress</p>
+              <time class="activity-item__time" datetime="2024-01-10T08:45:00">4 hours ago</time>
+            </div>
+          </article>
+
+          <article class="activity-item">
+            <div class="activity-item__icon" aria-hidden="true">✎</div>
+            <div class="activity-item__body">
+              <p class="activity-item__text"><strong>Jordan Kim</strong> updated the due date on "User research interviews" to Jan 20</p>
+              <time class="activity-item__time" datetime="2024-01-10T07:00:00">5 hours ago</time>
+            </div>
+          </article>
+
+          <article class="activity-item">
+            <div class="activity-item__icon" aria-hidden="true">✓</div>
+            <div class="activity-item__body">
+              <p class="activity-item__text"><strong>Taylor Brooks</strong> completed task "Write unit tests for auth module"</p>
+              <time class="activity-item__time" datetime="2024-01-09T16:20:00">Yesterday at 4:20 PM</time>
+            </div>
+          </article>
+
+          <article class="activity-item">
+            <div class="activity-item__icon" aria-hidden="true">@</div>
+            <div class="activity-item__body">
+              <p class="activity-item__text"><strong>Riley Nguyen</strong> mentioned <strong>Alex Chen</strong> in a comment on "Navigation component"</p>
+              <time class="activity-item__time" datetime="2024-01-09T14:55:00">Yesterday at 2:55 PM</time>
+            </div>
+          </article>
+
+          <article class="activity-item">
+            <div class="activity-item__icon" aria-hidden="true">⚑</div>
+            <div class="activity-item__body">
+              <p class="activity-item__text"><strong>Casey Morgan</strong> changed priority of "Migrate database schema" to High</p>
+              <time class="activity-item__time" datetime="2024-01-09T11:30:00">Yesterday at 11:30 AM</time>
+            </div>
+          </article>
+
+          <article class="activity-item">
+            <div class="activity-item__icon" aria-hidden="true">+</div>
+            <div class="activity-item__body">
+              <p class="activity-item__text"><strong>Jane Doe</strong> created a new project "Onboarding Flow"</p>
+              <time class="activity-item__time" datetime="2024-01-09T09:00:00">Yesterday at 9:00 AM</time>
+            </div>
+          </article>
+
+          <article class="activity-item">
+            <div class="activity-item__icon" aria-hidden="true">✓</div>
+            <div class="activity-item__body">
+              <p class="activity-item__text"><strong>Maria Garcia</strong> completed task "Wireframes for dashboard v2"</p>
+              <time class="activity-item__time" datetime="2024-01-08T17:10:00">2 days ago</time>
+            </div>
+          </article>
+
+          <article class="activity-item">
+            <div class="activity-item__icon" aria-hidden="true">↑</div>
+            <div class="activity-item__body">
+              <p class="activity-item__text"><strong>Sam Patel</strong> moved "Integrate Stripe payments" to Done</p>
+              <time class="activity-item__time" datetime="2024-01-08T15:45:00">2 days ago</time>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- SHARED FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__inner">
+
+      <div class="site-footer__brand">
+        <span class="site-footer__logo-text">ProjectFlow</span>
+        <p class="site-footer__copy">&copy; 2024 ProjectFlow. All rights reserved.</p>
+      </div>
+
+      <nav class="site-footer__nav" aria-label="Footer navigation">
+        <ul class="site-footer__links" role="list">
+          <li>
+            <a href="#privacy" class="site-footer__link">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="#terms" class="site-footer__link">Terms of Service</a>
+          </li>
+          <li>
+            <a href="#support" class="site-footer__link">Contact Support</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="site-footer__social">
+        <a href="https://linkedin.com" class="site-footer__social-link" aria-label="ProjectFlow on LinkedIn" target="_blank" rel="noopener noreferrer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+        <a href="https://twitter.com" class="site-footer__social-link" aria-label="ProjectFlow on Twitter" target="_blank" rel="noopener noreferrer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://github.com" class="site-footer__social-link" aria-label="ProjectFlow on GitHub" target="_blank" rel="noopener noreferrer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>

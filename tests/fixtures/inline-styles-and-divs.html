@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inline Styles and Div Soup</title>
+  <style>
+    :root {
+      --pesto-font-sans: "Inter", system-ui, sans-serif;
+      --pesto-text-primary: #1c1917;
+      --pesto-surface-page: #ffffff;
+    }
+    body {
+      font-family: var(--pesto-font-sans);
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-page);
+    }
+  </style>
+</head>
+<body>
+  <!-- Violation: inline styles everywhere -->
+  <div style="max-width: 1280px; margin: 0 auto; padding: 64px 32px;">
+    <div style="text-align: center; margin-bottom: 48px;">
+      <h1 style="font-size: 48px; font-weight: 700; color: #1c1917;">Welcome</h1>
+      <p style="font-size: 18px; color: #57534e; margin-top: 16px;">
+        This page uses inline styles instead of CSS rules.
+      </p>
+    </div>
+
+    <!-- Violation: div soup instead of semantic HTML -->
+    <div class="cards">
+      <div style="background: white; border: 1px solid #e7e5e4; border-radius: 12px; padding: 24px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+        <div style="font-size: 20px; font-weight: 600;">Feature One</div>
+        <div style="color: #57534e; margin-top: 8px;">Description of the feature.</div>
+      </div>
+      <div style="background: white; border: 1px solid #e7e5e4; border-radius: 12px; padding: 24px; margin-top: 16px;">
+        <div style="font-size: 20px; font-weight: 600;">Feature Two</div>
+        <div style="color: #57534e; margin-top: 8px;">Another feature description.</div>
+        <!-- Violation: <br> for spacing -->
+        <br><br>
+        <div>
+          <a href="#" style="background: #16a34a; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none;">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Violation: form input without label -->
+    <div style="margin-top: 48px;">
+      <div style="font-size: 24px; font-weight: 600; margin-bottom: 16px;">Contact Us</div>
+      <input type="email" placeholder="Your email" style="border: 1px solid #d6d3d1; border-radius: 8px; padding: 12px 16px; width: 100%;">
+      <input type="text" placeholder="Your name" style="border: 1px solid #d6d3d1; border-radius: 8px; padding: 12px 16px; width: 100%; margin-top: 12px;">
+      <button style="background: #16a34a; color: white; border: none; border-radius: 8px; padding: 12px 24px; margin-top: 12px; cursor: pointer;">Submit</button>
+    </div>
+  </div>
+</body>
+</html>

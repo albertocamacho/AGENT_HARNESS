@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bad Components Test</title>
+  <style>
+    :root {
+      --pesto-font-sans: "Inter", system-ui, sans-serif;
+      --pesto-text-primary: #1c1917;
+      --pesto-surface-page: #ffffff;
+      --pesto-brand-600: #16a34a;
+      --pesto-brand-700: #15803d;
+      --pesto-neutral-200: #e7e5e4;
+      --pesto-neutral-600: #57534e;
+      --pesto-text-inverse: #ffffff;
+      --pesto-surface-raised: #ffffff;
+      --pesto-border-default: var(--pesto-neutral-200);
+      --pesto-radius-md: 8px;
+      --pesto-radius-lg: 12px;
+      --pesto-space-3: 0.75rem;
+      --pesto-space-6: 1.5rem;
+      --pesto-shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --pesto-text-sm: 0.875rem;
+      --pesto-weight-medium: 500;
+      --pesto-duration-normal: 200ms;
+      --pesto-ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    body {
+      font-family: var(--pesto-font-sans);
+      color: var(--pesto-text-primary);
+      background: var(--pesto-surface-page);
+      padding: 40px;
+    }
+
+    /* VIOLATION: primary button uses wrong radius (should be radius-md) */
+    .btn-primary {
+      background: var(--pesto-brand-600);
+      color: var(--pesto-text-inverse);
+      padding: 8px 16px; /* VIOLATION: should be space-3 space-6 */
+      border: none;
+      border-radius: 20px; /* VIOLATION: should be var(--pesto-radius-md) */
+      font-size: 16px; /* VIOLATION: should be var(--pesto-text-sm) */
+      font-weight: 400; /* VIOLATION: should be var(--pesto-weight-medium) */
+      cursor: pointer;
+      /* VIOLATION: missing transition */
+    }
+    /* VIOLATION: no :focus-visible on button */
+
+    /* VIOLATION: card nests inside another card */
+    .card {
+      background: var(--pesto-surface-raised);
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-lg);
+      padding: var(--pesto-space-6);
+      box-shadow: var(--pesto-shadow-sm);
+    }
+
+    /* VIOLATION: nav links use wrong colors */
+    .nav-link {
+      color: var(--pesto-text-primary); /* should be text-secondary */
+      text-decoration: underline; /* not specified in rules */
+    }
+
+    /* VIOLATION: form input missing focus state */
+    .form-input {
+      border: 1px solid var(--pesto-border-default);
+      border-radius: var(--pesto-radius-md);
+      padding: var(--pesto-space-3);
+      font-size: 16px;
+    }
+
+    /* VIOLATION: badge uses wrong radius (should be radius-full) */
+    .badge {
+      background: #dcfce7;
+      color: #166534;
+      padding: 4px 8px;
+      border-radius: 4px; /* VIOLATION: should be var(--pesto-radius-full) */
+      font-size: 14px; /* VIOLATION: should be var(--pesto-text-xs) */
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#" class="nav-link">Home</a>
+    <a href="#" class="nav-link">About</a>
+    <a href="#" class="nav-link">Contact</a>
+  </nav>
+
+  <h1>Component Test Page</h1>
+  <h2>Buttons</h2>
+  <button class="btn-primary">Click Me</button>
+
+  <h2>Cards</h2>
+  <!-- VIOLATION: nested cards -->
+  <div class="card">
+    <h3>Outer Card</h3>
+    <div class="card">
+      <h3>Inner Card (nested — forbidden)</h3>
+      <p>This card should not be inside another card.</p>
+    </div>
+  </div>
+
+  <h2>Badges</h2>
+  <span class="badge">New</span>
+  <span class="badge">Featured</span>
+
+  <h2>Form</h2>
+  <!-- VIOLATION: no label associated with input -->
+  <input class="form-input" type="text" placeholder="Your name">
+  <input class="form-input" type="email" placeholder="Your email">
+  <button class="btn-primary">Submit</button>
+</body>
+</html>
