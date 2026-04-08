@@ -20,16 +20,16 @@
 
   /* ── Color: Neutral ───────────────────────────────────── */
   --pesto-neutral-0:   #ffffff;
-  --pesto-neutral-50:  #fafaf9;
-  --pesto-neutral-100: #f5f5f4;
-  --pesto-neutral-200: #e7e5e4;
-  --pesto-neutral-300: #d6d3d1;
-  --pesto-neutral-400: #a8a29e;
-  --pesto-neutral-500: #78716c;
-  --pesto-neutral-600: #57534e;
-  --pesto-neutral-700: #44403c;
-  --pesto-neutral-800: #292524;
-  --pesto-neutral-900: #1c1917;
+  --pesto-neutral-50:  #F9F8F7;   /* lightest — side nav, sunken bg */
+  --pesto-neutral-100: #F1F0EF;   /* subtle backgrounds */
+  --pesto-neutral-200: #E3E1DF;
+  --pesto-neutral-300: #C9C5C2;
+  --pesto-neutral-400: #908B87;   /* tertiary text, placeholders */
+  --pesto-neutral-500: #787370;
+  --pesto-neutral-600: #5F5E5A;   /* secondary text */
+  --pesto-neutral-700: #474542;
+  --pesto-neutral-800: #2F2D2B;
+  --pesto-neutral-900: #1A1918;   /* primary text */
 
   /* ── Color: Accent ────────────────────────────────────── */
   --pesto-accent-50:  #fefce8;
@@ -189,20 +189,20 @@ a {
 }
 
 /* ── Dark mode overrides ──────────────────────────────────── */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --pesto-surface-page:   var(--pesto-neutral-900);
-    --pesto-surface-raised: var(--pesto-neutral-800);
-    --pesto-surface-sunken: var(--pesto-neutral-900);
+/* Opt-in only: add data-theme="dark" to <html> to activate.
+   Does NOT auto-activate from OS preference. */
+[data-theme="dark"] {
+  --pesto-surface-page:   var(--pesto-neutral-900);
+  --pesto-surface-raised: var(--pesto-neutral-800);
+  --pesto-surface-sunken: var(--pesto-neutral-900);
 
-    --pesto-text-primary:   var(--pesto-neutral-50);
-    --pesto-text-secondary: var(--pesto-neutral-400);
-    --pesto-text-tertiary:  var(--pesto-neutral-500);
-    --pesto-text-inverse:   var(--pesto-neutral-900);
-    --pesto-text-link:      var(--pesto-brand-400);
-    --pesto-text-link-hover: var(--pesto-brand-300);
+  --pesto-text-primary:   var(--pesto-neutral-50);
+  --pesto-text-secondary: var(--pesto-neutral-400);
+  --pesto-text-tertiary:  var(--pesto-neutral-500);
+  --pesto-text-inverse:   var(--pesto-neutral-900);
+  --pesto-text-link:      var(--pesto-brand-400);
+  --pesto-text-link-hover: var(--pesto-brand-300);
 
-    --pesto-border-default: var(--pesto-neutral-700);
-    --pesto-border-strong:  var(--pesto-neutral-600);
-  }
+  --pesto-border-default: var(--pesto-neutral-700);
+  --pesto-border-strong:  var(--pesto-neutral-600);
 }

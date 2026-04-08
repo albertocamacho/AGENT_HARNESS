@@ -1,10 +1,12 @@
-import { readFileSync, readdirSync } from "fs";
+import { readFileSync, readdirSync, writeFileSync } from "fs";
 import { join, extname } from "path";
 
 export interface DesignSystem {
   /** Raw CSS with all custom properties */
   css: string;
-  /** Component rules in markdown */
+  /** Component CSS specs as parsed JSON */
+  componentSpecs: Record<string, unknown>;
+  /** Component guidelines in markdown */
   rules: string;
   /** Visual craft guidelines in markdown */
   craftGuidelines: string;
@@ -32,6 +34,7 @@ export function loadDesignSystem(dir?: string): DesignSystem {
   const files = readdirSync(baseDir);
 
   const cssFiles = files.filter((f) => extname(f) === ".css");
+  const jsonFiles = files.filter((f) => extname(f) === ".json");
   const mdFiles = files.filter((f) => extname(f) === ".md" && !f.startsWith("visual-craft"));
   const craftFiles = files.filter((f) => f.startsWith("visual-craft") && extname(f) === ".md");
   const htmlFiles = files.filter((f) => f.startsWith("reference-") && extname(f) === ".html");
@@ -39,6 +42,11 @@ export function loadDesignSystem(dir?: string): DesignSystem {
   const css = cssFiles
     .map((f) => readFileSync(join(baseDir, f), "utf-8"))
     .join("\n\n");
+
+  const componentSpecs: Record<string, unknown> = {};
+  for (const f of jsonFiles) {
+    Object.assign(componentSpecs, JSON.parse(readFileSync(join(baseDir, f), "utf-8")));
+  }
 
   const rules = mdFiles
     .map((f) => readFileSync(join(baseDir, f), "utf-8"))
@@ -52,10 +60,16 @@ export function loadDesignSystem(dir?: string): DesignSystem {
     .map((f) => readFileSync(join(baseDir, f), "utf-8"))
     .join("\n\n");
 
+  const specsJson = JSON.stringify(componentSpecs, null, 2);
+
   const promptBlock = `<design_system>
 <design_tokens>
 ${css}
 </design_tokens>
+
+<component_specs>
+${specsJson}
+</component_specs>
 
 <component_rules>
 ${rules}
@@ -70,6 +84,10 @@ ${rules}
 ${tokenSummary}
 </available_tokens>
 
+<component_specs>
+${specsJson}
+</component_specs>
+
 <component_rules>
 ${rules}
 </component_rules>
@@ -78,13 +96,20 @@ ${rules}
   // Renderer needs full CSS tokens + component rules (but not audit checklists)
   const tokensAndRulesBlock = promptBlock;
 
-  cached = { css, rules, craftGuidelines, referenceExample, promptBlock, rulesOnlyBlock, tokensAndRulesBlock };
+  cached = { css, componentSpecs, rules, craftGuidelines, referenceExample, promptBlock, rulesOnlyBlock, tokensAndRulesBlock };
   return cached;
 }
 
 /** Clear the cache (useful for tests or hot-reloading) */
 export function clearDesignSystemCache(): void {
   cached = null;
+}
+
+/** Write updated CSS back to the design-system directory */
+export function writeDesignSystemCss(css: string, dir?: string): void {
+  const baseDir = dir ?? findDesignSystemDir();
+  writeFileSync(join(baseDir, "pesto.css"), css, "utf-8");
+  clearDesignSystemCache();
 }
 
 /**

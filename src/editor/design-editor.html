@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pesto Design System Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ed-bg: #0a0a0a;
+      --ed-surface: #141414;
+      --ed-surface-2: #1a1a1a;
+      --ed-border: #2a2a2a;
+      --ed-text: #e0e0e0;
+      --ed-text-dim: #888;
+      --ed-accent: #5046e5;
+      --ed-accent-hover: #6358f0;
+      --ed-success: #34d399;
+      --ed-warning: #fbbf24;
+      --ed-radius: 8px;
+      --ed-font: "Inter", system-ui, sans-serif;
+      --ed-mono: "JetBrains Mono", ui-monospace, monospace;
+    }
+    body {
+      font-family: var(--ed-font);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--ed-text);
+      background: var(--ed-bg);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── Header ─────────────────────────────────────────── */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      background: var(--ed-surface);
+      border-bottom: 1px solid var(--ed-border);
+      flex-shrink: 0;
+    }
+    .header h1 {
+      font-size: 15px;
+      font-weight: 600;
+      flex: 1;
+    }
+    .header h1 span { color: var(--ed-accent); }
+    .header-btn {
+      padding: 6px 14px;
+      font: 500 12px var(--ed-font);
+      border: 1px solid var(--ed-border);
+      border-radius: 6px;
+      background: transparent;
+      color: var(--ed-text);
+      cursor: pointer;
+      transition: all 150ms;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .header-btn:hover { background: var(--ed-surface-2); border-color: #444; }
+    .header-btn.active { background: var(--ed-accent); border-color: var(--ed-accent); color: #fff; }
+    .save-btn { background: var(--ed-accent); border-color: var(--ed-accent); color: #fff; }
+    .save-btn:hover { background: var(--ed-accent-hover); }
+    .save-btn.dirty { box-shadow: 0 0 0 2px var(--ed-warning); }
+    .save-btn.saved { background: var(--ed-success); border-color: var(--ed-success); }
+
+    /* ── Main layout ────────────────────────────────────── */
+    .main {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ── Sidebar ────────────────────────────────────────── */
+    .sidebar {
+      width: 360px;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--ed-border);
+      background: var(--ed-surface);
+      flex-shrink: 0;
+    }
+    .sidebar-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--ed-border);
+      flex-shrink: 0;
+    }
+    .sidebar-tab {
+      flex: 1;
+      padding: 10px 16px;
+      font: 500 12px var(--ed-font);
+      text-align: center;
+      color: var(--ed-text-dim);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 150ms;
+    }
+    .sidebar-tab:hover { color: var(--ed-text); }
+    .sidebar-tab.active { color: var(--ed-text); border-bottom-color: var(--ed-accent); }
+    .sidebar-content {
+      flex: 1;
+      overflow-y: auto;
+    }
+    .sidebar-content.hidden { display: none; }
+    .sidebar::-webkit-scrollbar { width: 6px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sidebar::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+    /* Category sections */
+    .category { border-bottom: 1px solid var(--ed-border); }
+    .category summary {
+      padding: 10px 16px;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ed-text-dim);
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .category summary::before {
+      content: "\25B6";
+      font-size: 8px;
+      transition: transform 150ms;
+    }
+    .category[open] summary::before { transform: rotate(90deg); }
+    .category summary:hover { color: var(--ed-text); }
+    .token-list { padding: 0 16px 12px; }
+
+    /* ── Token controls ─────────────────────────────────── */
+    .token-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0;
+    }
+    .token-name {
+      font-family: var(--ed-mono);
+      font-size: 11px;
+      color: var(--ed-text-dim);
+      min-width: 140px;
+      flex-shrink: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .token-name:hover { color: var(--ed-text); }
+    .token-control { flex: 1; display: flex; align-items: center; gap: 6px; }
+
+    /* Color picker */
+    .color-control { display: flex; align-items: center; gap: 6px; flex: 1; }
+    .color-swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--ed-border);
+      cursor: pointer;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .color-swatch input[type="color"] {
+      position: absolute;
+      inset: -4px;
+      width: calc(100% + 8px);
+      height: calc(100% + 8px);
+      border: none;
+      cursor: pointer;
+      opacity: 0;
+    }
+    .color-hex {
+      font-family: var(--ed-mono);
+      font-size: 11px;
+      background: var(--ed-bg);
+      border: 1px solid var(--ed-border);
+      border-radius: 4px;
+      padding: 3px 6px;
+      color: var(--ed-text);
+      width: 76px;
+    }
+
+    /* Size slider */
+    .size-control { display: flex; align-items: center; gap: 6px; flex: 1; }
+    .size-control input[type="range"] {
+      flex: 1;
+      accent-color: var(--ed-accent);
+      height: 4px;
+    }
+    .size-value {
+      font-family: var(--ed-mono);
+      font-size: 11px;
+      background: var(--ed-bg);
+      border: 1px solid var(--ed-border);
+      border-radius: 4px;
+      padding: 3px 6px;
+      color: var(--ed-text);
+      width: 70px;
+      text-align: right;
+    }
+
+    /* Dropdown */
+    .token-select {
+      font: 12px var(--ed-mono);
+      background: var(--ed-bg);
+      border: 1px solid var(--ed-border);
+      border-radius: 4px;
+      padding: 4px 6px;
+      color: var(--ed-text);
+      flex: 1;
+    }
+
+    /* Text input */
+    .token-text {
+      font: 11px var(--ed-mono);
+      background: var(--ed-bg);
+      border: 1px solid var(--ed-border);
+      border-radius: 4px;
+      padding: 4px 8px;
+      color: var(--ed-text);
+      flex: 1;
+    }
+
+    /* ── Preview panel ──────────────────────────────────── */
+    .preview-panel { flex: 1; display: flex; flex-direction: column; background: #fff; }
+    .preview-panel iframe { flex: 1; border: none; width: 100%; }
+
+    /* ── Code panel ─────────────────────────────────────── */
+    .code-panel {
+      display: none;
+      height: 280px;
+      border-top: 1px solid var(--ed-border);
+      background: var(--ed-surface);
+      flex-shrink: 0;
+    }
+    .code-panel.open { display: flex; flex-direction: column; }
+    .code-panel textarea {
+      flex: 1;
+      font: 12px/1.6 var(--ed-mono);
+      background: var(--ed-bg);
+      color: var(--ed-text);
+      border: none;
+      padding: 16px;
+      resize: none;
+      tab-size: 2;
+    }
+    .code-panel textarea:focus { outline: none; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1><span>Pesto</span> Design System</h1>
+    <button class="header-btn" id="darkToggle" onclick="toggleDarkMode()">Dark Mode</button>
+    <button class="header-btn" id="codeToggle" onclick="toggleCodeView()">Code</button>
+    <button class="header-btn save-btn" id="saveBtn" onclick="save()">Save</button>
+  </div>
+
+  <div class="main">
+    <div class="sidebar">
+      <div class="sidebar-tabs">
+        <button class="sidebar-tab active" onclick="switchTab('tokens')">Tokens</button>
+        <button class="sidebar-tab" onclick="switchTab('components')">Components</button>
+      </div>
+      <div class="sidebar-content" id="sidebar-tokens"></div>
+      <div class="sidebar-content hidden" id="sidebar-components"></div>
+    </div>
+    <div class="preview-panel">
+      <iframe id="preview"></iframe>
+    </div>
+  </div>
+
+  <div class="code-panel" id="codePanel">
+    <textarea id="codeEditor" spellcheck="false"></textarea>
+  </div>
+
+  <script>
+    // ── State ────────────────────────────────────────────────────
+    let tokenData = null;       // ParsedTokens from server
+    let currentTokens = {};     // name → value for all modified tokens
+    let originalCss = '';
+    let isDark = false;
+    let isDirty = false;
+    let syncing = false;
+    let codeDebounce = null;
+    let componentData = null;   // pesto-components.json
+
+    // ── Init ────────────────────────────────────────────────────
+    async function init() {
+      console.log('[editor] fetching tokens...');
+      const res = await fetch('/api/tokens');
+      tokenData = await res.json();
+      originalCss = tokenData.rawCss;
+      console.log('[editor] loaded', tokenData.light.length, 'light categories,', tokenData.dark.length, 'dark');
+
+      // Build initial token map
+      for (const cat of [...tokenData.light, ...tokenData.dark]) {
+        for (const t of cat.tokens) {
+          currentTokens[t.name] = t.value;
+        }
+      }
+      console.log('[editor] token map built:', Object.keys(currentTokens).length, 'tokens');
+
+      renderSidebar(tokenData.light);
+      console.log('[editor] sidebar rendered');
+
+      // Load component specs
+      const compRes = await fetch('/api/components');
+      componentData = await compRes.json();
+      renderComponentSidebar();
+      console.log('[editor] components loaded');
+
+      initPreview();
+      console.log('[editor] preview initialized');
+    }
+
+    // ── Tab switching ───────────────────────────────────────────
+    function switchTab(tab) {
+      document.querySelectorAll('.sidebar-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.sidebar-content').forEach(c => c.classList.add('hidden'));
+      if (tab === 'tokens') {
+        document.querySelectorAll('.sidebar-tab')[0].classList.add('active');
+        document.getElementById('sidebar-tokens').classList.remove('hidden');
+      } else {
+        document.querySelectorAll('.sidebar-tab')[1].classList.add('active');
+        document.getElementById('sidebar-components').classList.remove('hidden');
+      }
+    }
+
+    // ── Component sidebar ───────────────────────────────────────
+    function renderComponentSidebar() {
+      const container = document.getElementById('sidebar-components');
+      container.innerHTML = '';
+
+      const sections = {
+        buttons: 'Buttons',
+        cards: 'Cards',
+        forms: 'Form Inputs',
+        badges: 'Badges',
+        navigation: 'Navigation',
+        typography: 'Typography',
+      };
+
+      for (const [key, label] of Object.entries(sections)) {
+        const spec = componentData[key];
+        if (!spec) continue;
+
+        const details = document.createElement('details');
+        details.className = 'category';
+        details.open = key === 'buttons';
+
+        const summary = document.createElement('summary');
+        summary.textContent = label;
+        details.appendChild(summary);
+
+        const list = document.createElement('div');
+        list.className = 'token-list';
+
+        const props = flattenComponentProps(spec, key);
+        for (const prop of props) {
+          const row = document.createElement('div');
+          row.className = 'token-row';
+
+          const nameEl = document.createElement('div');
+          nameEl.className = 'token-name';
+          nameEl.textContent = prop.label;
+          nameEl.title = prop.path;
+          row.appendChild(nameEl);
+
+          const control = document.createElement('div');
+          control.className = 'token-control';
+          control.innerHTML = createComponentDropdown(prop);
+          row.appendChild(control);
+
+          list.appendChild(row);
+        }
+
+        details.appendChild(list);
+        container.appendChild(details);
+      }
+    }
+
+    /** Flatten nested component JSON into editable properties */
+    function flattenComponentProps(obj, sectionKey, prefix) {
+      const props = [];
+      prefix = prefix || sectionKey;
+
+      for (const [key, value] of Object.entries(obj)) {
+        const path = prefix + '.' + key;
+
+        if (typeof value === 'string') {
+          // Extract token reference from var(--pesto-*) or raw --pesto-*
+          const tokenMatch = value.match(/var\((--pesto-[\w-]+)\)/) || value.match(/^(--pesto-[\w-]+)$/);
+          if (tokenMatch) {
+            const tokenName = tokenMatch[1];
+            const tokenType = getTokenType(tokenName);
+            props.push({
+              label: key.replace(/-/g, ' '),
+              path: path,
+              tokenName: tokenName,
+              rawValue: value,
+              type: tokenType,
+            });
+          } else if (!['transparent', 'none', 'auto', 'underline', 'not-allowed'].includes(value) && !value.startsWith('1px') && !value.includes(' ')) {
+            // Raw values that might be editable (opacity, etc)
+            props.push({
+              label: key.replace(/-/g, ' '),
+              path: path,
+              tokenName: null,
+              rawValue: value,
+              type: 'raw',
+            });
+          }
+        } else if (Array.isArray(value)) {
+          // Arrays of alternatives — use the first one
+          const first = value[0];
+          const tokenMatch = (typeof first === 'string') && (first.match(/var\((--pesto-[\w-]+)\)/) || first.match(/^(--pesto-[\w-]+)$/));
+          if (tokenMatch) {
+            props.push({
+              label: key.replace(/-/g, ' '),
+              path: path,
+              tokenName: tokenMatch[1],
+              rawValue: first,
+              type: getTokenType(tokenMatch[1]),
+            });
+          }
+        } else if (typeof value === 'object' && value !== null) {
+          // Recurse into nested objects
+          props.push(...flattenComponentProps(value, sectionKey, path));
+        }
+      }
+      return props;
+    }
+
+    /** Determine which token dropdown to show based on the token name */
+    function getTokenType(tokenName) {
+      if (!tokenName) return 'raw';
+      const seg = tokenName.replace('--pesto-', '').split('-')[0];
+      if (['brand', 'neutral', 'accent', 'error', 'warning', 'success', 'info'].includes(seg)) return 'color';
+      if (seg === 'space') return 'spacing';
+      if (seg === 'radius') return 'radius';
+      if (seg === 'shadow') return 'shadow';
+      if (seg === 'weight') return 'weight';
+      if (seg === 'text') {
+        // text-primary vs text-sm
+        if (/^--pesto-text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl)$/.test(tokenName)) return 'text-size';
+        return 'reference';
+      }
+      if (['surface', 'border'].includes(seg)) return 'reference';
+      if (seg === 'leading') return 'leading';
+      if (seg === 'duration') return 'duration';
+      return 'raw';
+    }
+
+    /** Get all tokens of a given type for dropdown options */
+    function getTokensByType(type) {
+      if (!tokenData) return [];
+      const all = tokenData.light.flatMap(cat => cat.tokens);
+
+      switch (type) {
+        case 'color':
+          return all.filter(t => {
+            const seg = t.name.replace('--pesto-', '').split('-')[0];
+            return ['brand', 'neutral', 'accent', 'error', 'warning', 'success', 'info'].includes(seg);
+          });
+        case 'spacing':
+          return all.filter(t => t.name.startsWith('--pesto-space-'));
+        case 'radius':
+          return all.filter(t => t.name.startsWith('--pesto-radius-'));
+        case 'shadow':
+          return all.filter(t => t.name.startsWith('--pesto-shadow-'));
+        case 'weight':
+          return all.filter(t => t.name.startsWith('--pesto-weight-'));
+        case 'text-size':
+          return all.filter(t => /^--pesto-text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl)$/.test(t.name));
+        case 'leading':
+          return all.filter(t => t.name.startsWith('--pesto-leading-'));
+        case 'duration':
+          return all.filter(t => t.name.startsWith('--pesto-duration-'));
+        case 'reference':
+          // Surface, text-color, and border tokens + all colors
+          return all.filter(t => {
+            const seg = t.name.replace('--pesto-', '').split('-')[0];
+            return ['brand', 'neutral', 'accent', 'error', 'warning', 'success', 'info', 'surface', 'text', 'border'].includes(seg)
+              && !/^--pesto-text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl)$/.test(t.name);
+          });
+        default:
+          return [];
+      }
+    }
+
+    function createComponentDropdown(prop) {
+      if (prop.type === 'raw') {
+        return '<input type="text" class="token-text" value="' + prop.rawValue + '" ' +
+               'data-comp-path="' + prop.path + '" onchange="onCompRawChange(this)">';
+      }
+
+      const options = getTokensByType(prop.type);
+      const opts = options.map(t => {
+        const selected = t.name === prop.tokenName ? 'selected' : '';
+        const shortName = t.name.replace('--pesto-', '');
+        const preview = prop.type === 'color' ? ' style="color:' + t.value + '"' : '';
+        return '<option value="' + t.name + '" ' + selected + preview + '>' + shortName +
+               (t.comment ? ' (' + t.comment + ')' : prop.type === 'color' ? ' (' + t.value + ')' : '') +
+               '</option>';
+      }).join('');
+
+      // If current token isn't in the list, add it
+      const inList = options.some(t => t.name === prop.tokenName);
+      const extra = (!inList && prop.tokenName)
+        ? '<option value="' + prop.tokenName + '" selected>' + prop.tokenName.replace('--pesto-', '') + '</option>'
+        : '';
+
+      return '<select class="token-select" data-comp-path="' + prop.path + '" data-comp-type="' + prop.type + '" ' +
+             'onchange="onCompTokenChange(this)" style="flex:1">' + extra + opts + '</select>';
+    }
+
+    function onCompTokenChange(el) {
+      const path = el.dataset.compPath;
+      const newToken = el.value;
+      setComponentValue(path, newToken);
+      updatePreviewComponent(path, newToken);
+      markDirty();
+    }
+
+    function onCompRawChange(el) {
+      const path = el.dataset.compPath;
+      setComponentValue(path, el.value);
+      markDirty();
+    }
+
+    /** Set a value in the nested componentData by dot path */
+    function setComponentValue(path, value) {
+      const parts = path.split('.');
+      let obj = componentData;
+      for (let i = 0; i < parts.length - 1; i++) {
+        obj = obj[parts[i]];
+        if (!obj) return;
+      }
+      const key = parts[parts.length - 1];
+      const oldVal = obj[key];
+      // Preserve var() wrapper if the original had it
+      if (typeof oldVal === 'string' && oldVal.startsWith('var(') && !value.startsWith('var(')) {
+        obj[key] = 'var(' + value + ')';
+      } else if (typeof oldVal === 'string' && !oldVal.startsWith('var(') && oldVal.startsWith('--pesto-')) {
+        obj[key] = value;
+      } else if (Array.isArray(oldVal)) {
+        obj[key] = [value.startsWith('--') ? value : 'var(' + value + ')'];
+      } else {
+        obj[key] = value.startsWith('--pesto-') && !oldVal?.startsWith?.('var(') ? value : 'var(' + value + ')';
+      }
+    }
+
+    /** Update the preview iframe when a component property changes */
+    function updatePreviewComponent(path, tokenName) {
+      try {
+        const doc = document.getElementById('preview').contentDocument;
+        const root = doc.documentElement;
+        const varValue = tokenName.startsWith('--pesto-') ? 'var(' + tokenName + ')' : tokenName;
+
+        // Check if this path maps to a --comp-* variable
+        const compVar = COMP_VAR_MAP[path];
+        if (compVar) {
+          root.style.setProperty('--' + compVar, varValue);
+          return;
+        }
+
+        // Handle split padding paths (flattenComponentProps generates these)
+        const padMatch = path.match(/^(.+)\.(padding-y|padding-x)$/);
+        if (padMatch) {
+          const base = padMatch[1];
+          const suffix = padMatch[2] === 'padding-y' ? 'y' : 'x';
+          const prefix = base.includes('buttons') ? 'comp-btn-padding'
+            : base.includes('badges') ? 'comp-badge-padding'
+            : base.includes('forms') ? 'comp-form-padding'
+            : null;
+          if (prefix) {
+            root.style.setProperty('--' + prefix + '-' + suffix, varValue);
+            return;
+          }
+        }
+
+        // Handle border color changes (path like cards.border, forms.input.border)
+        const borderVars = {
+          'buttons.secondary.border': 'comp-btn-secondary-border',
+          'cards.border': 'comp-card-border',
+          'forms.input.border': 'comp-form-border',
+        };
+        if (borderVars[path]) {
+          root.style.setProperty('--' + borderVars[path], varValue);
+          return;
+        }
+
+        // Fallback: set directly
+        if (tokenName.startsWith('--pesto-')) {
+          root.style.setProperty(tokenName, currentTokens[tokenName] || '');
+        }
+      } catch (e) { console.warn('updatePreviewComponent error:', e); }
+    }
+
+    // ── Sidebar rendering ───────────────────────────────────────
+    function renderSidebar(categories) {
+      const sidebar = document.getElementById('sidebar-tokens');
+      sidebar.innerHTML = '';
+
+      for (const cat of categories) {
+        const details = document.createElement('details');
+        details.className = 'category';
+        // Open color categories by default
+        if (cat.controlType === 'color') details.open = true;
+
+        const summary = document.createElement('summary');
+        summary.textContent = cat.label;
+        details.appendChild(summary);
+
+        const list = document.createElement('div');
+        list.className = 'token-list';
+
+        for (const token of cat.tokens) {
+          const row = document.createElement('div');
+          row.className = 'token-row';
+
+          const name = document.createElement('div');
+          name.className = 'token-name';
+          name.textContent = token.name.replace('--pesto-', '');
+          name.title = token.name;
+          row.appendChild(name);
+
+          const control = createControl(token, cat.controlType);
+          row.appendChild(control);
+          list.appendChild(row);
+        }
+
+        details.appendChild(list);
+        sidebar.appendChild(details);
+      }
+    }
+
+    function createControl(token, controlType) {
+      const wrap = document.createElement('div');
+      wrap.className = 'token-control';
+
+      switch (controlType) {
+        case 'color':
+          wrap.innerHTML = createColorControl(token);
+          break;
+        case 'size':
+          wrap.innerHTML = createSizeControl(token);
+          break;
+        case 'weight':
+          wrap.innerHTML = createWeightControl(token);
+          break;
+        case 'reference':
+          wrap.innerHTML = createReferenceControl(token);
+          break;
+        case 'shadow':
+        case 'text':
+        case 'transition':
+          wrap.innerHTML = createTextControl(token);
+          break;
+        case 'font':
+          wrap.innerHTML = createTextControl(token);
+          break;
+        case 'number':
+          wrap.innerHTML = createNumberControl(token);
+          break;
+      }
+
+      return wrap;
+    }
+
+    function createColorControl(token) {
+      const v = token.value;
+      return `<div class="color-control">
+        <div class="color-swatch" style="background:${v}">
+          <input type="color" value="${v}" data-token="${token.name}"
+                 oninput="onColorChange(this)">
+        </div>
+        <input type="text" class="color-hex" value="${v}" data-token="${token.name}"
+               onchange="onHexChange(this)">
+      </div>`;
+    }
+
+    function createSizeControl(token) {
+      const raw = token.value;
+      const num = parseFloat(raw);
+      const unit = raw.replace(/[\d.]+/, '') || '';
+      const max = unit === 'px' ? 200 : unit === 'rem' ? 12 : unit === 'ms' ? 1000 : 4;
+      const step = unit === 'px' ? 1 : unit === 'rem' ? 0.0625 : unit === 'ms' ? 10 : 0.05;
+      return `<div class="size-control">
+        <input type="range" min="0" max="${max}" step="${step}" value="${num}"
+               data-token="${token.name}" data-unit="${unit}"
+               oninput="onSizeChange(this)">
+        <input type="text" class="size-value" value="${raw}" data-token="${token.name}"
+               onchange="onSizeTextChange(this)">
+      </div>`;
+    }
+
+    function createWeightControl(token) {
+      const opts = [400, 500, 600, 700].map(w =>
+        `<option value="${w}" ${parseInt(token.value) === w ? 'selected' : ''}>${w}</option>`
+      ).join('');
+      return `<select class="token-select" data-token="${token.name}"
+                      onchange="onSelectChange(this)">${opts}</select>`;
+    }
+
+    /** Build the list of all color tokens available for reference dropdowns */
+    function getColorTokenOptions() {
+      if (!tokenData) return [];
+      return tokenData.light
+        .filter(cat => cat.controlType === 'color')
+        .flatMap(cat => cat.tokens);
+    }
+
+    function createReferenceControl(token) {
+      const colorTokens = getColorTokenOptions();
+      // Extract the referenced token name from var(--pesto-*)
+      const varMatch = token.value.match(/^var\((--pesto-[\w-]+)\)$/);
+      const referencedName = varMatch ? varMatch[1] : null;
+
+      // Build dropdown options from all color tokens
+      let options = colorTokens.map(ct => {
+        const selected = ct.name === referencedName ? 'selected' : '';
+        return `<option value="var(${ct.name})" ${selected} style="color:${ct.value}">` +
+               `${ct.name.replace('--pesto-', '')} (${ct.value})</option>`;
+      }).join('');
+
+      // If the current value isn't a standard var() reference (e.g. rgba), add it as a custom option
+      if (!referencedName && token.value) {
+        options = `<option value="${token.value}" selected>${token.value}</option>` + options;
+      }
+
+      // Resolve the display color for the swatch
+      const swatchColor = referencedName
+        ? (colorTokens.find(ct => ct.name === referencedName)?.value || token.value)
+        : token.value;
+
+      return `<div class="color-control">
+        <div class="color-swatch" data-ref-swatch="${token.name}" style="background:${swatchColor}"></div>
+        <select class="token-select" data-token="${token.name}" onchange="onReferenceChange(this)" style="flex:1">
+          ${options}
+        </select>
+      </div>`;
+    }
+
+    function createTextControl(token) {
+      return `<input type="text" class="token-text" value="${token.value}" data-token="${token.name}"
+                     onchange="onTextChange(this)">`;
+    }
+
+    function createNumberControl(token) {
+      return `<input type="number" class="size-value" value="${token.value}" data-token="${token.name}"
+                     onchange="onNumberChange(this)" style="width:80px">`;
+    }
+
+    // ── Control handlers ────────────────────────────────────────
+    function onColorChange(el) {
+      const name = el.dataset.token;
+      const value = el.value;
+      // Update hex text input
+      const hex = el.closest('.color-control').querySelector('.color-hex');
+      if (hex) hex.value = value;
+      // Update swatch
+      el.closest('.color-swatch').style.background = value;
+      updateToken(name, value);
+    }
+
+    function onHexChange(el) {
+      const name = el.dataset.token;
+      const value = el.value;
+      // Update color picker + swatch
+      const swatch = el.closest('.color-control').querySelector('.color-swatch');
+      if (swatch) {
+        swatch.style.background = value;
+        const picker = swatch.querySelector('input[type="color"]');
+        if (picker) picker.value = value;
+      }
+      updateToken(name, value);
+    }
+
+    function onSizeChange(el) {
+      const name = el.dataset.token;
+      const unit = el.dataset.unit;
+      const value = el.value + unit;
+      // Update text display
+      const text = el.closest('.size-control').querySelector('.size-value');
+      if (text) text.value = value;
+      updateToken(name, value);
+    }
+
+    function onSizeTextChange(el) {
+      const name = el.dataset.token;
+      const value = el.value;
+      // Update slider
+      const slider = el.closest('.size-control').querySelector('input[type="range"]');
+      if (slider) slider.value = parseFloat(value);
+      updateToken(name, value);
+    }
+
+    function onSelectChange(el) { updateToken(el.dataset.token, el.value); }
+    function onTextChange(el) { updateToken(el.dataset.token, el.value); }
+    function onNumberChange(el) { updateToken(el.dataset.token, el.value); }
+
+    function onReferenceChange(el) {
+      const name = el.dataset.token;
+      const value = el.value;
+      updateToken(name, value);
+      // Update the swatch preview with the resolved color
+      const swatch = el.closest('.color-control').querySelector('[data-ref-swatch]');
+      if (swatch) {
+        const varMatch = value.match(/^var\((--pesto-[\w-]+)\)$/);
+        if (varMatch) {
+          const resolved = currentTokens[varMatch[1]] || value;
+          swatch.style.background = resolved;
+        } else {
+          swatch.style.background = value;
+        }
+      }
+    }
+
+    // ── Token update ────────────────────────────────────────────
+    function updateToken(name, value) {
+      currentTokens[name] = value;
+      markDirty();
+
+      // Live update the iframe
+      try {
+        const doc = document.getElementById('preview').contentDocument;
+        doc.documentElement.style.setProperty(name, value);
+      } catch (e) {}
+
+      // Sync code view if open
+      if (document.getElementById('codePanel').classList.contains('open') && !syncing) {
+        rebuildCodeView();
+      }
+    }
+
+    function markDirty() {
+      isDirty = true;
+      document.getElementById('saveBtn').classList.add('dirty');
+      document.getElementById('saveBtn').classList.remove('saved');
+      document.getElementById('saveBtn').textContent = 'Save *';
+    }
+
+    // ── Preview iframe ──────────────────────────────────────────
+    function initPreview() {
+      const iframe = document.getElementById('preview');
+      iframe.srcdoc = buildPreviewHtml();
+      // Inject the dynamic script after the iframe loads
+      iframe.addEventListener('load', () => {
+        try {
+          const doc = iframe.contentDocument;
+          const script = doc.createElement('script');
+          script.textContent = getPreviewScript();
+          doc.body.appendChild(script);
+        } catch (e) {}
+      });
+    }
+
+    function buildPreviewHtml() {
+      return `<!DOCTYPE html>
+<html lang="en" data-theme="${isDark ? 'dark' : 'light'}">
+<head>
+<meta charset="UTF-8">
+<style>${originalCss}</style>
+<style>
+  /* Dark mode toggle via attribute instead of media query */
+  [data-theme="dark"] {
+    ${buildDarkOverrides()}
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: var(--pesto-font-sans);
+    color: var(--pesto-text-primary);
+    background: var(--pesto-surface-page);
+    padding: 32px;
+    font-size: var(--pesto-text-base);
+    line-height: var(--pesto-leading-normal);
+  }
+  .section { margin-bottom: 48px; }
+  .section-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--pesto-text-tertiary);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--pesto-border-default);
+  }
+
+  /* ── Component-level custom properties (set by editor) ── */
+  :root {
+    ${buildComponentVars()}
+  }
+
+  /* ── Buttons ── */
+  .btn-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    padding: var(--comp-btn-padding-y) var(--comp-btn-padding-x);
+    font-size: var(--comp-btn-font-size);
+    font-weight: var(--comp-btn-font-weight);
+    border-radius: var(--comp-btn-radius);
+    border: none;
+    cursor: pointer;
+    transition: all 300ms cubic-bezier(1,0,0,1);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: var(--comp-btn-shadow);
+  }
+  .btn:hover { box-shadow: var(--comp-btn-hover-shadow); }
+  .btn:focus-visible { outline: 2px solid var(--pesto-border-focus); outline-offset: 2px; }
+  .btn-primary { background: var(--comp-btn-primary-bg); color: var(--comp-btn-primary-text); }
+  .btn-primary:hover { background: var(--comp-btn-primary-hover-bg); transform: translateY(-1px); }
+  .btn-secondary { background: transparent; border: 1px solid var(--comp-btn-secondary-border); color: var(--comp-btn-secondary-text, var(--pesto-text-primary)); }
+  .btn-secondary:hover { background: var(--comp-btn-secondary-hover-bg); }
+  .btn-ghost { background: transparent; color: var(--comp-btn-ghost-text); }
+  .btn-ghost:hover { text-decoration: underline; }
+  .btn-disabled { background: var(--comp-btn-primary-bg); color: var(--comp-btn-primary-text); opacity: var(--comp-btn-disabled-opacity); cursor: not-allowed; }
+
+  /* ── Cards ── */
+  .card-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--pesto-space-6); }
+  .card {
+    background: var(--comp-card-bg);
+    border: 1px solid var(--comp-card-border);
+    border-radius: var(--comp-card-radius);
+    padding: var(--comp-card-padding);
+    box-shadow: var(--comp-card-shadow);
+    transition: all 300ms cubic-bezier(1,0,0,1);
+  }
+  .card:hover { box-shadow: var(--comp-card-hover-shadow); transform: translateY(-2px); }
+  .card h3 { font-size: var(--comp-card-title-size); font-weight: var(--comp-card-title-weight); margin-bottom: var(--pesto-space-2); }
+  .card p { font-size: var(--comp-card-body-size); color: var(--comp-card-body-color); }
+
+  /* ── Typography ── */
+  .type-h1 { font-size: var(--comp-type-h1-size); font-weight: var(--comp-type-h1-weight); line-height: var(--pesto-leading-tight); margin-bottom: 12px; }
+  .type-h2 { font-size: var(--comp-type-h2-size); font-weight: var(--comp-type-h2-weight); margin-bottom: 10px; }
+  .type-h3 { font-size: var(--comp-type-h3-size); font-weight: var(--comp-type-h3-weight); margin-bottom: 8px; }
+  .type-h4 { font-size: var(--comp-type-h4-size); font-weight: var(--comp-type-h4-weight); margin-bottom: 6px; }
+  .type-body { font-size: var(--comp-type-body-size); color: var(--comp-type-body-color); max-width: 65ch; margin-bottom: 6px; }
+  .type-small { font-size: var(--comp-type-small-size); color: var(--comp-type-small-color); }
+  .type-caption { font-size: var(--comp-type-caption-size); color: var(--comp-type-caption-color); }
+
+  /* ── Forms ── */
+  .form-group { max-width: 360px; }
+  .form-row { margin-bottom: 16px; }
+  .form-label {
+    display: block;
+    font-size: var(--comp-form-label-size);
+    font-weight: var(--comp-form-label-weight);
+    color: var(--pesto-text-primary);
+    margin-bottom: var(--comp-form-label-spacing);
+  }
+  .form-input {
+    width: 100%;
+    border: 1px solid var(--comp-form-border, var(--pesto-border-default));
+    border-radius: var(--comp-form-radius);
+    padding: var(--comp-form-padding-y) var(--comp-form-padding-x);
+    font: inherit;
+    font-size: var(--pesto-text-base);
+    background: var(--pesto-surface-raised);
+    color: var(--pesto-text-primary);
+    transition: all 200ms;
+    box-shadow: var(--comp-form-shadow);
+  }
+  .form-input:hover { box-shadow: var(--comp-form-hover-shadow); }
+  .form-input:focus { border-color: var(--comp-form-focus-border); outline: 2px solid var(--comp-form-focus-outline); outline-offset: 1px; }
+  .form-input.error { border-color: var(--comp-form-error-border); }
+  .form-error { font-size: var(--pesto-text-sm); color: var(--comp-form-error-text); margin-top: var(--pesto-space-1); }
+
+  /* ── Badges ── */
+  .badge-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .badge {
+    display: inline-block;
+    padding: var(--comp-badge-padding-y) var(--comp-badge-padding-x);
+    border-radius: var(--comp-badge-radius);
+    font-size: var(--comp-badge-font-size);
+    font-weight: var(--comp-badge-font-weight);
+    box-shadow: var(--comp-badge-shadow);
+    transition: box-shadow 200ms;
+  }
+  .badge:hover { box-shadow: var(--comp-badge-hover-shadow); }
+  .badge-brand { background: var(--comp-badge-brand-bg); color: var(--comp-badge-brand-text); }
+  .badge-error { background: var(--pesto-error-50); color: var(--pesto-error-700); }
+  .badge-warning { background: var(--pesto-warning-50); color: var(--pesto-warning-700); }
+  .badge-success { background: var(--pesto-success-50); color: var(--pesto-success-700); }
+  .badge-info { background: var(--pesto-info-50); color: var(--pesto-info-700); }
+
+  /* ── Nav ── */
+  .sample-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--comp-nav-gap);
+    padding: var(--comp-nav-padding);
+    background: var(--comp-nav-bg);
+    border: 1px solid var(--comp-nav-border);
+    border-radius: var(--pesto-radius-lg);
+    margin-bottom: 0;
+    box-shadow: var(--comp-nav-shadow);
+    transition: box-shadow 200ms;
+  }
+  .sample-nav:hover { box-shadow: var(--comp-nav-hover-shadow); }
+  .nav-logo { font-size: var(--pesto-text-xl); font-weight: var(--pesto-weight-bold); color: var(--comp-nav-logo-color); }
+  .nav-link {
+    font-size: var(--pesto-text-sm);
+    font-weight: var(--pesto-weight-medium);
+    color: var(--comp-nav-link-color);
+    text-decoration: none;
+    transition: color 200ms;
+  }
+  .nav-link:hover { color: var(--comp-nav-link-hover); }
+  .nav-link.active { color: var(--comp-nav-active-color); font-weight: var(--comp-nav-active-weight); }
+  .nav-cta {
+    margin-left: auto;
+    padding: var(--pesto-space-2) var(--pesto-space-5);
+    background: var(--pesto-brand-600);
+    color: var(--pesto-text-inverse);
+    border-radius: var(--pesto-radius-md);
+    font-size: var(--pesto-text-sm);
+    font-weight: var(--pesto-weight-medium);
+    border: none;
+    cursor: pointer;
+  }
+
+  /* ── Color swatches ── */
+  .swatch-grid { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 12px; }
+  .swatch-group-label { font-size: 11px; color: var(--pesto-text-tertiary); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .swatch {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--pesto-radius-md);
+    border: 1px solid var(--pesto-border-default);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 2px;
+  }
+  .swatch span { font-size: 8px; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+
+  /* ── Spacing ── */
+  .spacing-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+  .spacing-label { font-size: 11px; color: var(--pesto-text-tertiary); width: 70px; text-align: right; font-family: var(--pesto-font-mono); }
+  .spacing-bar { height: 20px; background: var(--pesto-brand-200); border-radius: 3px; transition: width 300ms; }
+</style>
+</head>
+<body>
+
+<div class="section">
+  <div class="section-title">Navigation</div>
+  <nav class="sample-nav">
+    <span class="nav-logo">AppName</span>
+    <a class="nav-link active" href="#">Dashboard</a>
+    <a class="nav-link" href="#">Projects</a>
+    <a class="nav-link" href="#">Settings</a>
+    <button class="nav-cta">Get Started</button>
+  </nav>
+</div>
+
+<div class="section">
+  <div class="section-title">Buttons</div>
+  <div class="btn-row">
+    <button class="btn btn-primary">Primary</button>
+    <button class="btn btn-secondary">Secondary</button>
+    <button class="btn btn-ghost">Ghost</button>
+    <button class="btn btn-disabled" disabled>Disabled</button>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Cards</div>
+  <div class="card-row">
+    <div class="card">
+      <h3>Analytics</h3>
+      <p>Track your key metrics and monitor performance in real-time.</p>
+    </div>
+    <div class="card">
+      <h3>Reports</h3>
+      <p>Generate detailed reports and export data in multiple formats.</p>
+    </div>
+    <div class="card">
+      <h3>Settings</h3>
+      <p>Configure preferences, integrations, and team permissions.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Typography</div>
+  <div class="type-h1">Heading 1</div>
+  <div class="type-h2">Heading 2</div>
+  <div class="type-h3">Heading 3</div>
+  <div class="type-h4">Heading 4</div>
+  <div class="type-body">Body text looks like this. It should be comfortable to read with generous line-height and a constrained max-width of 65 characters for optimal readability.</div>
+  <div class="type-small">Small text for secondary information</div>
+  <div class="type-caption">Caption text for metadata and timestamps</div>
+</div>
+
+<div class="section">
+  <div class="section-title">Forms</div>
+  <div class="form-group">
+    <div class="form-row">
+      <label class="form-label" for="demo-input">Email address</label>
+      <input class="form-input" type="email" id="demo-input" placeholder="you@example.com">
+    </div>
+    <div class="form-row">
+      <label class="form-label" for="demo-error">Password</label>
+      <input class="form-input error" type="password" id="demo-error" value="short">
+      <div class="form-error">Password must be at least 8 characters</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Badges</div>
+  <div class="badge-row">
+    <span class="badge badge-brand">New Feature</span>
+    <span class="badge badge-success">Active</span>
+    <span class="badge badge-warning">Pending</span>
+    <span class="badge badge-error">Overdue</span>
+    <span class="badge badge-info">Info</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Color Palette</div>
+  <div id="swatches"></div>
+</div>
+
+<div class="section">
+  <div class="section-title">Spacing Scale</div>
+  <div id="spacing"></div>
+</div>
+
+</body>
+</html>`;
+    }
+
+    /** Generate the iframe script for swatches and spacing as a separate injection */
+    function getPreviewScript() {
+      return `
+  // Generate color swatches
+  var palettes = {
+    'Brand': ['--pesto-brand-50','--pesto-brand-100','--pesto-brand-200','--pesto-brand-300','--pesto-brand-400','--pesto-brand-500','--pesto-brand-600','--pesto-brand-700','--pesto-brand-800','--pesto-brand-900'],
+    'Neutral': ['--pesto-neutral-0','--pesto-neutral-50','--pesto-neutral-100','--pesto-neutral-200','--pesto-neutral-300','--pesto-neutral-400','--pesto-neutral-500','--pesto-neutral-600','--pesto-neutral-700','--pesto-neutral-800','--pesto-neutral-900'],
+  };
+  var swatchContainer = document.getElementById('swatches');
+  for (var _name of Object.keys(palettes)) {
+    var tokens = palettes[_name];
+    var label = document.createElement('div');
+    label.className = 'swatch-group-label';
+    label.textContent = _name;
+    swatchContainer.appendChild(label);
+    var grid = document.createElement('div');
+    grid.className = 'swatch-grid';
+    for (var t of tokens) {
+      var s = document.createElement('div');
+      s.className = 'swatch';
+      s.style.background = 'var(' + t + ')';
+      s.innerHTML = '<span>' + t.split('-').pop() + '</span>';
+      grid.appendChild(s);
+    }
+    swatchContainer.appendChild(grid);
+  }
+
+  // Generate spacing scale
+  var spacingTokens = ['--pesto-space-1','--pesto-space-2','--pesto-space-3','--pesto-space-4','--pesto-space-5','--pesto-space-6','--pesto-space-8','--pesto-space-10','--pesto-space-12','--pesto-space-16','--pesto-space-20','--pesto-space-24'];
+  var spacingContainer = document.getElementById('spacing');
+  for (var t of spacingTokens) {
+    var row = document.createElement('div');
+    row.className = 'spacing-row';
+    var cs = getComputedStyle(document.documentElement);
+    var val = cs.getPropertyValue(t).trim();
+    row.innerHTML = '<div class="spacing-label">' + t.replace('--pesto-','') + '</div><div class="spacing-bar" style="width:' + val + '"></div>';
+    spacingContainer.appendChild(row);
+  }`;
+    }
+
+    /** Map component JSON paths to --comp-* CSS custom properties.
+     *  Every editable path from pesto-components.json must be here. */
+    const COMP_VAR_MAP = {
+      // Buttons
+      'buttons.primary.background':         'comp-btn-primary-bg',
+      'buttons.primary.color':              'comp-btn-primary-text',
+      'buttons.primary.border-radius':      'comp-btn-radius',
+      'buttons.primary.hover.background':   'comp-btn-primary-hover-bg',
+      'buttons.secondary.color':            'comp-btn-secondary-text',
+      'buttons.secondary.hover.background': 'comp-btn-secondary-hover-bg',
+      'buttons.ghost.color':                'comp-btn-ghost-text',
+      'buttons.shared.font-size':           'comp-btn-font-size',
+      'buttons.shared.font-weight':         'comp-btn-font-weight',
+      'buttons.shadow':                     'comp-btn-shadow',
+      'buttons.hover-shadow':               'comp-btn-hover-shadow',
+      'buttons.disabled.opacity':           'comp-btn-disabled-opacity',
+      // Cards
+      'cards.background':                   'comp-card-bg',
+      'cards.border-radius':                'comp-card-radius',
+      'cards.padding':                      'comp-card-padding',
+      'cards.shadow':                       'comp-card-shadow',
+      'cards.hover-shadow':                 'comp-card-hover-shadow',
+      // Forms
+      'forms.input.shadow':                 'comp-form-shadow',
+      'forms.input.hover-shadow':           'comp-form-hover-shadow',
+      'forms.input.border-radius':          'comp-form-radius',
+      'forms.focus.border-color':           'comp-form-focus-border',
+      'forms.focus.outline':                'comp-form-focus-outline',
+      'forms.error.border-color':           'comp-form-error-border',
+      'forms.error.helper-color':           'comp-form-error-text',
+      'forms.label.font-size':              'comp-form-label-size',
+      'forms.label.font-weight':            'comp-form-label-weight',
+      'forms.label.color':                  'comp-form-label-color',
+      'forms.label.margin-bottom':          'comp-form-label-spacing',
+      // Badges
+      'badges.border-radius':               'comp-badge-radius',
+      'badges.font-size':                   'comp-badge-font-size',
+      'badges.font-weight':                 'comp-badge-font-weight',
+      'badges.background':                  'comp-badge-brand-bg',
+      'badges.color':                       'comp-badge-brand-text',
+      'badges.shadow':                      'comp-badge-shadow',
+      'badges.hover-shadow':                'comp-badge-hover-shadow',
+      // Navigation
+      'navigation.link.color':              'comp-nav-link-color',
+      'navigation.link-hover.color':        'comp-nav-link-hover',
+      'navigation.link-active.color':       'comp-nav-active-color',
+      'navigation.link-active.font-weight': 'comp-nav-active-weight',
+      'navigation.shadow':                   'comp-nav-shadow',
+      'navigation.hover-shadow':            'comp-nav-hover-shadow',
+      'navigation.sticky.background':       'comp-nav-bg',
+      'navigation.sticky.z-index':          'comp-nav-z',
+      // Typography
+      'typography.h1.font-size':            'comp-type-h1-size',
+      'typography.h1.font-weight':          'comp-type-h1-weight',
+      'typography.h2.font-size':            'comp-type-h2-size',
+      'typography.h2.font-weight':          'comp-type-h2-weight',
+      'typography.h3.font-size':            'comp-type-h3-size',
+      'typography.h3.font-weight':          'comp-type-h3-weight',
+      'typography.h4+.font-size':           'comp-type-h4-size',
+      'typography.h4+.font-weight':         'comp-type-h4-weight',
+      'typography.body.font-size':          'comp-type-body-size',
+      'typography.body.line-height':        'comp-type-body-leading',
+      'typography.small.font-size':         'comp-type-small-size',
+      'typography.small.color':             'comp-type-small-color',
+    };
+
+    /** Resolve a value from the component JSON by dot path */
+    function resolveCompPath(path) {
+      const parts = path.split('.');
+      let obj = componentData;
+      for (const p of parts) {
+        if (!obj) return null;
+        obj = obj[p];
+      }
+      if (Array.isArray(obj)) return obj[0];
+      return typeof obj === 'string' ? obj : null;
+    }
+
+    /** Normalize a value to be usable as a CSS custom property value.
+     *  Bare token names (--pesto-*) get wrapped in var().
+     *  Values already wrapped in var() are kept as-is. */
+    function normalizeCssValue(val) {
+      if (!val) return '';
+      if (val.startsWith('--pesto-')) return 'var(' + val + ')';
+      return val;
+    }
+
+    /** Build :root block for component-level CSS vars from the JSON spec */
+    function buildComponentVars() {
+      if (!componentData) return '';
+      const lines = [];
+
+      // Process all mapped paths
+      for (const [path, varName] of Object.entries(COMP_VAR_MAP)) {
+        const val = resolveCompPath(path);
+        if (val) lines.push('--' + varName + ': ' + normalizeCssValue(val) + ';');
+      }
+
+      // Handle split padding values: "var(--pesto-space-3) var(--pesto-space-6)"
+      const paddings = [
+        ['buttons.primary.padding', 'comp-btn-padding'],
+        ['forms.input.padding', 'comp-form-padding'],
+        ['badges.padding', 'comp-badge-padding'],
+      ];
+      for (const [path, prefix] of paddings) {
+        const val = resolveCompPath(path);
+        if (val) {
+          const parts = val.split(/\s+/);
+          lines.push('--' + prefix + '-y: ' + (parts[0] || val) + ';');
+          lines.push('--' + prefix + '-x: ' + (parts[1] || parts[0] || val) + ';');
+        }
+      }
+
+      // Handle "1px solid var(...)" border values — extract the color token
+      const borders = [
+        ['buttons.secondary.border', 'comp-btn-secondary-border'],
+        ['cards.border', 'comp-card-border'],
+        ['forms.input.border', 'comp-form-border'],
+      ];
+      for (const [path, varName] of borders) {
+        const val = resolveCompPath(path);
+        if (val) {
+          const colorMatch = val.match(/var\((--pesto-[\w-]+)\)/);
+          lines.push('--' + varName + ': ' + (colorMatch ? 'var(' + colorMatch[1] + ')' : 'var(--pesto-border-default)') + ';');
+        }
+      }
+
+      // Hardcoded defaults for properties not directly in the JSON
+      lines.push('--comp-type-body-color: var(--pesto-text-primary);');
+      lines.push('--comp-type-body-leading: var(--pesto-leading-normal);');
+      lines.push('--comp-type-caption-size: var(--pesto-text-xs);');
+      lines.push('--comp-type-caption-color: var(--pesto-text-tertiary);');
+      lines.push('--comp-nav-border: var(--pesto-border-default);');
+      lines.push('--comp-nav-padding: var(--pesto-space-4);');
+      lines.push('--comp-nav-gap: var(--pesto-space-8);');
+      lines.push('--comp-nav-logo-color: var(--pesto-brand-600);');
+      lines.push('--comp-nav-z: var(--pesto-z-sticky);');
+      lines.push('--comp-card-title-size: var(--pesto-text-xl);');
+      lines.push('--comp-card-title-weight: var(--pesto-weight-semibold);');
+      lines.push('--comp-card-body-size: var(--pesto-text-sm);');
+      lines.push('--comp-card-body-color: var(--pesto-text-secondary);');
+      lines.push('--comp-form-label-color: var(--pesto-text-primary);');
+
+      return lines.join('\n    ');
+    }
+
+    function buildDarkOverrides() {
+      if (!tokenData || !tokenData.dark) return '';
+      return tokenData.dark
+        .flatMap(cat => cat.tokens)
+        .map(t => `${t.name}: ${currentTokens[t.name] || t.value};`)
+        .join('\n    ');
+    }
+
+    // ── Dark mode ───────────────────────────────────────────────
+    function toggleDarkMode() {
+      isDark = !isDark;
+      const btn = document.getElementById('darkToggle');
+      btn.classList.toggle('active', isDark);
+
+      try {
+        const doc = document.getElementById('preview').contentDocument;
+        doc.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      } catch (e) {}
+
+      // Switch sidebar to show dark tokens
+      if (isDark && tokenData.dark.length > 0) {
+        renderSidebar(tokenData.dark);
+      } else {
+        renderSidebar(tokenData.light);
+      }
+    }
+
+    // ── Code view ───────────────────────────────────────────────
+    function toggleCodeView() {
+      const panel = document.getElementById('codePanel');
+      const btn = document.getElementById('codeToggle');
+      panel.classList.toggle('open');
+      btn.classList.toggle('active');
+
+      if (panel.classList.contains('open')) {
+        rebuildCodeView();
+      }
+    }
+
+    function rebuildCodeView() {
+      syncing = true;
+      // Build modified CSS from original + current token values
+      let css = originalCss;
+      for (const [name, value] of Object.entries(currentTokens)) {
+        const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const re = new RegExp('(' + escaped + '\\s*:\\s*)(.+?)(\\s*;)', 'g');
+        css = css.replace(re, '$1' + value + '$3');
+      }
+      document.getElementById('codeEditor').value = css;
+      syncing = false;
+    }
+
+    // Code editor → controls sync (debounced)
+    document.getElementById('codeEditor').addEventListener('input', () => {
+      if (syncing) return;
+      clearTimeout(codeDebounce);
+      codeDebounce = setTimeout(syncFromCode, 500);
+    });
+
+    function syncFromCode() {
+      syncing = true;
+      const css = document.getElementById('codeEditor').value;
+      // Re-parse tokens from edited CSS
+      const re = /--(pesto-[\w-]+)\s*:\s*(.+?)\s*;/g;
+      let match;
+      while ((match = re.exec(css)) !== null) {
+        const name = `--${match[1]}`;
+        const value = match[2].trim();
+        if (currentTokens[name] !== undefined && currentTokens[name] !== value) {
+          currentTokens[name] = value;
+          // Update iframe
+          try {
+            const doc = document.getElementById('preview').contentDocument;
+            doc.documentElement.style.setProperty(name, value);
+          } catch (e) {}
+        }
+      }
+      // Re-render sidebar controls
+      if (isDark) {
+        renderSidebar(tokenData.dark);
+      } else {
+        renderSidebar(tokenData.light);
+      }
+      markDirty();
+      syncing = false;
+    }
+
+    // ── Save ────────────────────────────────────────────────────
+    async function save() {
+      // Build the final CSS
+      let css = originalCss;
+      for (const [name, value] of Object.entries(currentTokens)) {
+        const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const re = new RegExp('(' + escaped + '\\s*:\\s*)(.+?)(\\s*;)', 'g');
+        css = css.replace(re, '$1' + value + '$3');
+      }
+
+      const btn = document.getElementById('saveBtn');
+      btn.textContent = 'Saving...';
+
+      try {
+        const res = await fetch('/api/tokens', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ css }),
+        });
+
+        // Also save component specs
+        if (componentData) {
+          await fetch('/api/components', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(componentData),
+          });
+        }
+
+        if (res.ok) {
+          originalCss = css;
+          isDirty = false;
+          btn.classList.remove('dirty');
+          btn.classList.add('saved');
+          btn.textContent = 'Saved';
+          setTimeout(() => {
+            btn.classList.remove('saved');
+            btn.textContent = 'Save';
+          }, 2000);
+        } else {
+          btn.textContent = 'Error!';
+          setTimeout(() => { btn.textContent = 'Save *'; }, 2000);
+        }
+      } catch (e) {
+        btn.textContent = 'Error!';
+        setTimeout(() => { btn.textContent = 'Save *'; }, 2000);
+      }
+    }
+
+    // Warn on unsaved changes
+    window.addEventListener('beforeunload', (e) => {
+      if (isDirty) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    });
+
+    // ── Boot ────────────────────────────────────────────────────
+    init().catch(err => {
+      document.getElementById('sidebar').innerHTML =
+        '<div style="padding:20px;color:#f87171;">Error loading tokens:<br><pre>' +
+        String(err) + '</pre></div>';
+      console.error('Init failed:', err);
+    });
+  </script>
+</body>
+</html>

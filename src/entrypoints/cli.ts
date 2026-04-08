@@ -19,7 +19,7 @@ program
 program
   .command("generate")
   .description("Generate an HTML page from a text prompt")
-  .argument("<prompt>", "Description of the page to generate")
+  .argument("<prompt...>", "Description of the page to generate")
   .option("-o, --output <file>", "Output file path", "output.html")
   .option("-t, --type <pageType>", "Page type hint (e.g. landing, dashboard, blog)")
   .option("--palette <colors...>", "Color palette (space-separated hex codes)")
@@ -28,7 +28,8 @@ program
   .option("-s, --serve [port]", "Serve the output on localhost after generation")
   .option("-l, --live [port]", "Live preview in browser during generation")
   .option("--no-validate", "Skip the validation step")
-  .action(async (prompt: string, opts) => {
+  .action(async (promptParts: string[], opts) => {
+    const prompt = promptParts.join(" ");
     const harness = createHarness({ planner: opts.planner });
 
     // Start live preview server if requested
@@ -167,6 +168,112 @@ program
     for (const name of harness.listAgents()) {
       console.log(`  - ${name}`);
     }
+  });
+
+program
+  .command("design")
+  .description("Open the visual design system editor")
+  .option("-p, --port <port>", "Port to serve the editor on", "3300")
+  .action(async (opts) => {
+    const { default: express } = await import("express");
+    const { parseTokens, serializeTokens } = await import("../editor/token-parser.js");
+    const { loadDesignSystem, writeDesignSystemCss, clearDesignSystemCache } = await import("../utils/design-system.js");
+
+    const app = express();
+    app.use(express.json({ limit: "1mb" }));
+
+    const editorPath = join(
+      import.meta.dirname ?? process.cwd(),
+      "..", "editor", "design-editor.html"
+    );
+
+    // Serve the editor UI
+    app.get("/", (_req, res) => {
+      try {
+        const html = readFileSync(editorPath, "utf-8");
+        res.type("html").send(html);
+      } catch (err) {
+        res.status(500).send(`Failed to load editor: ${err}`);
+      }
+    });
+
+    // Return parsed tokens as JSON
+    app.get("/api/tokens", (_req, res) => {
+      clearDesignSystemCache();
+      const ds = loadDesignSystem();
+      const parsed = parseTokens(ds.css);
+      res.json(parsed);
+    });
+
+    // Save modified CSS
+    app.post("/api/tokens", (req, res) => {
+      try {
+        const { css } = req.body;
+        if (!css || typeof css !== "string") {
+          res.status(400).json({ error: "Missing css field" });
+          return;
+        }
+        writeDesignSystemCss(css);
+        res.json({ ok: true });
+      } catch (err) {
+        res.status(500).json({ error: String(err) });
+      }
+    });
+
+    // Return component specs
+    app.get("/api/components", (_req, res) => {
+      try {
+        const compPath = join(
+          import.meta.dirname ?? process.cwd(),
+          "..", "..", "design-system", "pesto-components.json"
+        );
+        const raw = readFileSync(compPath, "utf-8");
+        res.json(JSON.parse(raw));
+      } catch (err) {
+        res.status(500).json({ error: String(err) });
+      }
+    });
+
+    // Save component specs
+    app.post("/api/components", (req, res) => {
+      try {
+        const compPath = join(
+          import.meta.dirname ?? process.cwd(),
+          "..", "..", "design-system", "pesto-components.json"
+        );
+        writeFileSync(compPath, JSON.stringify(req.body, null, 2) + "\n", "utf-8");
+        res.json({ ok: true });
+      } catch (err) {
+        res.status(500).json({ error: String(err) });
+      }
+    });
+
+    // Serve raw pesto.css
+    app.get("/api/pesto.css", (_req, res) => {
+      clearDesignSystemCache();
+      const ds = loadDesignSystem();
+      res.type("css").send(ds.css);
+    });
+
+    const port = parseInt(opts.port, 10);
+
+    // Kill any leftover process on the port before starting
+    try {
+      const { execSync } = await import("child_process");
+      execSync(`lsof -ti :${port} | xargs kill -9 2>/dev/null`, { stdio: "ignore" });
+    } catch { /* nothing to kill */ }
+
+    const server = app.listen(port, () => {
+      console.log(`\nPesto Design System Editor: http://localhost:${port}`);
+      console.log("  Edit tokens visually, toggle dark mode, and save back to disk.");
+      console.log("  Press Ctrl+C to stop.\n");
+      exec(`open http://localhost:${port}`);
+    });
+
+    // Graceful shutdown
+    const shutdown = () => { server.close(() => process.exit(0)); };
+    process.on("SIGINT", shutdown);
+    process.on("SIGTERM", shutdown);
   });
 
 function serveFile(filePath: string, port: number) {

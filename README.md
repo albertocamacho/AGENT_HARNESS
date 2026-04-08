@@ -17,9 +17,10 @@ The orchestrator manages handoffs, passes context between agents, and surfaces t
 The `design-system/` directory holds the source of truth:
 
 - **`pesto.css`** — CSS custom properties for colors, spacing, typography, surfaces, transitions, z-index. All generated pages must use these tokens exclusively.
-- **`pesto-components.md`** — Component rules for buttons, cards, forms, nav, badges, images, layout, responsive, and forbidden patterns.
+- **`pesto-components.json`** — CSS property specs for each component (buttons, cards, forms, nav, badges, typography, layout, responsive).
+- **`pesto-guidelines.md`** — Behavioral rules, accessibility requirements, and forbidden patterns.
 
-Both files are loaded at startup and injected into every agent's system prompt. The validator checks every rule in `pesto-components.md` and every token in `pesto.css`.
+All files are loaded at startup and injected into every agent's system prompt. The validator checks every rule in `pesto-guidelines.md`, every spec in `pesto-components.json`, and every token in `pesto.css`.
 
 To customize the design system, edit these files. No code changes needed — agents pick up the new rules on next run.
 
@@ -140,7 +141,8 @@ const harness = createHarness({ extraAgents: [new SEOAgent()] });
 ```
 ├── design-system/
 │   ├── pesto.css               # Design tokens (colors, spacing, type, etc.)
-│   └── pesto-components.md     # Component and pattern rules
+│   ├── pesto-components.json   # Component CSS property specs
+│   └── pesto-guidelines.md     # Behavioral rules and forbidden patterns
 ├── src/
 │   ├── core/
 │   │   ├── types.ts            # All interfaces and types

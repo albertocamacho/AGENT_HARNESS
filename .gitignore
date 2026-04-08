@@ -3,3 +3,8 @@ dist/
 .env
 .DS_Store
 *.tsbuildinfo
+
+# Generated harness outputs
+*.html
+!src/**/*.html
+!design-system/**/*.html

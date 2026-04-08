@@ -9,6 +9,7 @@
     "cli": "tsx src/entrypoints/cli.ts",
     "api": "tsx src/entrypoints/api.ts",
     "web": "tsx src/entrypoints/web.ts",
+    "design": "tsx src/entrypoints/cli.ts design",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:unit": "vitest run tests/design-system.test.ts",

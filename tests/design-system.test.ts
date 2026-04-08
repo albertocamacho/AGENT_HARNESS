@@ -6,12 +6,26 @@ describe("design system loader", () => {
     clearDesignSystemCache();
   });
 
-  it("loads pesto.css and pesto-components.md", () => {
+  it("loads pesto.css, pesto-components.json, and pesto-guidelines.md", () => {
     const ds = loadDesignSystem();
 
     expect(ds.css).toBeTruthy();
+    expect(ds.componentSpecs).toBeTruthy();
     expect(ds.rules).toBeTruthy();
     expect(ds.promptBlock).toBeTruthy();
+  });
+
+  it("componentSpecs contains expected component keys", () => {
+    const ds = loadDesignSystem();
+
+    const keys = Object.keys(ds.componentSpecs);
+    expect(keys).toContain("buttons");
+    expect(keys).toContain("cards");
+    expect(keys).toContain("forms");
+    expect(keys).toContain("typography");
+    expect(keys).toContain("navigation");
+    expect(keys).toContain("badges");
+    expect(keys).toContain("responsive");
   });
 
   it("css contains core token categories", () => {
@@ -48,7 +62,6 @@ describe("design system loader", () => {
       "Forms",
       "Navigation",
       "Images",
-      "Badges",
       "Responsive",
       "Forbidden Patterns",
     ];
@@ -64,6 +77,7 @@ describe("design system loader", () => {
     expect(ds.promptBlock).toContain("<design_system>");
     expect(ds.promptBlock).toContain("</design_system>");
     expect(ds.promptBlock).toContain("<design_tokens>");
+    expect(ds.promptBlock).toContain("<component_specs>");
     expect(ds.promptBlock).toContain("<component_rules>");
   });
 
