@@ -8,8 +8,9 @@ export class RendererAgent extends BaseAgent {
   protected artifactKey = "final_html";
 
   protected llmOptions = {
-    maxTokens: 32000,
+    maxTokens: 24000,
     model: "claude-sonnet-4-6",
+    temperature: 0.5,
   };
 
   protected get systemPrompt(): string {
@@ -41,7 +42,7 @@ Rules:
 - Images: use <img> with descriptive alt text and src="https://placehold.co/WxH"
 - The page must look polished and production-ready
 - Do NOT use inline styles, !important, hardcoded colors, or CSS frameworks
-- Do NOT add content or design choices that aren't in the spec
+- CRITICAL: populate the page with rich, realistic sample data — tables should have 5-8 rows, lists should have real items, dashboards should show charts/metrics with plausible numbers, cards should have full descriptions. An empty-looking page is a failure. Invent realistic placeholder content that fits the domain.
 - Keep CSS concise — combine selectors where possible, avoid redundant declarations
 
 ${ds.referenceExample ? `Here is a reference example of a well-built Pesto page. Match this level of quality, structure, and token usage — but do NOT copy its content or layout. Use it only as a quality benchmark:
@@ -56,7 +57,7 @@ ${ds.referenceExample}
 
 Original brief: "${request.prompt}"
 
-Build it exactly as specified — no creative liberties.`;
+Build it as specified. IMPORTANT: Fill the page with rich, realistic sample content appropriate to the domain. Tables with real rows, lists with real items, metrics with plausible numbers, cards with full text. The page must feel lived-in and populated, never empty or skeletal.`;
   }
 
   protected parseResponse(raw: string) {

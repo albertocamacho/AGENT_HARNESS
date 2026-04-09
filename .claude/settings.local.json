@@ -10,7 +10,10 @@
       "mcp__Claude_Preview__preview_start",
       "Bash(npx tsc:*)",
       "Bash(ls -la /Users/albertocamacho/Desktop/AGENT_HARNESS/*.md)",
-      "Bash(npx tsx:*)"
+      "Bash(npx tsx:*)",
+      "Bash(curl -s http://localhost:3300/api/tokens)",
+      "Bash(python3 -c \":*)",
+      "Bash(wc -l /tmp/impeccable-review/source/skills/*/SKILL.md)"
     ]
   }
 }

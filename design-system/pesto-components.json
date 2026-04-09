@@ -22,11 +22,9 @@
   },
   "typography": {
     "h1": {
-      "font-size": [
-        "--pesto-text-4xl",
-        "--pesto-text-5xl"
-      ],
-      "font-weight": "--pesto-weight-bold"
+      "font-size": "--pesto-text-2xl",
+      "font-weight": "--pesto-weight-bold",
+      "_note": "Use --pesto-text-2xl for all page headers. Reserve 4xl/5xl only for landing hero sections."
     },
     "h2": {
       "font-size": [

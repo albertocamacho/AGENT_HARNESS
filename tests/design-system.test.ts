@@ -47,7 +47,7 @@ describe("design system loader", () => {
     // Transitions
     expect(ds.css).toContain("--pesto-duration-normal");
     // Dark mode
-    expect(ds.css).toContain("prefers-color-scheme: dark");
+    expect(ds.css).toContain('data-theme="dark"');
   });
 
   it("rules contain all required component sections", () => {
@@ -87,6 +87,32 @@ describe("design system loader", () => {
 
     // Same reference — cached
     expect(first).toBe(second);
+  });
+
+  it("craftGuidelines loads modules from craft/ directory", () => {
+    const ds = loadDesignSystem();
+
+    // Anti-patterns always comes first
+    expect(ds.craftGuidelines).toMatch(/^# Anti-Patterns/);
+
+    // All 7 craft modules are present
+    expect(ds.craftGuidelines).toContain("# Anti-Patterns");
+    expect(ds.craftGuidelines).toContain("# Typography");
+    expect(ds.craftGuidelines).toContain("# Color & Contrast");
+    expect(ds.craftGuidelines).toContain("# Spatial Design");
+    expect(ds.craftGuidelines).toContain("# Motion Design");
+    expect(ds.craftGuidelines).toContain("# Interaction Design");
+    expect(ds.craftGuidelines).toContain("# Responsive Design");
+    expect(ds.craftGuidelines).toContain("# UX Writing");
+  });
+
+  it("craftGuidelines contains key anti-pattern rules", () => {
+    const ds = loadDesignSystem();
+
+    expect(ds.craftGuidelines).toContain("AI Slop Test");
+    expect(ds.craftGuidelines).toContain("Cyan-on-dark");
+    expect(ds.craftGuidelines).toContain("Glassmorphism");
+    expect(ds.craftGuidelines).toContain("Bounce or elastic");
   });
 
   it("clearCache forces a reload", () => {

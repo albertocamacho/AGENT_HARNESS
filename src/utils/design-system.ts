@@ -1,5 +1,5 @@
-import { readFileSync, readdirSync, writeFileSync } from "fs";
-import { join, extname } from "path";
+import { readFileSync, readdirSync, writeFileSync, existsSync } from "fs";
+import { join, extname, basename } from "path";
 
 export interface DesignSystem {
   /** Raw CSS with all custom properties */
@@ -8,7 +8,7 @@ export interface DesignSystem {
   componentSpecs: Record<string, unknown>;
   /** Component guidelines in markdown */
   rules: string;
-  /** Visual craft guidelines in markdown */
+  /** Visual craft guidelines in markdown (combined from craft/ modules) */
   craftGuidelines: string;
   /** Reference HTML example demonstrating ideal output */
   referenceExample: string;
@@ -36,7 +36,6 @@ export function loadDesignSystem(dir?: string): DesignSystem {
   const cssFiles = files.filter((f) => extname(f) === ".css");
   const jsonFiles = files.filter((f) => extname(f) === ".json");
   const mdFiles = files.filter((f) => extname(f) === ".md" && !f.startsWith("visual-craft"));
-  const craftFiles = files.filter((f) => f.startsWith("visual-craft") && extname(f) === ".md");
   const htmlFiles = files.filter((f) => f.startsWith("reference-") && extname(f) === ".html");
 
   const css = cssFiles
@@ -52,7 +51,13 @@ export function loadDesignSystem(dir?: string): DesignSystem {
     .map((f) => readFileSync(join(baseDir, f), "utf-8"))
     .join("\n\n");
 
-  const craftGuidelines = craftFiles
+  // Load craft modules from craft/ subdirectory
+  // Anti-patterns always come first, then alphabetical
+  const craftGuidelines = loadCraftModules(baseDir);
+
+  // Legacy fallback: if no craft/ dir, try visual-craft*.md
+  const craftFallback = craftGuidelines || files
+    .filter((f) => f.startsWith("visual-craft") && extname(f) === ".md")
     .map((f) => readFileSync(join(baseDir, f), "utf-8"))
     .join("\n\n");
 
@@ -96,7 +101,7 @@ ${rules}
   // Renderer needs full CSS tokens + component rules (but not audit checklists)
   const tokensAndRulesBlock = promptBlock;
 
-  cached = { css, componentSpecs, rules, craftGuidelines, referenceExample, promptBlock, rulesOnlyBlock, tokensAndRulesBlock };
+  cached = { css, componentSpecs, rules, craftGuidelines: craftFallback, referenceExample, promptBlock, rulesOnlyBlock, tokensAndRulesBlock };
   return cached;
 }
 
@@ -110,6 +115,31 @@ export function writeDesignSystemCss(css: string, dir?: string): void {
   const baseDir = dir ?? findDesignSystemDir();
   writeFileSync(join(baseDir, "pesto.css"), css, "utf-8");
   clearDesignSystemCache();
+}
+
+/**
+ * Load craft reference modules from design-system/craft/ directory.
+ * Anti-patterns always loads first for maximum prompt emphasis,
+ * then remaining modules in alphabetical order.
+ */
+function loadCraftModules(baseDir: string): string {
+  const craftDir = join(baseDir, "craft");
+  if (!existsSync(craftDir)) return "";
+
+  const craftFiles = readdirSync(craftDir)
+    .filter((f) => extname(f) === ".md")
+    .sort((a, b) => {
+      // Anti-patterns always first
+      if (a.startsWith("anti-pattern")) return -1;
+      if (b.startsWith("anti-pattern")) return 1;
+      return a.localeCompare(b);
+    });
+
+  if (craftFiles.length === 0) return "";
+
+  return craftFiles
+    .map((f) => readFileSync(join(craftDir, f), "utf-8").trim())
+    .join("\n\n---\n\n");
 }
 
 /**

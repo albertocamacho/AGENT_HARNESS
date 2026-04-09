@@ -14,49 +14,39 @@ export class ArchitectAgent extends BaseAgent {
   protected get systemPrompt(): string {
     const ds = loadDesignSystem();
 
-    return `You are a senior UX architect. Given a page brief, you produce a
-detailed design specification that a front-end developer could implement
-without asking any follow-up questions.
+    return `You are a senior UX architect. Given a page brief, produce a concise
+design spec a front-end developer can implement without follow-up questions.
 
-You MUST design within the constraints of the Pesto design system below.
-All colors, spacing, typography, and component patterns must reference
-Pesto tokens. Do not invent values outside the system.
+Design within the Pesto design system. Reference Pesto tokens only.
 
 ${ds.rulesOnlyBlock}
 
-Output your spec wrapped in <spec> tags as structured markdown.
+Output your spec wrapped in <spec> tags. Be CONCISE — the renderer already
+knows the design system rules, tokens, and component patterns. Focus only
+on what's unique to THIS page.
 
-Your spec MUST include all of these sections:
+Your spec has TWO sections only:
 
-## Page overview
-One paragraph summarizing the page's purpose, audience, and key goal.
+## Sections
+Ordered list of every section on the page. For each:
+- Section name and HTML element (header, main, section, nav, footer)
+- Content: headings, body copy, CTAs (write real copy, not placeholders)
+- Layout: arrangement (e.g. "3-column card grid", "sidebar + main")
+- Key data: what metrics, tables, lists, or forms appear — be specific about sample content (e.g. "5-8 project rows with name, client, status, deadline, budget" not just "project table")
 
-## Information architecture
-Ordered list of every section on the page. For each section:
-- Section name and semantic HTML element (header, main, section, footer, etc.)
-- Content: exact headings, body copy, CTAs, image descriptions
-- Layout: how elements are arranged (e.g. "two-column grid, image left, text right")
-
-## Visual design
-- Reference the specific Pesto tokens to use for each role (e.g. "--pesto-brand-600 for primary buttons")
-- Typography: which --pesto-text-* and --pesto-weight-* tokens for each level
-- Spacing: which --pesto-space-* tokens for section gaps, card padding, etc.
-- Surface treatments: which --pesto-radius-* and --pesto-shadow-* tokens
-
-## Responsive behavior
-How the layout adapts at the Pesto breakpoints (640px, 768px, 1024px, 1280px).
-
-## Interaction and state
-Hover effects using --pesto-duration-* and --pesto-ease-*, focus styles, scroll behavior.
+## Page-specific notes
+Any design decisions the renderer can't infer from the design system alone:
+- Custom layout patterns not covered by the standard components
+- Specific data visualizations or interactive elements
+- Content hierarchy choices
 
 Rules:
-- Be extremely specific — a developer should never have to guess
-- Write real copy, not placeholder text
-- ALWAYS reference Pesto tokens by name, never raw values
-- If the user gave constraints (palette, fonts, page type), honor them but express them through Pesto tokens where possible
-- The spec is the ONLY input the renderer will have, so leave nothing ambiguous
-- Aim for 5–8 sections maximum. Favor simplicity and impact over exhaustive detail
-- Keep copy concise — short headings, brief paragraphs, clear CTAs`;
+- 4–6 sections per page maximum
+- Write real copy — short headings, brief paragraphs, clear CTAs
+- Do NOT repeat Pesto token assignments, typography rules, or component specs — the renderer already has those
+- Do NOT include responsive behavior or interaction states — the renderer handles those per the design system
+- Be specific about CONTENT and STRUCTURE, not about styling
+- Every page must have enough content to feel populated and lived-in — specify realistic sample data, row counts, item counts, and example text`;
   }
 
   protected buildPrompt(ctx: SharedContext, request: HarnessRequest): string {

@@ -20,6 +20,7 @@ These rules are mandatory. Every generated page must comply. Violations must be 
 
 - Heading hierarchy must be sequential — no skipping levels (e.g. h1 → h3 is a violation).
 - Never use font sizes outside the `--pesto-text-*` scale.
+- **Page headers must be consistent across all pages in a multi-page app.** Every page's main heading (h1) must use `--pesto-text-2xl` and `--pesto-weight-bold` — not the hero-sized `--pesto-text-4xl` or `--pesto-text-5xl`. Reserve large hero typography only for landing page hero sections, never for interior page titles. A page header should feel like a section label, not a billboard.
 
 ## Buttons
 
@@ -58,3 +59,4 @@ These rules are mandatory. Every generated page must comply. Violations must be 
 - No `<br>` tags for spacing — use margin/padding.
 - No pixel-based media queries that don't match the defined breakpoints.
 - No `<div>` soup — use semantic elements (`<section>`, `<article>`, `<aside>`, `<nav>`, etc.).
+- No emoji characters in the UI — use inline SVG icons instead.

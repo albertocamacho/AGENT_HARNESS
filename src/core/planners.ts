@@ -31,15 +31,17 @@ export class StaticPlanner implements PipelinePlanner {
       const dynamicAgents = [shellRenderer, ...pageRenderers, ...pageValidators];
 
       const steps: Pipeline["steps"] = [
+        // Architect and shell run in parallel — shell only needs the page
+        // list (from complexity detection), not the architect's spec
         { agentName: "architect", phase: 0 },
-        { agentName: "shell", phase: 1 },
+        { agentName: "shell", phase: 0 },
         ...complexity.pages.map((page) => ({
           agentName: `renderer_${page.id}`,
-          phase: 2,
+          phase: 1,
         })),
         ...complexity.pages.map((page) => ({
           agentName: `validator_${page.id}`,
-          phase: 3,
+          phase: 2,
           condition: (ctx: import("./types.js").SharedContext) => !ctx.request.skipValidation,
         })),
       ];

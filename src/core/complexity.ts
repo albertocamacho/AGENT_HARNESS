@@ -25,10 +25,49 @@ export interface ComplexityPlan {
  * Analyze a prompt and determine whether it needs one page or multiple.
  * Uses Haiku for speed — this should add < 5s of overhead.
  */
+/**
+ * Quick regex check for obvious single-page prompts.
+ * Returns a ComplexityPlan if confident, or null to fall through to LLM.
+ */
+function quickClassify(prompt: string): ComplexityPlan | null {
+  const lower = prompt.toLowerCase();
+
+  // Obvious single-page patterns
+  const singlePatterns = [
+    /^a\s+(landing|pricing|login|signup|about|contact|blog|faq|error|404)\s+page/i,
+    /^(create|build|make|design)\s+a\s+(single|one|simple)\s+page/i,
+    /^a\s+(restaurant|product|portfolio|resume|cv)\s+(menu|page|site|website)\b/i,
+  ];
+  for (const pat of singlePatterns) {
+    if (pat.test(prompt)) return fallbackSingle(prompt);
+  }
+
+  // Obvious multi-page: prompt mentions multiple distinct pages/sections with "and"
+  // e.g. "with a dashboard, a settings page, and a reports page"
+  const multiSignals = lower.match(/\b(?:page|view|screen|tab|section)\b/gi) || [];
+  const withClause = lower.match(/with\s+(?:a\s+)?[\w\s]+(?:,\s*(?:a\s+)?[\w\s]+)+(?:,?\s*and\s+(?:a\s+)?[\w\s]+)/i);
+
+  if (multiSignals.length >= 2 || withClause) {
+    // Looks multi-page — still need the LLM to extract page specs
+    return null;
+  }
+
+  // If the prompt is very short and doesn't mention multiple things, assume single
+  if (lower.split(/\s+/).length < 15 && !lower.includes(' and ')) {
+    return fallbackSingle(prompt);
+  }
+
+  return null; // uncertain, use LLM
+}
+
 export async function detectComplexity(
   prompt: string,
   constraints?: PageConstraints,
 ): Promise<ComplexityPlan> {
+  // Fast path: skip LLM for obvious cases
+  const quick = quickClassify(prompt);
+  if (quick) return quick;
+
   const systemPrompt = `You classify web page generation requests into complexity tiers.
 
 Tier "single": The request describes one page or a narrowly scoped view.

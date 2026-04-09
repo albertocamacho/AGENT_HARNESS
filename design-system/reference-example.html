@@ -1,454 +1,114 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GreenLedger — Smart Expense Tracking</title>
-  <link rel="stylesheet" href="pesto.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* ── Resets ──────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<!-- Reference: Key CSS patterns for a well-built Pesto page -->
+<style>
+  /* ── Resets (provided by pesto.css, do not repeat) ── */
 
-    body {
-      font-family: var(--pesto-font-sans);
-      font-size: var(--pesto-text-base);
-      line-height: var(--pesto-leading-normal);
-      color: var(--pesto-text-primary);
-      background: var(--pesto-surface-page);
-      -webkit-font-smoothing: antialiased;
-    }
+  /* ── Container pattern ── */
+  .container {
+    width: var(--pesto-content-width);
+    margin-inline: auto;
+  }
 
-    /* ── Container ───────────────────────────────────────── */
-    .container {
-      width: var(--pesto-content-width);
-      margin-inline: auto;
-    }
+  /* ── Sticky nav ── */
+  .nav {
+    position: sticky; top: 0;
+    z-index: var(--pesto-z-sticky);
+    background: var(--pesto-surface-page);
+    border-bottom: 1px solid var(--pesto-border-default);
+    padding: var(--pesto-space-4) 0;
+  }
 
-    /* ── Navigation ──────────────────────────────────────── */
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: var(--pesto-z-sticky);
-      background: var(--pesto-surface-page);
-      border-bottom: 1px solid var(--pesto-border-default);
-      padding: var(--pesto-space-4) 0;
-    }
+  /* ── Primary button ── */
+  .btn-primary {
+    padding: var(--pesto-space-3) var(--pesto-space-6);
+    background: var(--pesto-brand-600);
+    color: var(--pesto-text-inverse);
+    font-size: var(--pesto-text-sm);
+    font-weight: var(--pesto-weight-medium);
+    border: none;
+    border-radius: var(--pesto-radius-md);
+    cursor: pointer;
+    transition: all 300ms var(--pesto-ease-interact);
+    min-height: 44px;
+  }
+  .btn-primary:hover {
+    background: var(--pesto-brand-700);
+    transform: translateY(-1px);
+    box-shadow: var(--pesto-shadow-md);
+  }
+  .btn-primary:focus-visible {
+    outline: 2px solid var(--pesto-border-focus);
+    outline-offset: 2px;
+  }
 
-    .nav .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+  /* ── Card ── */
+  .card {
+    background: var(--pesto-surface-raised);
+    border: 1px solid var(--pesto-border-default);
+    border-radius: var(--pesto-radius-lg);
+    padding: var(--pesto-space-6);
+    box-shadow: var(--pesto-shadow-sm);
+    transition: all 300ms var(--pesto-ease-interact);
+  }
+  .card:hover {
+    box-shadow: var(--pesto-shadow-md);
+    transform: translateY(-2px);
+  }
 
-    .nav-logo {
-      font-size: var(--pesto-text-xl);
-      font-weight: var(--pesto-weight-bold);
-      color: var(--pesto-brand-600);
-      text-decoration: none;
-    }
+  /* ── Section spacing ── */
+  .section { padding: var(--pesto-space-20) 0; }
 
-    .nav-links {
-      display: flex;
-      gap: var(--pesto-space-8);
-      list-style: none;
-    }
+  /* ── Feature grid ── */
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--pesto-space-8);
+  }
 
-    .nav-links a {
-      color: var(--pesto-text-secondary);
-      text-decoration: none;
-      font-size: var(--pesto-text-sm);
-      font-weight: var(--pesto-weight-medium);
-      transition: color var(--pesto-duration-normal) var(--pesto-ease-default);
-    }
+  /* ── Badge ── */
+  .badge {
+    display: inline-block;
+    padding: var(--pesto-space-1) var(--pesto-space-3);
+    background: var(--pesto-brand-100);
+    color: var(--pesto-brand-800);
+    font-size: var(--pesto-text-xs);
+    font-weight: var(--pesto-weight-medium);
+    border-radius: var(--pesto-radius-full);
+  }
 
-    .nav-links a:hover { color: var(--pesto-text-primary); }
-    .nav-links a[aria-current="page"] {
-      color: var(--pesto-text-primary);
-      font-weight: var(--pesto-weight-medium);
-    }
+  /* ── Stats ── */
+  .stat-value {
+    font-size: var(--pesto-text-4xl);
+    font-weight: var(--pesto-weight-bold);
+    color: var(--pesto-brand-600);
+  }
+  .stat-label {
+    font-size: var(--pesto-text-sm);
+    color: var(--pesto-text-secondary);
+  }
 
-    .nav-links a:focus-visible {
-      outline: 2px solid var(--pesto-border-focus);
-      outline-offset: 2px;
-      border-radius: var(--pesto-radius-sm);
-    }
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .grid-3 { grid-template-columns: 1fr; }
+  }
+</style>
 
-    .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      padding: var(--pesto-space-2) var(--pesto-space-5);
-      background: var(--pesto-brand-600);
-      color: var(--pesto-text-inverse);
-      font-size: var(--pesto-text-sm);
-      font-weight: var(--pesto-weight-medium);
-      border: none;
-      border-radius: var(--pesto-radius-md);
-      cursor: pointer;
-      transition: background var(--pesto-duration-normal) var(--pesto-ease-default);
-    }
-
-    .nav-cta:hover { background: var(--pesto-brand-700); }
-    .nav-cta:focus-visible {
-      outline: 2px solid var(--pesto-border-focus);
-      outline-offset: 2px;
-    }
-
-    /* ── Hero ────────────────────────────────────────────── */
-    .hero {
-      padding: var(--pesto-space-24) 0 var(--pesto-space-20);
-      text-align: center;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      padding: var(--pesto-space-1) var(--pesto-space-3);
-      background: var(--pesto-brand-100);
-      color: var(--pesto-brand-800);
-      font-size: var(--pesto-text-xs);
-      font-weight: var(--pesto-weight-medium);
-      border-radius: var(--pesto-radius-full);
-      margin-bottom: var(--pesto-space-6);
-    }
-
-    .hero h1 {
-      font-size: var(--pesto-text-5xl);
-      font-weight: var(--pesto-weight-bold);
-      line-height: var(--pesto-leading-tight);
-      max-width: 18ch;
-      margin-inline: auto;
-      margin-bottom: var(--pesto-space-6);
-    }
-
-    .hero p {
-      font-size: var(--pesto-text-lg);
-      color: var(--pesto-text-secondary);
-      max-width: 55ch;
-      margin-inline: auto;
-      margin-bottom: var(--pesto-space-10);
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: var(--pesto-space-4);
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* ── Buttons ─────────────────────────────────────────── */
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--pesto-space-2);
-      padding: var(--pesto-space-3) var(--pesto-space-6);
-      background: var(--pesto-brand-600);
-      color: var(--pesto-text-inverse);
-      font-size: var(--pesto-text-sm);
-      font-weight: var(--pesto-weight-medium);
-      border: none;
-      border-radius: var(--pesto-radius-md);
-      cursor: pointer;
-      transition: all var(--pesto-duration-normal) var(--pesto-ease-default);
-      min-height: 44px;
-    }
-
-    .btn-primary:hover { background: var(--pesto-brand-700); }
-    .btn-primary:focus-visible {
-      outline: 2px solid var(--pesto-border-focus);
-      outline-offset: 2px;
-    }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--pesto-space-2);
-      padding: var(--pesto-space-3) var(--pesto-space-6);
-      background: transparent;
-      color: var(--pesto-text-primary);
-      font-size: var(--pesto-text-sm);
-      font-weight: var(--pesto-weight-medium);
-      border: 1px solid var(--pesto-border-default);
-      border-radius: var(--pesto-radius-md);
-      cursor: pointer;
-      transition: all var(--pesto-duration-normal) var(--pesto-ease-default);
-      min-height: 44px;
-    }
-
-    .btn-secondary:hover { background: var(--pesto-surface-sunken); }
-    .btn-secondary:focus-visible {
-      outline: 2px solid var(--pesto-border-focus);
-      outline-offset: 2px;
-    }
-
-    /* ── Features section ────────────────────────────────── */
-    .features {
-      padding: var(--pesto-space-20) 0;
-    }
-
-    .features-header {
-      text-align: center;
-      margin-bottom: var(--pesto-space-16);
-    }
-
-    .features-header h2 {
-      font-size: var(--pesto-text-3xl);
-      font-weight: var(--pesto-weight-semibold);
-      margin-bottom: var(--pesto-space-4);
-    }
-
-    .features-header p {
-      font-size: var(--pesto-text-lg);
-      color: var(--pesto-text-secondary);
-      max-width: 55ch;
-      margin-inline: auto;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--pesto-space-8);
-    }
-
-    /* ── Cards ───────────────────────────────────────────── */
-    .card {
-      background: var(--pesto-surface-raised);
-      border: 1px solid var(--pesto-border-default);
-      border-radius: var(--pesto-radius-lg);
-      padding: var(--pesto-space-6);
-      box-shadow: var(--pesto-shadow-sm);
-      transition: box-shadow var(--pesto-duration-normal) var(--pesto-ease-default);
-    }
-
-    .card:hover { box-shadow: var(--pesto-shadow-md); }
-
-    .card-icon {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--pesto-brand-100);
-      color: var(--pesto-brand-700);
-      border-radius: var(--pesto-radius-md);
-      font-size: var(--pesto-text-xl);
-      margin-bottom: var(--pesto-space-4);
-    }
-
-    .card h3 {
-      font-size: var(--pesto-text-xl);
-      font-weight: var(--pesto-weight-semibold);
-      margin-bottom: var(--pesto-space-2);
-    }
-
-    .card p {
-      font-size: var(--pesto-text-sm);
-      color: var(--pesto-text-secondary);
-      line-height: var(--pesto-leading-normal);
-      max-width: 65ch;
-    }
-
-    /* ── Stats section ───────────────────────────────────── */
-    .stats {
-      padding: var(--pesto-space-20) 0;
-      background: var(--pesto-surface-sunken);
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--pesto-space-8);
-      text-align: center;
-    }
-
-    .stat-value {
-      font-size: var(--pesto-text-4xl);
-      font-weight: var(--pesto-weight-bold);
-      color: var(--pesto-brand-600);
-      margin-bottom: var(--pesto-space-2);
-    }
-
-    .stat-label {
-      font-size: var(--pesto-text-sm);
-      color: var(--pesto-text-secondary);
-    }
-
-    /* ── CTA section ─────────────────────────────────────── */
-    .cta-section {
-      padding: var(--pesto-space-20) 0;
-      text-align: center;
-    }
-
-    .cta-section h2 {
-      font-size: var(--pesto-text-3xl);
-      font-weight: var(--pesto-weight-semibold);
-      margin-bottom: var(--pesto-space-4);
-    }
-
-    .cta-section p {
-      font-size: var(--pesto-text-lg);
-      color: var(--pesto-text-secondary);
-      max-width: 50ch;
-      margin-inline: auto;
-      margin-bottom: var(--pesto-space-8);
-    }
-
-    /* ── Footer ──────────────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--pesto-border-default);
-      padding: var(--pesto-space-12) 0;
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-text {
-      font-size: var(--pesto-text-sm);
-      color: var(--pesto-text-tertiary);
-    }
-
-    .footer-links {
-      display: flex;
-      gap: var(--pesto-space-6);
-      list-style: none;
-    }
-
-    .footer-links a {
-      font-size: var(--pesto-text-sm);
-      color: var(--pesto-text-secondary);
-      text-decoration: none;
-      transition: color var(--pesto-duration-normal) var(--pesto-ease-default);
-    }
-
-    .footer-links a:hover { color: var(--pesto-text-primary); }
-    .footer-links a:focus-visible {
-      outline: 2px solid var(--pesto-border-focus);
-      outline-offset: 2px;
-      border-radius: var(--pesto-radius-sm);
-    }
-
-    /* ── Responsive ──────────────────────────────────────── */
-    @media (max-width: 1024px) {
-      .features-grid { grid-template-columns: repeat(2, 1fr); }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: var(--pesto-space-6); }
-    }
-
-    @media (max-width: 768px) {
-      .hero h1 { font-size: var(--pesto-text-4xl); }
-      .nav-links { display: none; }
-      .features-grid { grid-template-columns: 1fr; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-inner { flex-direction: column; gap: var(--pesto-space-4); }
-    }
-
-    @media (max-width: 640px) {
-      .hero { padding: var(--pesto-space-16) 0; }
-      .hero h1 { font-size: var(--pesto-text-3xl); }
-      .hero-actions { flex-direction: column; align-items: center; }
-      .stats-grid { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-<body>
-
-  <nav class="nav" aria-label="Main navigation">
-    <div class="container">
-      <a href="/" class="nav-logo">GreenLedger</a>
-      <ul class="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#stats">Results</a></li>
-        <li><a href="#pricing" aria-current="page">Pricing</a></li>
-      </ul>
-      <button class="nav-cta">Get started</button>
+<!-- Reference: Sample section structure -->
+<section class="section">
+  <div class="container">
+    <h2 style="font-size:var(--pesto-text-2xl);font-weight:var(--pesto-weight-bold);margin-bottom:var(--pesto-space-4)">
+      Section Heading
+    </h2>
+    <p style="font-size:var(--pesto-text-lg);color:var(--pesto-text-secondary);max-width:55ch;margin-bottom:var(--pesto-space-10)">
+      Supporting description text.
+    </p>
+    <div class="grid-3">
+      <article class="card">
+        <h3 style="font-size:var(--pesto-text-xl);font-weight:var(--pesto-weight-semibold);margin-bottom:var(--pesto-space-2)">Card Title</h3>
+        <p style="font-size:var(--pesto-text-sm);color:var(--pesto-text-secondary)">Card description text.</p>
+      </article>
     </div>
-  </nav>
-
-  <main>
-    <section class="hero">
-      <div class="container">
-        <span class="hero-badge">Now tracking 50+ currencies</span>
-        <h1>Expense tracking that works the way you do</h1>
-        <p>Categorize spending automatically, split bills with your team, and get real-time budget alerts — all in one place.</p>
-        <div class="hero-actions">
-          <button class="btn-primary">Start free trial</button>
-          <button class="btn-secondary">View demo</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="features" id="features">
-      <div class="container">
-        <div class="features-header">
-          <h2>Everything you need to stay on budget</h2>
-          <p>Powerful tools that save your finance team hours every week.</p>
-        </div>
-        <div class="features-grid">
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">&#9889;</div>
-            <h3>Auto-categorization</h3>
-            <p>Transactions are tagged instantly using machine learning trained on your past spending patterns.</p>
-          </article>
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">&#128202;</div>
-            <h3>Real-time dashboards</h3>
-            <p>See where every dollar goes with live charts that update as transactions clear.</p>
-          </article>
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">&#128276;</div>
-            <h3>Budget alerts</h3>
-            <p>Get notified before you overspend. Set limits by category, team, or project.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="stats" id="stats">
-      <div class="container">
-        <div class="stats-grid">
-          <div>
-            <div class="stat-value">12k+</div>
-            <div class="stat-label">Active teams</div>
-          </div>
-          <div>
-            <div class="stat-value">$2.4B</div>
-            <div class="stat-label">Expenses tracked</div>
-          </div>
-          <div>
-            <div class="stat-value">98%</div>
-            <div class="stat-label">Categorization accuracy</div>
-          </div>
-          <div>
-            <div class="stat-value">4.2hrs</div>
-            <div class="stat-label">Saved per week</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-section">
-      <div class="container">
-        <h2>Ready to simplify your expenses?</h2>
-        <p>Join thousands of teams who ditched spreadsheets for GreenLedger.</p>
-        <button class="btn-primary">Start your free trial</button>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-inner">
-        <span class="footer-text">&copy; 2026 GreenLedger. All rights reserved.</span>
-        <ul class="footer-links">
-          <li><a href="#">Privacy</a></li>
-          <li><a href="#">Terms</a></li>
-          <li><a href="#">Support</a></li>
-        </ul>
-      </div>
-    </div>
-  </footer>
-
-</body>
-</html>
+  </div>
+</section>

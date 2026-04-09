@@ -14,8 +14,8 @@ export class ShellRendererAgent extends BaseAgent {
   protected artifactKey = "shared_shell";
 
   protected llmOptions = {
-    maxTokens: 8000,
-    model: "claude-sonnet-4-6",
+    maxTokens: 4000,
+    model: "claude-haiku-4-5-20251001",
   };
 
   private pages: PageSpec[];

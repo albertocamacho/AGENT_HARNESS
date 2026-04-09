@@ -151,7 +151,10 @@ export class Orchestrator {
         agentSteps: stepResults,
         tokenUsage: totalTokens,
       },
-      data: { ...ctx.data },
+      data: {
+        ...ctx.data,
+        ...(complexity ? { pageSpecs: complexity.pages } : {}),
+      },
     };
 
     // Clean up dynamic agents so they don't leak across runs
@@ -209,7 +212,7 @@ export class Orchestrator {
       } catch (err) {
         const errorMsg =
           err instanceof Error ? err.message : String(err);
-        const isRetryable = /ETIMEDOUT|ECONNRESET|ECONNREFUSED|timeout|overloaded/i.test(errorMsg);
+        const isRetryable = /ETIMEDOUT|ECONNRESET|ECONNREFUSED|timeout|overloaded|premature close|socket hang up|EPIPE/i.test(errorMsg);
 
         if (isRetryable && attempt < maxRetries) {
           const delay = 1000 * (attempt + 1);
