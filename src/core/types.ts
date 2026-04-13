@@ -143,4 +143,11 @@ export type ProgressEvent =
   | { type: "agent_artifact"; agentName: string; artifactKey: string; artifact: string }
   | { type: "design_tokens"; css: string }
   | { type: "pipeline_complete"; result: HarnessResult }
+  | { type: "status"; message: string; detail?: StatusDetail }
   | { type: "error"; agentName?: string; error: string };
+
+export type StatusDetail =
+  | { kind: "complexity"; tier: "single" | "multi"; pages: { id: string; title: string; description: string; isLanding: boolean }[] }
+  | { kind: "pipeline_plan"; phases: { phase: number; agents: string[] }[] }
+  | { kind: "phase_start"; phase: number; agents: string[] }
+  | { kind: "agent_progress"; agentName: string; message: string };

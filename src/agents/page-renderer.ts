@@ -58,8 +58,9 @@ Rules:
 - Do NOT re-declare or inline the Pesto :root custom properties — they are provided by the linked stylesheet
 - Include the shell CSS verbatim in your <style> block, then add page-specific styles after it
 - Include the shell nav HTML verbatim at the top of <body>, before <main>
+- Include the shell page header HTML verbatim at the top of <main>, replacing the .page-title text with this page's title and .page-subtitle with a brief description
 - Include the shell footer HTML verbatim at the bottom of <body>, after </main>
-- Only generate the <main> content and page-specific CSS — do NOT regenerate nav or footer
+- Only generate the <main> content (after the page header) and page-specific CSS — do NOT regenerate nav, page header structure, or footer
 - ALL colors, spacing, typography, radii, and shadows MUST use var(--pesto-*) tokens
 - Follow every rule in the component rules above — buttons, cards, forms, nav, badges, etc.
 - Follow the spec exactly: copy, layout, responsive behavior
@@ -96,6 +97,10 @@ Here is the shared UI shell. Include these EXACTLY as-is in your output:
 ${shell.navHtml}
 </shared_nav>
 
+<shared_page_header>
+${shell.pageHeaderHtml || ""}
+</shared_page_header>
+
 <shared_footer>
 ${shell.footerHtml}
 </shared_footer>
@@ -104,7 +109,10 @@ ${shell.footerHtml}
 ${shell.shellCss}
 </shared_css>
 
-Remember: add class="active" to the link with data-page="${this.page.id}" in the nav.`;
+Remember:
+- Add class="active" to the nav link with data-page="${this.page.id}"
+- Place the page header at the top of <main>, replacing .page-title text with "${this.page.title}" and .page-subtitle with a brief description of this page
+- Do NOT create your own h1 or page header — use the shared one`;
       } catch { /* fall through without shell */ }
     }
 

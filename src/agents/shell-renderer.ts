@@ -14,8 +14,8 @@ export class ShellRendererAgent extends BaseAgent {
   protected artifactKey = "shared_shell";
 
   protected llmOptions = {
-    maxTokens: 4000,
-    model: "claude-haiku-4-5-20251001",
+    maxTokens: 6000,
+    model: "claude-sonnet-4-6",
   };
 
   private pages: PageSpec[];
@@ -33,8 +33,8 @@ export class ShellRendererAgent extends BaseAgent {
       .join("\n");
 
     return `You are an expert front-end developer. You generate ONLY the shared UI
-components for a multi-page application — the navigation bar, footer, and
-base layout CSS. These will be included verbatim in every page.
+components for a multi-page application — the navigation bar, page header,
+footer, and base layout CSS. These will be included verbatim in every page.
 
 Pages in this application:
 ${navLinks}
@@ -50,14 +50,30 @@ Output your shared shell wrapped in <shell> tags with these exact sections:
      Example: <a href="dashboard.html" data-page="dashboard">Dashboard</a> -->
 </nav_html>
 
+<page_header_html>
+<!-- A reusable page header template placed at the top of <main>.
+     Contains an <h1> with class="page-title" (the page renderer will replace its text content)
+     and optionally a breadcrumb or subtitle with class="page-subtitle".
+     This ensures every page has an identical header layout.
+     Example:
+     <header class="page-header">
+       <div class="page-header-container">
+         <h1 class="page-title">Page Title</h1>
+         <p class="page-subtitle">Brief description</p>
+       </div>
+     </header>
+-->
+</page_header_html>
+
 <footer_html>
 <!-- The complete <footer> element -->
 </footer_html>
 
 <shell_css>
-/* All CSS for: nav, footer, base layout (container, page structure),
+/* All CSS for: nav, page header, footer, base layout (container, page structure),
    responsive nav collapse, and any shared utility classes.
-   Do NOT include page-specific content styles. */
+   Do NOT include page-specific content styles.
+   The .page-header, .page-title, and .page-subtitle must be styled here. */
 </shell_css>
 </shell>
 
@@ -67,6 +83,8 @@ Rules:
 - Nav must collapse to a hamburger menu at --pesto-container-md or below
 - Include hover, focus-visible, and active states on all nav links
 - The active link is styled via a CSS rule: [data-page].active or .nav-link.active
+- Page header h1 must use --pesto-text-2xl and --pesto-weight-bold — never hero sizes
+- Page header must use the same centered container pattern as nav and footer
 - Footer uses secondary/tertiary text colors and a top border
 - Use a centered container pattern: width: var(--pesto-content-width); margin-inline: auto
 - Import Inter from Google Fonts via <link> tag (output the <link> tag in nav_html)
@@ -85,14 +103,15 @@ Read the architect's spec carefully and ensure the nav and footer match the spec
   protected parseResponse(raw: string) {
     const shell = extractTag(raw, "shell");
     const navHtml = extractTag(shell, "nav_html");
+    const pageHeaderHtml = extractTag(shell, "page_header_html");
     const footerHtml = extractTag(shell, "footer_html");
     const shellCss = extractTag(shell, "shell_css");
 
-    const artifact = JSON.stringify({ navHtml, footerHtml, shellCss });
+    const artifact = JSON.stringify({ navHtml, pageHeaderHtml, footerHtml, shellCss });
 
     return {
       artifact,
-      data: { navHtml, footerHtml, shellCss },
+      data: { navHtml, pageHeaderHtml, footerHtml, shellCss },
     };
   }
 }

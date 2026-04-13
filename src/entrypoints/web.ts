@@ -96,11 +96,19 @@ const WEB_UI_HTML = `<!DOCTYPE html>
     textarea { width: 100%; height: 120px; background: #1a1a1a; color: #e0e0e0; border: 1px solid #333; border-radius: 8px; padding: 12px; font: inherit; resize: vertical; }
     button { background: #5046e5; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font: inherit; }
     button:disabled { opacity: 0.5; cursor: not-allowed; }
-    .log { flex: 1; min-height: 120px; overflow-y: auto; font-size: 13px; font-family: ui-monospace, monospace; background: #1a1a1a; border-radius: 8px; padding: 12px; }
-    .log-entry { padding: 4px 0; border-bottom: 1px solid #222; }
+    .status-bar { display: none; background: #141414; border: 1px solid #2a2a2a; border-radius: 8px; padding: 12px 16px; }
+    .status-bar.visible { display: block; }
+    .status-headline { font-size: 14px; font-weight: 500; color: #e0e0e0; margin-bottom: 4px; }
+    .status-detail { font-size: 12px; color: #a0a0a0; white-space: pre-wrap; line-height: 1.5; }
+    .status-pages { margin-top: 8px; padding: 8px 12px; background: #1a1a1a; border-radius: 6px; font-size: 12px; font-family: ui-monospace, monospace; }
+    .status-pages .page-item { padding: 3px 0; color: #93c5fd; }
+    .status-pages .page-item.landing { color: #34d399; }
+    .log { flex: 1; min-height: 80px; overflow-y: auto; font-size: 12px; font-family: ui-monospace, monospace; background: #1a1a1a; border-radius: 8px; padding: 12px; }
+    .log-entry { padding: 3px 0; border-bottom: 1px solid #1f1f1f; color: #666; }
     .log-entry.error { color: #f87171; }
     .log-entry.done { color: #34d399; }
     .log-entry.start { color: #93c5fd; }
+    .log-entry.status { color: #c4b5fd; }
     .spec-panel { display: none; max-height: 260px; overflow-y: auto; font-size: 12px; font-family: ui-monospace, monospace; background: #141414; border: 1px solid #2a2a2a; border-radius: 8px; padding: 12px; white-space: pre-wrap; word-wrap: break-word; color: #a0a0a0; }
     .spec-panel h2 { font-size: 13px; font-weight: 600; color: #93c5fd; margin-bottom: 8px; white-space: normal; }
     .page-tabs { display: none; background: #1a1a1a; border-bottom: 1px solid #2a2a2a; padding: 0 12px; gap: 0; overflow-x: auto; white-space: nowrap; }
@@ -115,6 +123,10 @@ const WEB_UI_HTML = `<!DOCTYPE html>
     <h1>Agent harness</h1>
     <textarea id="prompt" placeholder="Describe the page you want to generate..."></textarea>
     <button id="go" onclick="generate()">Generate</button>
+    <div class="status-bar" id="status-bar">
+      <div class="status-headline" id="status-headline"></div>
+      <div class="status-detail" id="status-detail"></div>
+    </div>
     <div class="log" id="log"></div>
     <div class="spec-panel" id="spec-panel">
       <h2>Architect Spec</h2>
@@ -166,6 +178,9 @@ const WEB_UI_HTML = `<!DOCTYPE html>
       document.getElementById('go').disabled = true;
       document.getElementById('spec-panel').style.display = 'none';
       document.getElementById('spec-content').textContent = '';
+      document.getElementById('status-bar').classList.remove('visible');
+      document.getElementById('status-headline').textContent = '';
+      document.getElementById('status-detail').innerHTML = '';
 
       // Reset progressive rendering state
       rendererBuffer = '';
@@ -236,14 +251,34 @@ const WEB_UI_HTML = `<!DOCTYPE html>
 
     function handleMessage(msg) {
       switch (msg.type) {
+        case 'status': {
+          const bar = document.getElementById('status-bar');
+          bar.classList.add('visible');
+          document.getElementById('status-headline').textContent = msg.message.split(String.fromCharCode(10))[0];
+
+          if (msg.detail && msg.detail.kind === 'complexity' && msg.detail.tier === 'multi') {
+            let html = '<div class="status-pages">';
+            for (const p of msg.detail.pages) {
+              const cls = p.isLanding ? 'page-item landing' : 'page-item';
+              const marker = p.isLanding ? '* ' : '  ';
+              html += '<div class="' + cls + '">' + marker + p.title + ' (' + p.id + ')</div>';
+            }
+            html += '</div>';
+            document.getElementById('status-detail').innerHTML = html;
+          } else {
+            document.getElementById('status-detail').textContent = '';
+          }
+          log(msg.message.split(String.fromCharCode(10))[0], 'status');
+          break;
+        }
         case 'pipeline_start':
-          log('Pipeline: ' + msg.pipeline.steps.length + ' steps', 'start');
+          log(msg.pipeline.steps.length + ' steps planned', 'start');
           break;
         case 'agent_start':
-          log('Running: ' + msg.agentName + ' (phase ' + msg.phase + ')', 'start');
+          log(msg.agentName + ' started', 'start');
           break;
         case 'agent_complete':
-          log('Done: ' + msg.agentName + ' (' + msg.result.durationMs + 'ms)', 'done');
+          log(msg.agentName + ' done (' + msg.result.durationMs + 'ms)', 'done');
           break;
         case 'design_tokens':
           pestoCss = msg.css;
@@ -287,10 +322,15 @@ const WEB_UI_HTML = `<!DOCTYPE html>
             }
           }
           break;
-        case 'pipeline_complete':
-          log('Complete! ' + msg.result.meta.durationMs + 'ms total', 'done');
+        case 'pipeline_complete': {
+          const secs = (msg.result.meta.durationMs / 1000).toFixed(1);
+          const tokens = msg.result.meta.tokenUsage;
+          log('Complete in ' + secs + 's (' + (tokens.input + tokens.output).toLocaleString() + ' tokens)', 'done');
+          document.getElementById('status-headline').textContent = 'Done in ' + secs + 's';
+          document.getElementById('status-detail').textContent = (tokens.input + tokens.output).toLocaleString() + ' tokens used';
           document.getElementById('go').disabled = false;
           break;
+        }
         case 'result': {
           // Flush any remaining progressive chunks
           if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }

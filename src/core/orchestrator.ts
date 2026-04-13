@@ -65,6 +65,7 @@ export class Orchestrator {
     };
 
     // 2. Plan the pipeline
+    request.onProgress?.({ type: "status", message: "Analyzing request..." });
     const planResult = await this.planner.plan(request, this.listAgents());
     const { pipeline, dynamicAgents, complexity } = planResult;
 
@@ -84,17 +85,59 @@ export class Orchestrator {
       ctx.complexity = complexity;
     }
 
+    // Emit complexity status
+    if (complexity) {
+      const pageSummaries = complexity.pages.map((p) => ({ id: p.id, title: p.title, description: p.description, isLanding: p.isLanding }));
+      if (complexity.tier === "multi") {
+        const tree = complexity.pages.map((p) => `  ${p.isLanding ? "* " : "  "}${p.title} (${p.id})`).join("\n");
+        request.onProgress?.({
+          type: "status",
+          message: `${complexity.pages.length} pages detected\n${tree}`,
+          detail: { kind: "complexity", tier: "multi", pages: pageSummaries },
+        });
+      } else {
+        request.onProgress?.({
+          type: "status",
+          message: `Single page: ${complexity.pages[0]?.title ?? "Main"}`,
+          detail: { kind: "complexity", tier: "single", pages: pageSummaries },
+        });
+      }
+    }
+
     request.onProgress?.({ type: "pipeline_start", pipeline });
+
+    // Emit pipeline plan summary
+    const phases = this.groupByPhase(pipeline.steps);
+    const phaseSummary = [...phases.entries()].map(([phase, steps]) => ({
+      phase,
+      agents: steps.map((s) => s.agentName),
+    }));
+    const planDesc = phaseSummary
+      .map((p) => `Phase ${p.phase}: ${p.agents.join(", ")}`)
+      .join(" → ");
+    request.onProgress?.({
+      type: "status",
+      message: `Pipeline: ${planDesc}`,
+      detail: { kind: "pipeline_plan", phases: phaseSummary },
+    });
 
     // 3. Execute phase by phase
     const stepResults: AgentStepResult[] = [];
-    const phases = this.groupByPhase(pipeline.steps);
 
     for (const [phase, steps] of phases) {
       // Filter out steps whose conditions aren't met
       const activeSteps = steps.filter(
         (s) => !s.condition || s.condition(ctx)
       );
+
+      // Emit phase start status
+      const agentNames = activeSteps.map((s) => s.agentName);
+      const phaseLabel = this.describePhase(agentNames, complexity);
+      request.onProgress?.({
+        type: "status",
+        message: phaseLabel,
+        detail: { kind: "phase_start", phase, agents: agentNames },
+      });
 
       // Run all agents in this phase concurrently
       const phaseResults = await Promise.all(
@@ -187,6 +230,14 @@ export class Orchestrator {
       phase,
     });
 
+    // Emit a human-friendly status for this agent
+    const agentStatus = this.describeAgent(agent.name, ctx.complexity);
+    request.onProgress?.({
+      type: "status",
+      message: agentStatus,
+      detail: { kind: "agent_progress", agentName: agent.name, message: agentStatus },
+    });
+
     // Emit design tokens before any renderer starts so the client
     // can inject them into the iframe before any HTML chunks arrive
     if (agent.name === "renderer" || agent.name.startsWith("renderer_")) {
@@ -241,6 +292,13 @@ export class Orchestrator {
       tokenUsage: output.tokenUsage ?? { input: 0, output: 0 },
     };
 
+    const doneMsg = `${this.describeAgent(agent.name, ctx.complexity)} — done in ${(stepResult.durationMs / 1000).toFixed(1)}s`;
+    request.onProgress?.({
+      type: "status",
+      message: doneMsg,
+      detail: { kind: "agent_progress", agentName: agent.name, message: doneMsg },
+    });
+
     request.onProgress?.({ type: "agent_complete", agentName: agent.name, result: stepResult });
     request.onProgress?.({
       type: "agent_artifact",
@@ -250,6 +308,56 @@ export class Orchestrator {
     });
 
     return { output, stepResult };
+  }
+
+  /** Human-friendly description of a phase based on its agents */
+  private describePhase(agentNames: string[], complexity?: ComplexityPlan): string {
+    if (agentNames.length === 1) {
+      return this.describeAgent(agentNames[0], complexity);
+    }
+
+    // Categorize agents in this phase
+    const renderers = agentNames.filter((n) => n.startsWith("renderer"));
+    const validators = agentNames.filter((n) => n.startsWith("validator"));
+
+    if (renderers.length > 1) {
+      return `Rendering ${renderers.length} pages in parallel`;
+    }
+    if (validators.length > 1) {
+      return `Validating ${validators.length} pages in parallel`;
+    }
+
+    // Mixed phase — list what's happening
+    const descriptions = agentNames.map((n) => this.describeAgent(n, complexity));
+    return descriptions.join(" + ");
+  }
+
+  /** Human-friendly description for a single agent */
+  private describeAgent(agentName: string, complexity?: ComplexityPlan): string {
+    if (agentName === "architect") return "Designing page structure and content";
+    if (agentName === "shell") return "Building shared navigation and layout shell";
+
+    // Page-specific renderer: "Rendering Dashboard (dashboard)"
+    const rendererMatch = agentName.match(/^renderer_(.+)$/);
+    if (rendererMatch) {
+      const pageId = rendererMatch[1];
+      const page = complexity?.pages.find((p) => p.id === pageId);
+      return page ? `Rendering ${page.title}` : `Rendering ${pageId}`;
+    }
+
+    if (agentName === "renderer") return "Rendering HTML";
+
+    // Page-specific validator
+    const validatorMatch = agentName.match(/^validator_(.+)$/);
+    if (validatorMatch) {
+      const pageId = validatorMatch[1];
+      const page = complexity?.pages.find((p) => p.id === pageId);
+      return page ? `Validating ${page.title}` : `Validating ${pageId}`;
+    }
+
+    if (agentName === "validator") return "Validating design system compliance";
+
+    return `Running ${agentName}`;
   }
 
   private groupByPhase(steps: PipelineStep[]): Map<number, PipelineStep[]> {

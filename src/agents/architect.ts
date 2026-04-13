@@ -8,8 +8,18 @@ export class ArchitectAgent extends BaseAgent {
   protected artifactKey = "spec";
 
   protected llmOptions = {
-    model: "claude-haiku-4-5-20251001",
+    model: "claude-sonnet-4-6",
+    maxTokens: 4096,
   };
+
+  async execute(ctx: SharedContext, request: HarnessRequest): Promise<import("../core/types.js").AgentOutput> {
+    // Scale token budget with page count so multi-page specs aren't truncated
+    const pageCount = ctx.complexity?.pages.length ?? 1;
+    if (pageCount > 1) {
+      this.llmOptions.maxTokens = Math.min(4096 * pageCount, 16000);
+    }
+    return super.execute(ctx, request);
+  }
 
   protected get systemPrompt(): string {
     const ds = loadDesignSystem();
